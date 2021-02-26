@@ -1,18 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './main.scss'
-import Test from './components/test'
+import Home from './pages/home'
 
-const Home = () => {
-  const q = 123
-  return (
-    <div>
-      {q}
-      <Test />
-    </div>
-  )
-}
+const Main = () => <div className="main"><Home /></div>
 
 const target = document.getElementById('root')
 
-ReactDOM.render(<Home />, target)
+ReactDOM.render(<Main />, target)
