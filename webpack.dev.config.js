@@ -13,6 +13,14 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
+      {
         enforce: 'pre',
         test: /\.(js|jsx)$/,
         use: ["eslint-loader"],

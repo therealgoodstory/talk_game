@@ -1,13 +1,5 @@
 import React from "react";
-import Header from "../components/header";
-import Menu from "../components/menu";
 
-const Home = () => (
-  <div className="main">
-    <Header />
-
-    <Menu />
-  </div>
-);
+const Home = () => <div>field</div>;
 
 export default Home;

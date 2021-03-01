@@ -1,13 +1,14 @@
 {
   "parser": "babel-eslint",
-  "root" : true,
-  "extends" : ["airbnb" , "plugin:react/recommended"],
+  "root": true,
+  "extends": ["airbnb", "plugin:react/recommended"],
   "globals": {
     "document": true
   },
   "rules": {
     "semi": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "quotes": [2, ["backtick", "single"]]
+    "quotes": [2, ["backtick", "single"]],
+    "react/prop-types": ["off"]
   }
 }
