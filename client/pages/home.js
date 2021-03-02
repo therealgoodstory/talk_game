@@ -1,11 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useLayoutEffect } from "react";
+import { useSelector } from 'react-redux'
 
-const Home = () => (
-  <div>
-    <input />
-    <Link to="/test">field</Link>
-  </div>
-);
+const Home = () => {
+  const state = useSelector((s) => s.sidebar.id);
+
+  const [style, setStyle] = useState("page__open");
+
+  useLayoutEffect(() => (
+    state === 1
+      ? setStyle("page__close")
+      : setStyle("page__open")
+  ), [state]);
+
+  return <div className={style}>123</div>;
+};
 
 export default Home;

@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
-import counter from "./counter";
+import sidebar from "./sidebar";
 
 const createRootReducer = (history) => (
   combineReducers({
     router: connectRouter(history),
-    counter,
+    sidebar,
   })
 )
 export default createRootReducer;
