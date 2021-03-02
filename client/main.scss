@@ -1,16 +1,10 @@
 body {
   margin: 0%;
-  background: #f8fafb;
-}
-
-.main {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  z-index: 1;
 }
 
 .header {
+  z-index: 1;
+  position: fixed;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -72,8 +66,11 @@ body {
 }
 
 .sidebar {
+  z-index: 1;
+  top: 70px;
   transition-property: width;
-  transition-duration: 3s;
+  transition-duration: 1s;
+  position: fixed;
   display: flex;
   flex-direction: column;
   width: 270px;
@@ -83,8 +80,11 @@ body {
 }
 
 .sidebar__close {
+  z-index: 1;
+  top: 70px;
+  position: fixed;
   transition-property: width;
-  transition-duration: 3s;
+  transition-duration: 1s;
   display: flex;
   flex-direction: column;
   width: 65px;
@@ -116,14 +116,15 @@ body {
 .page {
   z-index: 0;
   top: 70px;
-  position: relative;
   padding: 30px;
 }
 
 @media screen and (min-width: 1150px) {
   .sidebar {
+    top: 70px;
+    position: fixed;
     transition-property: width;
-    transition-duration: 3s;
+    transition-duration: 1s;
     display: flex;
     flex-direction: column;
     width: 270px;
@@ -133,8 +134,10 @@ body {
   }
 
   .sidebar__close {
+    top: 70px;
+    position: fixed;
     transition-property: width;
-    transition-duration: 3s;
+    transition-duration: 1s;
     display: flex;
     flex-direction: column;
     width: 65px;
@@ -151,7 +154,7 @@ body {
 
   .page__close {
     transition-property: margin-left;
-    transition-duration: 3s;
+    transition-duration: 1s;
     margin-left: 270px;
     height: 100vh;
     background: white;
@@ -161,7 +164,7 @@ body {
 
   .page__open {
     transition-property: margin-left;
-    transition-duration: 3s;
+    transition-duration: 1s;
     margin-left: 60px;
     height: 100vh;
     background: white;
@@ -171,8 +174,10 @@ body {
 }
 @media screen and (max-width: 1150px) {
   .sidebar {
+    top: 70px;
+    position: fixed;
     transition-property: width;
-    transition-duration: 3s;
+    transition-duration: 1s;
     display: flex;
     flex-direction: column;
     width: 65px;
@@ -182,8 +187,10 @@ body {
   }
 
   .sidebar__close {
+    top: 70px;
+    position: fixed;
     transition-property: width;
-    transition-duration: 3s;
+    transition-duration: 1s;
     display: flex;
     flex-direction: column;
     width: 270px;
@@ -218,8 +225,10 @@ body {
 
 @media screen and (min-width: 2500px) {
   .sidebar {
+    top: 70px;
+    position: fixed;
     transition-property: width;
-    transition-duration: 3s;
+    transition-duration: 1s;
     display: flex;
     flex-direction: column;
     width: 270px;
@@ -229,6 +238,8 @@ body {
   }
 
   .sidebar__close {
+    top: 70px;
+    position: fixed;
     transition-property: width;
     transition-duration: 3s;
     display: flex;

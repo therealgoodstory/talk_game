@@ -53,6 +53,7 @@ const config = {
     port: 8080,
     host: "localhost",
     index: "index.html",
+    historyApiFallback: true,
     overlay: {
       warning: false,
       errors: true,
