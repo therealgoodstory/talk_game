@@ -2,7 +2,7 @@ import React, { useState, useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from 'react-redux'
 
-const SideBarItems = (props) => {
+const Tasks = (props) => {
   const { name } = props;
 
   const state = useSelector((s) => s.sidebar.id)
@@ -10,6 +10,7 @@ const SideBarItems = (props) => {
   const [style, setStyle] = useState("sidebar__open")
   const [logoStyle, setLogoStyle] = useState("sidebar__open--logo")
   const [textStyle, setTextStyle] = useState("sidebar__open--name")
+  const [tasksStyle, setTasksStyle] = useState("tasks-open")
 
   useLayoutEffect(() => (
     state === 1
@@ -29,16 +30,33 @@ const SideBarItems = (props) => {
       : setTextStyle("sidebar__open--name")
   ), [state]);
 
+  useLayoutEffect(() => (
+    state === 1
+      ? setTasksStyle("tasks-close")
+      : setTasksStyle("tasks-open")
+  ), [state]);
+
+  const onClick = () => console.log("click")
+  const handleClick = (e) => (e.key === "n" ? console.log("click") : null);
+
+  const svg = (
+    <svg width="9" height="10" viewBox="0 0 9 10" fill="none">
+      <path d="M4.5 0.5V9.5" stroke="#586371" strokeWidth="2" />
+      <path d="M9 5L0 5" stroke="#586371" strokeWidth="2" />
+    </svg>
+  )
+
   return (
     <div className={style}>
       <div className={logoStyle}>LOG</div>
       <span className={textStyle}>{name}</span>
+      <div role="button" onClick={onClick} onKeyDown={handleClick} tabIndex={0} className={`${tasksStyle} button-border`}>{svg}</div>
     </div>
   );
 };
 
-SideBarItems.propTypes = {
+Tasks.propTypes = {
   name: PropTypes.instanceOf(Array).isRequired,
 };
 
-export default SideBarItems;
+export default Tasks;

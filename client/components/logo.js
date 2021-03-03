@@ -1,7 +1,6 @@
 import React, { useState, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "../public/logo.png";
-import MiniLogo from "../public/123.png";
 import { updateState } from "../redux/reducers/sidebar";
 
 const Logo = () => {
@@ -37,7 +36,9 @@ const Logo = () => {
   );
   return (
     <div className="header__menu between">
-      {state === -1 ? <img className={logoStyle} alt="logo" src={logo} /> : <img className={logoStyle} alt="logo" src={MiniLogo} />}
+      <div className={logoStyle}>
+        <img alt="logo" src={logo} width="145px" height="33px" />
+      </div>
       <div role="button" tabIndex={0} onClick={onClick} onKeyDown={handleClick} className="button-border">
         {svg}
       </div>

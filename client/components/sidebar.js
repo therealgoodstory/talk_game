@@ -1,6 +1,8 @@
 import React, { useState, useLayoutEffect } from "react";
 import { useSelector } from 'react-redux'
+import Account from "./account";
 import SideBarItems from "./sidebaritems";
+import Tasks from "./tasks";
 
 const Sidebar = () => {
   const state = useSelector((s) => s.sidebar.id)
@@ -28,10 +30,11 @@ const Sidebar = () => {
         <h5 className={menuStyle}>МЕНЮ</h5>
       </div>
       <div>
-        {menu.map((it) => (
-          <SideBarItems name={it} key={it} />
+        {menu.map((it, id) => (
+          id !== 1 ? <SideBarItems name={it} key={it} /> : <Tasks name={it} key={it} />
         ))}
       </div>
+      <Account />
     </div>
   );
 };

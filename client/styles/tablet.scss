@@ -1,0 +1,214 @@
+@media screen and (max-width: 1150px) {
+  .header__menu--logo {
+    overflow: hidden;
+    transition-property: margin-left;
+    transition-duration: 0.5s;
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 29px;
+    height: 33px;
+  }
+  .header__menu--mini-logo {
+    transition-property: margin-left;
+    transition-duration: 0.5s;
+    margin-left: 30px;
+    margin-right: 70px;
+    width: 145px;
+    height: 33px;
+  }
+
+  .header__menu--svg {
+    transform: translateX(-180px) rotate(90deg);
+    transition: transform 0.5s;
+    width: 21px;
+    height: 14px;
+  }
+
+  .header__menu--mini-svg {
+    transform: rotate(0deg);
+    transition: transform 0.5s;
+    width: 21px;
+    height: 14px;
+  }
+
+  .sidebar {
+    z-index: 1;
+    top: 70px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    height: 100vh;
+    border-right: 1px solid rgba(235, 235, 235, 0.73);
+  }
+
+  .sidebar__close {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    transition-property: width;
+    transition-duration: 0.5s;
+    width: 270px;
+    height: 50px;
+    border-bottom: 1px solid rgba(235, 235, 235, 0.73);
+  }
+
+  .sidebar__open {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition-property: width;
+    transition-duration: 0.5s;
+    width: 65px;
+    height: 50px;
+    border-bottom: 1px solid rgba(235, 235, 235, 0.73);
+  }
+
+  .sidebar__open--logo {
+    transition-property: margin-left;
+    transition-duration: 0.5s;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  .sidebar__close--logo {
+    transition-property: margin-left;
+    transition-duration: 0.5s;
+    margin-left: 25px;
+    margin-right: 15px;
+  }
+
+  .sidebar__open--name {
+    transition-property: opacity;
+    transition-duration: 0.1s;
+    opacity: 0;
+    white-space: nowrap;
+  }
+  .sidebar__close--name {
+    transition-property: opacity;
+    transition-delay: 0.3s;
+    transition-duration: 0.3s;
+    opacity: 1;
+    white-space: nowrap;
+  }
+
+  .sidebar__menu {
+    height: 60px;
+    border-bottom: 1px solid rgba(235, 235, 235, 0.73);
+  }
+  .sidebar__menu--open {
+    margin-top: 30px;
+    transition-property: margin-left;
+    transition-duration: 0.5s;
+    margin-left: 10px;
+  }
+  .sidebar__menu--close {
+    margin-top: 30px;
+    transition-property: margin-left;
+    transition-duration: 0.5s;
+    margin-left: 30px;
+  }
+
+  .sidebar__account-open {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 65px;
+    height: 50px;
+    align-items: center;
+    opacity: 0;
+    bottom: 70px;
+  }
+
+  .sidebar__account-close {
+    position: absolute;
+    transition-property: opacity;
+    transition-delay: 0.3s;
+    transition-duration: 0.3s;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    opacity: 1;
+    bottom: 70px;
+  }
+
+  .sidebar__account-many {
+    margin: 0%;
+  }
+
+  .sidebar__account-data {
+    margin-top: 5px;
+    color: rgb(184, 184, 184);
+  }
+
+  .sidebar__account-many--item {
+    margin: 5px;
+  }
+
+  .page {
+    z-index: 0;
+    top: 70px;
+    position: relative;
+    padding: 30px;
+    background: #f7f7f7;
+    height: 100vh;
+    width: auto;
+  }
+
+  .page__open {
+    background: white;
+    margin-left: 65px;
+    border-radius: 7px;
+    height: auto;
+    -webkit-box-shadow: 0px 6px 8px -3px rgba(0, 0, 0, 0.37);
+    box-shadow: 0px 6px 8px -3px rgba(0, 0, 0, 0.37);
+  }
+
+  .page__close {
+    margin-left: 65px;
+    background: white;
+    border-radius: 7px;
+    height: auto;
+    -webkit-box-shadow: 0px 6px 8px -3px rgba(0, 0, 0, 0.37);
+    box-shadow: 0px 6px 8px -3px rgba(0, 0, 0, 0.37);
+  }
+
+  .tasks-open {
+    width: 25px;
+    height: 25px;
+    background: #f1f3f5;
+    color: #586371;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    margin-left: 100px;
+    &:hover {
+      background: white;
+      color: #f1f3f5;
+    }
+    opacity: 0;
+  }
+
+  .tasks-close {
+    transition-property: opacity;
+    transition-delay: 0.5s;
+    transition-duration: 0.5s;
+    width: 25px;
+    height: 25px;
+    background: #f1f3f5;
+    color: #586371;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    margin-left: 100px;
+    &:hover {
+      background: white;
+      color: #f1f3f5;
+    }
+    opacity: 1;
+  }
+}
