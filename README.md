@@ -23,9 +23,8 @@
   ```shell
   $ yarn run dev:build
   ```
-4. Copy .env.example file to .env and make the necessary changes there
-
-5. Run project in Dev mode
+  
+4. Run project in Dev mode
 
   ```shell
   $ yarn run dev:watch
