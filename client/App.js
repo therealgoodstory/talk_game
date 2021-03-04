@@ -1,19 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Header from "./components/header";
 import Sidebar from "./components/sidebar";
-import Home from "./pages/home";
 
 const App = () => (
   <div>
     <div>
       <Header />
-      <div>
-        <Sidebar />
-      </div>
+      <Sidebar />
     </div>
-    <div className="page">
-      <Home />
-    </div>
+    <nav className="initialnav">
+      <ul>
+        <Link to="/create">create</Link>
+      </ul>
+      <ul>
+        {" "}
+        <Link to="/import">import</Link>
+      </ul>
+    </nav>
   </div>
 );
 

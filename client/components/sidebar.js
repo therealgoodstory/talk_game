@@ -25,17 +25,17 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="sidebar">
+    <aside className="sidebar">
       <div className="sidebar__menu">
         <h5 className={menuStyle}>МЕНЮ</h5>
       </div>
-      <div>
+      <nav>
         {menu.map((it, id) => (
           id !== 1 ? <SideBarItems name={it} key={it} /> : <Tasks name={it} key={it} />
         ))}
-      </div>
+      </nav>
       <Account />
-    </div>
+    </aside>
   );
 };
 

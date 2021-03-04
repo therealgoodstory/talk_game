@@ -7,7 +7,7 @@ import { ConnectedRouter } from "connected-react-router";
 import "./main.scss";
 import store, { history } from "./redux";
 import App from "./App";
-import Test from "./components/test";
+import CreateTask from "./pages/createTask";
 
 const Main = () => (
   <Provider store={store}>
@@ -15,7 +15,7 @@ const Main = () => (
       <BrowserRouter>
         <Switch>
           <Route exact path="/" render={() => <App />} />
-          <Route exact path="/test" component={Test} />
+          <Route exact path="/create" component={() => <CreateTask />} />
         </Switch>
       </BrowserRouter>
     </ConnectedRouter>
