@@ -12,22 +12,22 @@ const SelectComponent = (props) => {
     {
       label: "Group 1",
       options: [
-        { label: "Group 1, option 1", value: "value_1" },
-        { label: "Group 1, option 2", value: "value_2" },
+        { label: "11231323123", value: "value_1" },
+        { label: "2123123123", value: "value_2" },
       ],
     },
     {
-      label: "Group 1",
+      label: "Group 2",
       options: [
-        { label: "Group 1, option 1", value: "value_1" },
-        { label: "Group 1, option 2", value: "value_2" },
+        { label: "31231233", value: "value_3" },
+        { label: "4123123", value: "value_4" },
       ],
     },
     {
-      label: "Group 1",
+      label: "Group 3",
       options: [
-        { label: "Group 1, option 1", value: "value_1" },
-        { label: "Group 1, option 2", value: "value_2" },
+        { label: "51231233", value: "value_5" },
+        { label: "6sdffs", value: "value_6" },
       ],
     },
   ];
@@ -35,7 +35,7 @@ const SelectComponent = (props) => {
   return (
     <div className="page__size">
       <span className="font-page page__name">{name}</span>
-      <Select options={options} placeholder={placeholder} />
+      <Select classNamePrefix="react-select" className="select" options={options} placeholder={placeholder} />
     </div>
   );
 };

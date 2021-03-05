@@ -13,10 +13,6 @@ const App = () => (
       <ul>
         <Link to="/create">create</Link>
       </ul>
-      <ul>
-        {" "}
-        <Link to="/import">import</Link>
-      </ul>
     </nav>
   </div>
 );

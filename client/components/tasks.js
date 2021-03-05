@@ -1,5 +1,6 @@
 import React, { useState, useLayoutEffect } from "react";
 import PropTypes from "prop-types";
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const Tasks = (props) => {
@@ -36,9 +37,6 @@ const Tasks = (props) => {
       : setTasksStyle("tasks-open")
   ), [state]);
 
-  const onClick = () => console.log("click")
-  const handleClick = (e) => (e.key === "n" ? console.log("click") : null);
-
   const svg = (
     <svg width="9" height="10" viewBox="0 0 9 10" fill="none">
       <path d="M4.5 0.5V9.5" stroke="#586371" strokeWidth="2" />
@@ -50,7 +48,7 @@ const Tasks = (props) => {
     <div className={style}>
       <div className={logoStyle}>LOG</div>
       <span className={textStyle}>{name}</span>
-      <div role="button" onClick={onClick} onKeyDown={handleClick} tabIndex={0} className={`${tasksStyle} button-border`}>{svg}</div>
+      <Link role="button" to="/create" className={`${tasksStyle} button-border`}>{svg}</Link>
     </div>
   );
 };

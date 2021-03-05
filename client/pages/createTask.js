@@ -30,12 +30,39 @@ const CreateTask = () => {
       <div className="page">
         <div className={style}>
           <nav className="button-task">
-            <div type="button" onClick={clickCreate} onKeyDown={handleClick} tabIndex={0} role="button" className="button-border">
-              <span className="font-page title">Создание задачи</span>
+            <div
+              type="button"
+              onClick={clickCreate}
+              onKeyDown={handleClick}
+              tabIndex={0}
+              role="button"
+              className="button-border"
+            >
+              <span
+                className={
+                  statePage === 1 ? "font-page title" : "font-page title-on"
+                }
+              >
+                Создание задачи
+              </span>
             </div>
-            <div type="button" onClick={clickInput} onKeyDown={handleClick} tabIndex={0} role="button" className="button-border">
-              <span className="font-page title">Импорт</span>
+            <div
+              type="button"
+              onClick={clickInput}
+              onKeyDown={handleClick}
+              tabIndex={0}
+              role="button"
+              className="button-border"
+            >
+              <span
+                className={
+                  statePage === 1 ? "font-page title-on" : "font-page title"
+                }
+              >
+                Импорт
+              </span>
             </div>
+            <canvas className={statePage === 1 ? "canvas" : "canvas-on"} />
           </nav>
           <div>{statePage === 1 ? <InputTask /> : <ImportTask />}</div>
         </div>

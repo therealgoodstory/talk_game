@@ -7,14 +7,69 @@ body {
   cursor: default;
 }
 
-div::-webkit-scrollbar {
-  width: 5px;
-  height: 10px;
+h5 {
+  font-family: "Semibold";
+  font-size: 14px;
+  color: rgb(190, 190, 190);
 }
 
-div::-webkit-scrollbar-thumb {
-  background-color: rgb(196, 196, 196);
-  outline: 1px solid #eee;
+.select .react-select__control {
+  font-family: "Semibold";
+  font-size: 13px;
+  background-color: white;
+}
+.select .react-select__control--is-focused {
+  background-color: rgb(248, 248, 248); 
+  border-color: rgb(184, 218, 241);
+  box-shadow: 0px 0px 3px 0px rgba(66, 173, 235, 0.75);
+}
+
+.select .react-select__menu {
+  background-color: white;
+  margin: 0%;
+  margin-top: 10px;
+}
+.select .react-select__option {
+  height: 35px;
+  font-family: "Semibold";
+  font-size: 13px;
+  padding-left: 30px;
+  color: black;
+  background-color: white;
+}
+.select .react-select__option--is-focused {
+  height: 35px;
+  font-family: "Semibold";
+  font-size: 13px;
+  padding-left: 30px;
+  color: black;
+  background-color:  rgb(248, 248, 248);
+}
+
+.select .react-select__group-heading {
+  font-family: "Semibold";
+  font-size: 13px;
+  padding-left: 15px;
+  height: 30px;
+  color: black;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  background-color: #F3F5F8;
+}
+
+
+.select .react-select__menu-list{
+  padding-top: 0%;
+  padding-bottom: 0%;
+}
+.select .css-18ng2q5-group {
+  margin-bottom: 0%;
+}
+
+.select .css-syji7d-Group {
+  padding-top: 0%;
+  padding-bottom: 0%;
 }
 
 .font-page {
@@ -23,7 +78,15 @@ div::-webkit-scrollbar-thumb {
 }
 
 .title {
+  height: 50px;
   margin-left: 30px;
+  padding-bottom: 10px;
+}
+
+.title-on {
+  height: 50px;
+  margin-left: 30px;
+  color: rgb(156, 156, 156);
 }
 
 .initialnav {
@@ -66,7 +129,6 @@ input {
   padding-left: 15px;
 }
 
-
 textarea {
   border-radius: 7px;
   border: 1px solid rgba(214, 214, 214, 0.73);
@@ -102,6 +164,7 @@ textarea {
   height: 45px;
   border-bottom: 1px solid rgba(214, 214, 214, 0.73);
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .header {
@@ -158,3 +221,5 @@ textarea {
   display: flex;
   flex-direction: column;
 }
+
+

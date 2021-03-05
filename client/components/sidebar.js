@@ -29,7 +29,7 @@ const Sidebar = () => {
       <div className="sidebar__menu">
         <h5 className={menuStyle}>МЕНЮ</h5>
       </div>
-      <nav>
+      <nav className="onlyMobile">
         {menu.map((it, id) => (
           id !== 1 ? <SideBarItems name={it} key={it} /> : <Tasks name={it} key={it} />
         ))}
