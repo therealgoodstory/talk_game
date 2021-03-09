@@ -1,7 +1,7 @@
 @media screen and (min-width: 1150px) {
   .header__menu--logo {
     transition-property: margin-left;
-    transition-duration: 0.5s;
+    transition-duration: 0.4s;
     margin-left: 30px;
     margin-right: 70px;
     width: 145px;
@@ -10,7 +10,7 @@
   .header__menu--mini-logo {
     overflow: hidden;
     transition-property: margin-left;
-    transition-duration: 0.5s;
+    transition-duration: 0.4s;
     margin-right: 20px;
     margin-left: 20px;
     width: 29px;
@@ -19,14 +19,14 @@
 
   .header__menu--svg {
     transform: rotate(-0deg);
-    transition: transform 0.5s;
+    transition: transform 0.4s;
     width: 21px;
     height: 14px;
   }
 
   .header__menu--mini-svg {
     transform: translateX(-180px) rotate(-90deg);
-    transition: transform 0.5s;
+    transition: transform 0.4s;
     width: 21px;
     height: 14px;
   }
@@ -47,13 +47,11 @@
     flex-direction: row;
     align-items: center;
     transition-property: width;
-    transition-duration: 0.5s;
+    transition-duration: 0.4s;
     width: 65px;
     height: 50px;
     border-bottom: 1px solid rgba(235, 235, 235, 0.73);
-    border-left: 5px solid white;
     &:hover {
-      border-left: 5px solid #8695ac;
       background: #f6f7f9;
     }
   }
@@ -63,26 +61,24 @@
     display: flex;
     flex-direction: row;
     transition-property: width;
-    transition-duration: 0.5s;
+    transition-duration: 0.4s;
     width: 270px;
     height: 50px;
-    border-left: 5px solid white;
     border-bottom: 1px solid rgba(235, 235, 235, 0.73);
     &:hover {
-      border-left: 5px solid #8695ac;
       background: #f6f7f9;
     }
   }
 
   .sidebar__open--logo {
     transition-property: margin-left;
-    transition-duration: 0.5s;
+    transition-duration: 0.4s;
     margin-left: 25px;
     margin-right: 15px;
   }
   .sidebar__close--logo {
     transition-property: margin-left;
-    transition-duration: 0.5s;
+    transition-duration: 0.4s;
     margin-left: 15px;
     margin-right: 15px;
   }
@@ -108,13 +104,13 @@
   .sidebar__menu--open {
     margin-top: 30px;
     transition-property: margin-left;
-    transition-duration: 0.5s;
+    transition-duration: 0.4s;
     margin-left: 30px;
   }
   .sidebar__menu--close {
     margin-top: 30px;
     transition-property: margin-left;
-    transition-duration: 0.5s;
+    transition-duration: 0.4s;
     margin-left: 10px;
   }
 
@@ -162,13 +158,13 @@
     top: 70px;
     position: relative;
     padding: 30px;
-    background: #f7f7f7;
+    background: #F8FAFB;
     width: auto;
   }
 
   .page__open {
     transition-property: margin-left;
-    transition-duration: 0.5s;
+    transition-duration: 0.4s;
     margin-left: 270px;
     background: white;
     border-radius: 7px;
@@ -179,7 +175,7 @@
 
   .page__close {
     transition-property: margin-left;
-    transition-duration: 0.5s;
+    transition-duration: 0.4s;
     margin-left: 65px;
     background: white;
     border-radius: 7px;
@@ -190,8 +186,8 @@
 
   .tasks-open {
     transition-property: opacity;
-    transition-delay: 0.5s;
-    transition-duration: 0.5s;
+    transition-delay: 0.4s;
+    transition-duration: 0.4s;
     width: 25px;
     height: 25px;
     background: #f1f3f5;

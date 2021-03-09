@@ -1,11 +1,11 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux'
 
 const Account = () => {
   const [style, setStyle] = useState("sidebar__account-open");
   const state = useSelector((s) => s.sidebar.id)
 
-  useLayoutEffect(() => (
+  useEffect(() => (
     state === 1
       ? setStyle("sidebar__account-close")
       : setStyle("sidebar__account-open")

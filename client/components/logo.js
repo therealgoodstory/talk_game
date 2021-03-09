@@ -1,25 +1,30 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from 'react-router-dom'
 import logo from "../public/logo.png";
 import { updateState } from "../redux/reducers/sidebar";
 
 const Logo = () => {
-  const dispatch = useDispatch();
   const state = useSelector((s) => s.sidebar.id)
+  const dispatch = useDispatch();
+
   const [style, setStyle] = useState("header__menu--svg")
   const [logoStyle, setLogoStyle] = useState("header__menu--logo")
-  useLayoutEffect(() => (
+
+  useEffect(() => (
     state === 1
       ? setStyle("header__menu--mini-svg")
       : setStyle("header__menu--svg")
   ), [state]);
-  useLayoutEffect(() => (
+
+  useEffect(() => (
     state === 1
       ? setLogoStyle("header__menu--mini-logo")
       : setLogoStyle("header__menu--logo")
   ), [state]);
+
   const onClick = () => dispatch(updateState());
-  const handleClick = (e) => (e.key === "m" ? dispatch(updateState()) : null);
+  const handleClick = (e) => console.log(e.key)
 
   const svg = (
     <svg
@@ -36,9 +41,9 @@ const Logo = () => {
   );
   return (
     <div className="header__menu between">
-      <div className={logoStyle}>
+      <Link to="/" className={logoStyle}>
         <img alt="logo" src={logo} width="145px" height="33px" />
-      </div>
+      </Link>
       <div role="button" tabIndex={0} onClick={onClick} onKeyDown={handleClick} className="button-border">
         {svg}
       </div>

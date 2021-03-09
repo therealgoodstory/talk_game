@@ -7,13 +7,15 @@ import createRootReducer from "./reducers";
 
 export const history = createBrowserHistory();
 
-const middleware = [thunk];
+const middleware = [thunk, routerMiddleware(history)];
 const initialState = {};
 
 const composeFunc = process.env.NODE_ENV === "development" ? composeWithDevTools : compose;
+const enhancers = []
 
 const composedEnchanters = composeFunc(
-  applyMiddleware(routerMiddleware(history), ...middleware),
+  applyMiddleware(...middleware),
+  ...enhancers,
 );
 
 const store = createStore(
