@@ -1,5 +1,5 @@
 import React from 'react'
 
-const ImportTask = () => <div>import</div>
+const ImportTask = () => <div className="import">import</div>
 
 export default ImportTask

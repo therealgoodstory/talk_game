@@ -1,37 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Tasks = (props) => {
-  const { name } = props;
+  const { name, style } = props;
 
   const state = useSelector((s) => s.sidebar.id);
 
-  const [style, setStyle] = useState("sidebar__open");
-  const [logoStyle, setLogoStyle] = useState("sidebar__open--logo");
-  const [textStyle, setTextStyle] = useState("sidebar__open--name");
-  const [tasksStyle, setTasksStyle] = useState("tasks-open");
+  const [logoStyle, setLogoStyle] = useState("");
+  const [textStyle, setTextStyle] = useState("");
+  const [tasksStyle, setTasksStyle] = useState("");
 
-  useEffect(() => (
-    state === 1
-      ? setStyle("sidebar__close")
-      : setStyle("sidebar__open")
-  ), [state]);
-
-  useEffect(() => (
+  useLayoutEffect(() => (
     state === 1
       ? setLogoStyle("sidebar__close--logo")
       : setLogoStyle("sidebar__open--logo")
   ), [state]);
 
-  useEffect(() => (
+  useLayoutEffect(() => (
     state === 1
       ? setTextStyle("sidebar__close--name")
       : setTextStyle("sidebar__open--name")
   ), [state]);
 
-  useEffect(() => (
+  useLayoutEffect(() => (
     state === 1
       ? setTasksStyle("tasks-close")
       : setTasksStyle("tasks-open")
@@ -45,25 +38,23 @@ const Tasks = (props) => {
   );
 
   return (
-    <div className={style}>
+    <Link to="/task" className={style}>
       <div className={logoStyle}>LOG</div>
       <span className={textStyle}>{name}</span>
       <Link
         role="button"
-        to={{
-          pathname: "/create",
-          state: { fromDashboard: true },
-        }}
+        to="/create"
         className={`${tasksStyle} button-border`}
       >
         {svg}
       </Link>
-    </div>
+    </Link>
   );
 };
 
 Tasks.propTypes = {
   name: PropTypes.instanceOf(Array).isRequired,
+  style: PropTypes.string.isRequired,
 };
 
 export default Tasks;

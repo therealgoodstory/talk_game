@@ -1,18 +1,18 @@
-import React from "react";
-import CreateTaskPage from "../components/createTaskPage";
+import React from 'react'
+import AllTaskPage from '../components/allTaskPage';
 import Header from "../components/header";
 import Sidebar from "../components/sidebar";
 
-const CreateTask = () => (
+const AllTask = () => (
   <div>
     <div>
       <Header />
       <Sidebar />
     </div>
     <div>
-      <CreateTaskPage />
+      <AllTaskPage />
     </div>
   </div>
 );
 
-export default CreateTask;
+export default AllTask;

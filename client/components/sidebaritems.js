@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from 'react-redux'
 
@@ -7,16 +7,16 @@ const SideBarItems = (props) => {
 
   const state = useSelector((s) => s.sidebar.id)
 
-  const [logoStyle, setLogoStyle] = useState("sidebar__open--logo")
-  const [textStyle, setTextStyle] = useState("sidebar__open--name")
+  const [logoStyle, setLogoStyle] = useState("")
+  const [textStyle, setTextStyle] = useState("")
 
-  useEffect(() => (
+  useLayoutEffect(() => (
     state === 1
       ? setLogoStyle("sidebar__close--logo")
       : setLogoStyle("sidebar__open--logo")
   ), [state]);
 
-  useEffect(() => (
+  useLayoutEffect(() => (
     state === 1
       ? setTextStyle("sidebar__close--name")
       : setTextStyle("sidebar__open--name")

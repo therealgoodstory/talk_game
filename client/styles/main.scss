@@ -19,7 +19,7 @@ h5 {
   background-color: white;
 }
 .select .react-select__control--is-focused {
-  background-color: rgb(248, 248, 248); 
+  background-color: rgb(248, 248, 248);
   border-color: rgb(184, 218, 241);
   box-shadow: 0px 0px 3px 0px rgba(66, 173, 235, 0.75);
 }
@@ -43,7 +43,7 @@ h5 {
   font-size: 13px;
   padding-left: 30px;
   color: black;
-  background-color:  rgb(248, 248, 248);
+  background-color: rgb(248, 248, 248);
 }
 
 .select .react-select__group-heading {
@@ -55,11 +55,10 @@ h5 {
   justify-content: center;
   display: flex;
   flex-direction: column;
-  background-color: #F3F5F8;
+  background-color: #f3f5f8;
 }
 
-
-.select .react-select__menu-list{
+.select .react-select__menu-list {
   padding-top: 0%;
   padding-bottom: 0%;
 }
@@ -75,6 +74,20 @@ h5 {
 .font-page {
   font-family: "Semibold";
   font-size: 14px;
+}
+
+.select-menu {
+  background-color: #f6f7f9;
+  transition: background-color 0.5s;
+  border-left: 5px solid #8695ac;
+  :hover {
+    transition: background-color 0.5s;
+    background-color: white;
+  }
+}
+
+.not-selected {
+  border-left: 5px solid white;
 }
 
 .title {
@@ -177,7 +190,7 @@ textarea {
   width: 100vw;
   height: 70px;
   border-bottom: 1px solid rgba(214, 214, 214, 0.73);
-  box-shadow: 0px 4px 21px -7px rgba(0,0,0,0.38);
+  box-shadow: 0px 4px 21px -7px rgba(0, 0, 0, 0.38);
 }
 
 .header__menu {
@@ -221,5 +234,3 @@ textarea {
   display: flex;
   flex-direction: column;
 }
-
-

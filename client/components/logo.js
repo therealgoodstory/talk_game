@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
 import logo from "../public/logo.png";
@@ -8,23 +8,23 @@ const Logo = () => {
   const state = useSelector((s) => s.sidebar.id)
   const dispatch = useDispatch();
 
-  const [style, setStyle] = useState("header__menu--svg")
-  const [logoStyle, setLogoStyle] = useState("header__menu--logo")
+  const [style, setStyle] = useState("")
+  const [logoStyle, setLogoStyle] = useState("")
 
-  useEffect(() => (
+  useLayoutEffect(() => (
     state === 1
       ? setStyle("header__menu--mini-svg")
       : setStyle("header__menu--svg")
   ), [state]);
 
-  useEffect(() => (
+  useLayoutEffect(() => (
     state === 1
       ? setLogoStyle("header__menu--mini-logo")
       : setLogoStyle("header__menu--logo")
   ), [state]);
 
   const onClick = () => dispatch(updateState());
-  const handleClick = (e) => console.log(e.key)
+  const handleClick = (e) => (e.key === 'm' ? dispatch(updateState()) : null);
 
   const svg = (
     <svg

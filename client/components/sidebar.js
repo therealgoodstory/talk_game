@@ -1,26 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from 'react-redux'
+import React, { useState, useLayoutEffect } from "react";
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import Account from "./account";
 import SideBarItems from "./sidebaritems";
 import Tasks from "./tasks";
 
 const Sidebar = () => {
-  const state = useSelector((s) => s.sidebar.id)
+  const state = useSelector((s) => s.sidebar.id);
 
-  const [style, setStyle] = useState("sidebar__open")
-  const [menuStyle, setMenuStyle] = useState("sidebar__menu--open")
+  const [style, setStyle] = useState("");
+  const [menuStyle, setMenuStyle] = useState("");
 
-  useEffect(() => (
+  useLayoutEffect(() => (
     state === 1
       ? setMenuStyle("sidebar__menu--close")
       : setMenuStyle("sidebar__menu--open")
   ), [state]);
 
-  useEffect(() => (
+  useLayoutEffect(() => (
     state === 1
       ? setStyle("sidebar__close")
       : setStyle("sidebar__open")
   ), [state]);
+
+  const location = useLocation();
 
   return (
     <aside className="sidebar">
@@ -28,12 +31,24 @@ const Sidebar = () => {
         <h5 className={menuStyle}>МЕНЮ</h5>
       </div>
       <nav className="onlyMobile">
-        <SideBarItems name="Каталог услуг" style={style} />
-        <Tasks name="Задачи" style={style} />
-        <SideBarItems name="Инвойсы" style={style} />
-        <SideBarItems name="История операций" style={style} />
-        <SideBarItems name="Отчёты" style={style} />
-        <SideBarItems name="API" style={style} />
+        <div className={location.pathname === "/1" ? "select-menu" : "not-selected"}>
+          <SideBarItems name="Каталог услуг" style={style} />
+        </div>
+        <div className={location.pathname === "/create" || location.pathname === "/task" ? "select-menu" : "not-selected"}>
+          <Tasks name="Задачи" style={style} />
+        </div>
+        <div className={location.pathname === "/2" ? "select-menu" : "not-selected"}>
+          <SideBarItems name="Инвойсы" style={style} />
+        </div>
+        <div className={location.pathname === "/3" ? "select-menu" : "not-selected"}>
+          <SideBarItems name="История операций" style={style} />
+        </div>
+        <div className={location.pathname === "/4" ? "select-menu" : "not-selected"}>
+          <SideBarItems name="Отчёты" style={style} />
+        </div>
+        <div className={location.pathname === "/5" ? "select-menu" : "not-selected"}>
+          <SideBarItems name="API" style={style} />
+        </div>
       </nav>
       <Account />
     </aside>

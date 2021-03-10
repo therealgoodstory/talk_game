@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import Select from "react-select";
+import React, { useState, useEffect } from "react";
+import AsyncSelect from "react-select";
 
 const InputTask = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
-
+  const [selectedOption, setSelectedOption] = useState();
+  const [state, setState] = useState(0);
+  useEffect(() => {
+    setState(1);
+  }, []);
   const options = [
     {
       label: "Group 1",
@@ -27,51 +30,66 @@ const InputTask = () => {
       ],
     },
   ];
+  // setTimeout(() => setState(1), 100);
+
+  const select = (
+    <div className="page__input">
+      <div className="page__size">
+        <span className="font-page page__name">Тип работ</span>
+        <AsyncSelect
+          classNamePrefix="react-select"
+          className="select"
+          options={options}
+          placeholder="Выберите тип работ"
+          onChange={(e) => setSelectedOption(e)}
+        />
+      </div>
+    </div>
+  );
+  const atribute1 = (
+    <AsyncSelect
+      classNamePrefix="react-select"
+      className="select"
+      options={options}
+      onChange={(e) => setSelectedOption(e)}
+    />
+  );
+  const atribute2 = (
+    <AsyncSelect
+      classNamePrefix="react-select"
+      className="select"
+      options={options}
+      onChange={(e) => setSelectedOption(e)}
+    />
+  );
+
+  const atribute3 = (
+    <AsyncSelect
+      classNamePrefix="react-select"
+      className="select"
+      options={options}
+      onChange={(e) => setSelectedOption(e)}
+    />
+  );
   return (
     <form>
       <div className="page__size page__input">
         <span className="font-page page__name">Название задачи*</span>
         <input className="input" />
       </div>
-      <div className="page__input">
-        <div className="page__size">
-          <span className="font-page page__name">Тип работ</span>
-          <Select
-            classNamePrefix="react-select"
-            className="select"
-            options={options}
-            placeholder="Выберите тип работ"
-            onChange={(e) => setSelectedOption(e)}
-          />
-        </div>
-      </div>
+      {state === 1 ? select : null}
       <div className="page__atribute">
         <div className="page__size">
           <span className="font-page page__name">Атрибут</span>
-          <Select
-            classNamePrefix="react-select"
-            className="select"
-            options={options}
-            onChange={(e) => setSelectedOption(e)}
-          />
+          {state === 1 ? atribute1 : null}
         </div>
         <div className="page__size">
           <span className="font-page page__name">Атрибут</span>
-          <Select
-            classNamePrefix="react-select"
-            className="select"
-            options={options}
-            onChange={(e) => setSelectedOption(e)}
-          />
+          {state === 1 ? atribute2 : null}
         </div>
         <div className="page__size">
           <span className="font-page page__name">Атрибут</span>
-          <Select
-            classNamePrefix="react-select"
-            className="select"
-            options={options}
-            onChange={(e) => setSelectedOption(e)}
-          />
+          {state === 1 ? atribute3 : null}
         </div>
       </div>
       <div className="page__input">
