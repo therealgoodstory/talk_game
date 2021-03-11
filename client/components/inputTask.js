@@ -1,12 +1,32 @@
 import React, { useState, useEffect } from "react";
 import AsyncSelect from "react-select";
+import MainButton from "./mainButton";
 
 const InputTask = () => {
-  const [selectedOption, setSelectedOption] = useState();
+  const [nameTask, setNameTask] = useState("");
+  const [nameTaskStyle, setNameTaskStyle] = useState("input");
+  const [type, setType] = useState("");
+  const [selectStyle, setSelectStyle] = useState("react-select");
   const [state, setState] = useState(0);
   useEffect(() => {
     setState(1);
   }, []);
+
+  const validation = () => {
+    if (nameTask.length === 0) {
+      setNameTaskStyle("red");
+    } else {
+      setNameTaskStyle("input");
+    }
+    if (type === "") {
+      setSelectStyle("react-select--red");
+    } else {
+      setSelectStyle("react-select");
+    }
+  };
+
+  const onClick = () => validation();
+
   const options = [
     {
       label: "Group 1",
@@ -15,33 +35,18 @@ const InputTask = () => {
         { label: "2123123123", value: "value_2" },
       ],
     },
-    {
-      label: "Group 2",
-      options: [
-        { label: "31231233", value: "value_3" },
-        { label: "4123123", value: "value_4" },
-      ],
-    },
-    {
-      label: "Group 3",
-      options: [
-        { label: "51231233", value: "value_5" },
-        { label: "6sdffs", value: "value_6" },
-      ],
-    },
   ];
-  // setTimeout(() => setState(1), 100);
 
   const select = (
     <div className="page__input">
       <div className="page__size">
         <span className="font-page page__name">Тип работ</span>
         <AsyncSelect
-          classNamePrefix="react-select"
+          classNamePrefix={selectStyle}
           className="select"
           options={options}
           placeholder="Выберите тип работ"
-          onChange={(e) => setSelectedOption(e)}
+          onChange={(e) => setType(e)}
         />
       </div>
     </div>
@@ -51,7 +56,6 @@ const InputTask = () => {
       classNamePrefix="react-select"
       className="select"
       options={options}
-      onChange={(e) => setSelectedOption(e)}
     />
   );
   const atribute2 = (
@@ -59,7 +63,6 @@ const InputTask = () => {
       classNamePrefix="react-select"
       className="select"
       options={options}
-      onChange={(e) => setSelectedOption(e)}
     />
   );
 
@@ -68,14 +71,16 @@ const InputTask = () => {
       classNamePrefix="react-select"
       className="select"
       options={options}
-      onChange={(e) => setSelectedOption(e)}
     />
   );
   return (
     <form>
       <div className="page__size page__input">
         <span className="font-page page__name">Название задачи*</span>
-        <input className="input" />
+        <input
+          className={nameTaskStyle}
+          onChange={(e) => setNameTask(e.target.value)}
+        />
       </div>
       {state === 1 ? select : null}
       <div className="page__atribute">
@@ -96,7 +101,8 @@ const InputTask = () => {
         <span className="page__name">Описание</span>
         <textarea className="textarea" />
       </div>
-      {JSON.stringify(selectedOption)}
+      <MainButton onClick={onClick} />
+      {JSON.stringify(type)}
     </form>
   );
 };

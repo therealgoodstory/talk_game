@@ -181,6 +181,7 @@
   }
 
   .page__open {
+    padding-bottom: 30px;
     transition-property: margin-left;
     transition-duration: 0.4s;
     width: 70vw;
@@ -193,6 +194,7 @@
   }
 
   .page__close {
+    padding-bottom: 30px;
     transition-property: margin-left;
     transition-duration: 0.4s;
     width: 70vw;
