@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Select from "react-select";
+import AsyncSelect from "react-select";
 import MainButton from "./mainButton";
 
 const InputTask = () => {
@@ -21,69 +21,33 @@ const InputTask = () => {
   const [inputStyle, setInputStyle] = useState("input");
   const [textAreaStyle, setTextAreaStyle] = useState("textarea");
 
-  const [error1, setError1] = useState(0);
-  const [error2, setError2] = useState(0);
-  const [error3, setError3] = useState(0);
-  const [error4, setError4] = useState(0);
-  const [error5, setError5] = useState(0);
-  const [error6, setError6] = useState(0);
-
   useEffect(() => setLoad(1), []);
-  useEffect(() => {
-    setInputStyle("input");
-    setError1(0);
-  }, [input.length]);
-  useEffect(() => {
-    setTypeStyle("");
-    setError2(0);
-  }, [type.length]);
-  useEffect(() => {
-    setAtr1Style("");
-    setError3(0);
-  }, [atr1.length]);
-  useEffect(() => {
-    setAtr2Style("");
-    setError4(0);
-  }, [atr2.length]);
-  useEffect(() => {
-    setAtr3Style("");
-    setError5(0);
-  }, [atr3.length]);
-  useEffect(() => {
-    setTextAreaStyle("textarea");
-    setError6(0);
-  }, [textArea.length]);
+  useEffect(() => setTypeStyle(""), [type.length]);
+  useEffect(() => setAtr1Style(""), [atr1.length]);
+  useEffect(() => setAtr2Style(""), [atr2.length]);
+  useEffect(() => setAtr3Style(""), [atr3.length]);
+  useEffect(() => setInputStyle("input"), [input.length]);
+  useEffect(() => setTextAreaStyle("textarea"), [textArea.length]);
 
-  const validation = () => {
-    if (input.length === 0) {
-      setInputStyle("input-err");
-      setError1(1);
-    }
+  const onClick = () => {
     if (type.length === 0) {
       setTypeStyle("react-select");
-      setError2(1);
     }
     if (atr1.length === 0) {
       setAtr1Style("react-select");
-      setError3(1);
     }
     if (atr2.length === 0) {
       setAtr2Style("react-select");
-      setError4(1);
     }
     if (atr3.length === 0) {
       setAtr3Style("react-select");
-      setError5(1);
+    }
+    if (input.length === 0) {
+      setInputStyle("input-err");
     }
     if (textArea.length === 0) {
       setTextAreaStyle("textarea-err");
-      setError6(1);
     }
-  }
-
-  const onClick = () => {
-    validation()
-    return error1 + error2 + error3 + error4 + error5 + error6 === 0 ? console.log('ok') : null
   };
 
   const customStyles = {
@@ -147,7 +111,7 @@ const InputTask = () => {
   ];
 
   const select = (
-    <Select
+    <AsyncSelect
       classNamePrefix={typeStyle}
       options={options}
       placeholder="Выберите тип работ"
@@ -156,7 +120,7 @@ const InputTask = () => {
     />
   );
   const atribute1 = (
-    <Select
+    <AsyncSelect
       options={options}
       styles={customStyles}
       classNamePrefix={atr1Style}
@@ -164,7 +128,7 @@ const InputTask = () => {
     />
   );
   const atribute2 = (
-    <Select
+    <AsyncSelect
       options={options}
       styles={customStyles}
       classNamePrefix={atr2Style}
@@ -172,21 +136,18 @@ const InputTask = () => {
     />
   );
   const atribute3 = (
-    <Select
+    <AsyncSelect
       options={options}
       styles={customStyles}
       classNamePrefix={atr3Style}
       onChange={(e) => setAtr3(e)}
     />
   );
-
   return (
     <form>
       <div className="page__size page__input">
         <span className="font-page page__name">Название задачи*</span>
-        <span className={error1 === 1 ? "error-message" : "error-message-on"}>
-          Заполните это поле
-        </span>
+        <span className="error-message-on">Заполните это поле</span>
         <input
           onChange={(e) => setInput(e.target.value)}
           className={inputStyle}
@@ -195,41 +156,31 @@ const InputTask = () => {
       <div className="page__input">
         <div className="page__size">
           <span className="font-page page__name">Тип работ</span>
-          <span className={error2 === 1 ? "error-message" : "error-message-on"}>
-            Заполните это поле
-          </span>
+          <span className="error-message-on">Заполните это поле</span>
           {load === 1 ? select : null}
         </div>
       </div>
       <div className="page__atribute">
         <div className="page__size">
-          <span className="font-page page__name">Атрибут1</span>
-          <span className={error3 === 1 ? "error-message" : "error-message-on"}>
-            Заполните это поле
-          </span>
+          <span className="font-page page__name">Атрибут</span>
+          <span className="error-message-on">Заполните это поле</span>
           {load === 1 ? atribute1 : null}
         </div>
         <div className="page__size">
-          <span className="font-page page__name">Атрибут2</span>
-          <span className={error4 === 1 ? "error-message" : "error-message-on"}>
-            Заполните это поле
-          </span>
+          <span className="font-page page__name">Атрибут</span>
+          <span className="error-message-on">Заполните это поле</span>
           {load === 1 ? atribute2 : null}
         </div>
         <div className="page__size">
-          <span className="font-page page__name">Атрибут3</span>
-          <span className={error5 === 1 ? "error-message" : "error-message-on"}>
-            Заполните это поле
-          </span>
+          <span className="font-page page__name">Атрибут</span>
+          <span className="error-message-on">Заполните это поле</span>
           {load === 1 ? atribute3 : null}
         </div>
       </div>
       <div className="page__input">
         <div className="page__size">
           <span className="page__name">Описание</span>
-          <span className={error6 === 1 ? "error-message" : "error-message-on"}>
-            Заполните это поле
-          </span>
+          <span className="error-message-on">Заполните это поле</span>
           <textarea
             className={textAreaStyle}
             onChange={(e) => setTextArea(e.target.value)}
@@ -237,6 +188,7 @@ const InputTask = () => {
         </div>
       </div>
       <MainButton onClick={onClick} />
+      {JSON.stringify(type)}
     </form>
   );
 };

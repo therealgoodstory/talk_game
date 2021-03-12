@@ -57,69 +57,90 @@ button:focus {
   color: black;
 }
 
+.error-message {
+  height: 10px;
+  color: red;
+  position: absolute;
+  padding-top: 15px;
+  white-space: nowrap;
+  right: 0;
+}
+
+.error-message-on {
+  display: none;
+}
+
 h5 {
   font-family: "Semibold";
   font-size: 14px;
   color: rgb(190, 190, 190);
 }
+.react-select__control {
+  transition: border-color 1s;
+  border-color: red !important ;
+  border-width: 2px !important ;
+  :focus {
+    transition: border-color 1s;
+    border-color: red !important ;
+  }
+}
+// .select .react-select__control {
+//   font-family: "Semibold";
+//   font-size: 13px;
+//   background-color: white;
+// }
+// .select .react-select__control--is-focused {
+//   background-color: rgb(248, 248, 248);
+//   border-color: rgb(184, 218, 241);
+//   box-shadow: 0px 0px 3px 0px rgba(66, 173, 235, 0.75);
+// }
 
-.select .react-select__control {
-  font-family: "Semibold";
-  font-size: 13px;
-  background-color: white;
-}
-.select .react-select__control--is-focused {
-  background-color: rgb(248, 248, 248);
-  border-color: rgb(184, 218, 241);
-  box-shadow: 0px 0px 3px 0px rgba(66, 173, 235, 0.75);
-}
+// .select .react-select__menu {
+//   background-color: white;
+//   margin: 0%;
+//   margin-top: 10px;
+// }
+// .select .react-select__option {
+//   height: 35px;
+//   font-family: "Semibold";
+//   font-size: 13px;
+//   padding-left: 30px;
+//   color: black;
+//   background-color: white;
+// }
+// .select .react-select__option--is-focused {
+//   height: 35px;
+//   font-family: "Semibold";
+//   font-size: 13px;
+//   padding-left: 30px;
+//   color: black;
+//   background-color: rgb(248, 248, 248);
+// }
 
-.select .react-select__menu {
-  background-color: white;
-  margin: 0%;
-  margin-top: 10px;
-}
-.select .react-select__option {
-  height: 35px;
-  font-family: "Semibold";
-  font-size: 13px;
-  padding-left: 30px;
-  color: black;
-  background-color: white;
-}
-.select .react-select__option--is-focused {
-  height: 35px;
-  font-family: "Semibold";
-  font-size: 13px;
-  padding-left: 30px;
-  color: black;
-  background-color: rgb(248, 248, 248);
-}
+// .select .react-select__group-heading {
+//   font-family: "Semibold";
+//   font-size: 13px;
+//   padding-left: 15px;
+//   height: 30px;
+//   color: black;
+//   justify-content: center;
+//   display: flex;
+//   flex-direction: column;
+//   background-color: #f3f5f8;
+// }
 
-.select .react-select__group-heading {
-  font-family: "Semibold";
-  font-size: 13px;
-  padding-left: 15px;
-  height: 30px;
-  color: black;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  background-color: #f3f5f8;
-}
+// .select .react-select__menu-list {
+//   padding-top: 0%;
+//   padding-bottom: 0%;
+// }
+// .select .css-18ng2q5-group {
+//   margin-bottom: 0%;
+// }
 
-.select .react-select__menu-list {
-  padding-top: 0%;
-  padding-bottom: 0%;
-}
-.select .css-18ng2q5-group {
-  margin-bottom: 0%;
-}
-
-.select .css-syji7d-Group {
-  padding-top: 0%;
-  padding-bottom: 0%;
-}
+// .select .css-syji7d-Group {
+//   padding-top: 0%;
+//   padding-bottom: 0%;
+// }
 
 .font-page {
   font-family: "Semibold";
@@ -166,34 +187,14 @@ h5 {
   position: relative;
   height: auto;
 }
-.textarea {
-  height: 100px;
-  margin-bottom: 30px;
-}
+
 .page__input {
   display: flex;
   flex-direction: column;
   margin-left: 30px;
   width: 40%;
 }
-.react-select--red {
-  border-color: red;
-}
 
-input {
-  height: 30px;
-  border-radius: 7px;
-  border: 1px solid rgba(214, 214, 214, 0.73);
-  outline: none;
-  padding-left: 15px;
-}
-.red {
-  height: 40px;
-  border-radius: 7px;
-  border: 1px solid rgba(255, 81, 81, 0.73);
-  outline: none;
-  padding-left: 15px;
-}
 .input {
   height: 40px;
   border-radius: 7px;
@@ -202,12 +203,38 @@ input {
   padding-left: 15px;
 }
 
+.input-err {
+  transition: border 0.5s;
+  height: 40px;
+  border-radius: 7px;
+  border: 2px solid rgb(255, 0, 0);
+  outline: none;
+  padding-left: 15px;
+}
+
+.red {
+  height: 40px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 81, 81, 0.73);
+  outline: none;
+  padding-left: 15px;
+}
+
 textarea {
+  height: 100px;
+  margin-bottom: 30px;
   border-radius: 7px;
   border: 1px solid rgba(214, 214, 214, 0.73);
   outline: none;
   padding: 15px;
   resize: none;
+}
+
+.textarea-err {
+  transition: border 0.5s;
+  height: 100px;
+  margin-bottom: 30px;
+  border: 2px solid rgb(255, 0, 0);
 }
 
 .page__atribute {
