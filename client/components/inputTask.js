@@ -1,90 +1,23 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
-import MainButton from "./mainButton";
+import { useForm, Controller } from "react-hook-form";
 
 const InputTask = () => {
-  const [type, setType] = useState("");
   const [load, setLoad] = useState(0);
-  const [typeStyle, setTypeStyle] = useState("");
-
-  const [atr1, setAtr1] = useState("");
-  const [atr2, setAtr2] = useState("");
-  const [atr3, setAtr3] = useState("");
-
-  const [atr1Style, setAtr1Style] = useState("");
-  const [atr2Style, setAtr2Style] = useState("");
-  const [atr3Style, setAtr3Style] = useState("");
-
-  const [input, setInput] = useState("");
-  const [textArea, setTextArea] = useState("");
-
-  const [inputStyle, setInputStyle] = useState("input");
-  const [textAreaStyle, setTextAreaStyle] = useState("textarea");
-
-  const [error1, setError1] = useState(0);
-  const [error2, setError2] = useState(0);
-  const [error3, setError3] = useState(0);
-  const [error4, setError4] = useState(0);
-  const [error5, setError5] = useState(0);
-  const [error6, setError6] = useState(0);
+  const [data, setData] = useState(null);
 
   useEffect(() => setLoad(1), []);
-  useEffect(() => {
-    setInputStyle("input");
-    setError1(0);
-  }, [input.length]);
-  useEffect(() => {
-    setTypeStyle("");
-    setError2(0);
-  }, [type.length]);
-  useEffect(() => {
-    setAtr1Style("");
-    setError3(0);
-  }, [atr1.length]);
-  useEffect(() => {
-    setAtr2Style("");
-    setError4(0);
-  }, [atr2.length]);
-  useEffect(() => {
-    setAtr3Style("");
-    setError5(0);
-  }, [atr3.length]);
-  useEffect(() => {
-    setTextAreaStyle("textarea");
-    setError6(0);
-  }, [textArea.length]);
 
-  const validation = () => {
-    if (input.length === 0) {
-      setInputStyle("input-err");
-      setError1(1);
-    }
-    if (type.length === 0) {
-      setTypeStyle("react-select");
-      setError2(1);
-    }
-    if (atr1.length === 0) {
-      setAtr1Style("react-select");
-      setError3(1);
-    }
-    if (atr2.length === 0) {
-      setAtr2Style("react-select");
-      setError4(1);
-    }
-    if (atr3.length === 0) {
-      setAtr3Style("react-select");
-      setError5(1);
-    }
-    if (textArea.length === 0) {
-      setTextAreaStyle("textarea-err");
-      setError6(1);
-    }
-  }
+  const {
+    register,
+    handleSubmit,
+    control,
+    errors,
+  } = useForm();
 
   const onClick = () => {
-    validation()
-    return error1 + error2 + error3 + error4 + error5 + error6 === 0 ? console.log('ok') : null
-  };
+    console.log(data)
+  }
 
   const customStyles = {
     option: (provided, state) => ({
@@ -146,97 +79,105 @@ const InputTask = () => {
     },
   ];
 
+  const verificationRules = {
+    length: { required: true, minLength: 2 },
+  }
+
   const select = (
-    <Select
-      classNamePrefix={typeStyle}
+    <Controller
+      name="type"
       options={options}
       placeholder="Выберите тип работ"
-      onChange={(e) => setType(e)}
+      control={control}
+      as={Select}
+      rules={verificationRules.length}
       styles={customStyles}
+      defaultValue=""
+      classNamePrefix={errors.type === undefined ? "" : "react-select"}
     />
   );
   const atribute1 = (
-    <Select
+    <Controller
+      name="atr1"
       options={options}
       styles={customStyles}
-      classNamePrefix={atr1Style}
-      onChange={(e) => setAtr1(e)}
+      control={control}
+      as={Select}
+      rules={verificationRules.length}
+      defaultValue=""
+      classNamePrefix={errors.atr1 === undefined ? "" : "react-select"}
     />
   );
   const atribute2 = (
-    <Select
+    <Controller
+      name="atr2"
       options={options}
       styles={customStyles}
-      classNamePrefix={atr2Style}
-      onChange={(e) => setAtr2(e)}
+      control={control}
+      as={Select}
+      rules={verificationRules.length}
+      defaultValue=""
+      classNamePrefix={errors.atr2 === undefined ? "" : "react-select"}
     />
   );
   const atribute3 = (
-    <Select
+    <Controller
+      name="atr3"
       options={options}
       styles={customStyles}
-      classNamePrefix={atr3Style}
-      onChange={(e) => setAtr3(e)}
+      control={control}
+      as={Select}
+      rules={verificationRules.length}
+      defaultValue=""
+      classNamePrefix={errors.atr3 === undefined ? "" : "react-select"}
     />
   );
 
+  const errorMesage = <p className="error-message">Заполните поле</p>
+
   return (
-    <form>
+    <form onSubmit={handleSubmit((info) => setData(info))}>
       <div className="page__size page__input">
         <span className="font-page page__name">Название задачи*</span>
-        <span className={error1 === 1 ? "error-message" : "error-message-on"}>
-          Заполните это поле
-        </span>
-        <input
-          onChange={(e) => setInput(e.target.value)}
-          className={inputStyle}
-        />
+        <input name="taskName" className={errors.taskName === undefined ? "input" : "input-err"} ref={register(verificationRules.length)} />
+        {errors.taskName && errorMesage}
       </div>
       <div className="page__input">
         <div className="page__size">
           <span className="font-page page__name">Тип работ</span>
-          <span className={error2 === 1 ? "error-message" : "error-message-on"}>
-            Заполните это поле
-          </span>
           {load === 1 ? select : null}
+          {errors.type && errorMesage}
         </div>
       </div>
       <div className="page__atribute">
         <div className="page__size">
           <span className="font-page page__name">Атрибут1</span>
-          <span className={error3 === 1 ? "error-message" : "error-message-on"}>
-            Заполните это поле
-          </span>
           {load === 1 ? atribute1 : null}
+          {errors.atr1 && errorMesage}
         </div>
         <div className="page__size">
           <span className="font-page page__name">Атрибут2</span>
-          <span className={error4 === 1 ? "error-message" : "error-message-on"}>
-            Заполните это поле
-          </span>
           {load === 1 ? atribute2 : null}
+          {errors.atr2 && errorMesage}
         </div>
         <div className="page__size">
           <span className="font-page page__name">Атрибут3</span>
-          <span className={error5 === 1 ? "error-message" : "error-message-on"}>
-            Заполните это поле
-          </span>
           {load === 1 ? atribute3 : null}
+          {errors.atr3 && errorMesage}
         </div>
       </div>
       <div className="page__input">
         <div className="page__size">
           <span className="page__name">Описание</span>
-          <span className={error6 === 1 ? "error-message" : "error-message-on"}>
-            Заполните это поле
-          </span>
           <textarea
-            className={textAreaStyle}
-            onChange={(e) => setTextArea(e.target.value)}
+            ref={register(verificationRules.length)}
+            name="description"
+            className={errors.description === undefined ? "textarea" : "textarea-err"}
           />
+          {errors.description && errorMesage}
         </div>
       </div>
-      <MainButton onClick={onClick} />
+      <input type="submit" className="main-button" onClick={onClick} />
     </form>
   );
 };

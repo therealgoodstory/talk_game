@@ -9,7 +9,6 @@ import store, { history } from "./redux";
 import App from "./App";
 import CreateTask from "./pages/createTask";
 import AllTask from "./pages/allTask";
-import Appp from "./pages/test";
 
 const Main = () => (
   <Provider store={store}>
@@ -19,7 +18,6 @@ const Main = () => (
           <Route exact path="/" render={() => <App />} />
           <Route exact path="/create" component={() => <CreateTask />} />
           <Route exact path="/task" component={() => <AllTask />} />
-          <Route exact path="/test" component={() => <Appp />} />
         </Switch>
       </HashRouter>
     </ConnectedRouter>

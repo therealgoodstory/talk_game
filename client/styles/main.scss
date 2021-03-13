@@ -61,13 +61,10 @@ button:focus {
   height: 10px;
   color: red;
   position: absolute;
-  padding-top: 15px;
   white-space: nowrap;
   right: 0;
-}
-
-.error-message-on {
-  display: none;
+  font-family: "Semibold";
+  font-size: 13px;
 }
 
 h5 {
@@ -204,7 +201,6 @@ h5 {
 }
 
 .input-err {
-  transition: border 0.5s;
   height: 40px;
   border-radius: 7px;
   border: 2px solid rgb(255, 0, 0);
@@ -231,7 +227,6 @@ textarea {
 }
 
 .textarea-err {
-  transition: border 0.5s;
   height: 100px;
   margin-bottom: 30px;
   border: 2px solid rgb(255, 0, 0);
