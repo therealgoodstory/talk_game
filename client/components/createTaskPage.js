@@ -18,7 +18,7 @@ const CreateTaskPage = () => {
   const clickCreate = () => (statePage === false ? setStatePage(true) : null);
   const clickInput = () => (statePage === true ? setStatePage(false) : null);
   const handleClick = (e) => (e.key === "n" ? console.log("click") : null);
-  console.log(state)
+
   return (
     <div className="page">
       <div className={style}>

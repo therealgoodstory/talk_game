@@ -13,8 +13,13 @@ const AllTaskPage = () => {
   ), [state]);
 
   return (
-    <div className="page">
-      <div className={style}>all task</div>
+    <div>
+      <div className="page">
+        <div className={style}>all task</div>
+      </div>
+      <div className="page">
+        <div className={style}>all task</div>
+      </div>
     </div>
   );
 };

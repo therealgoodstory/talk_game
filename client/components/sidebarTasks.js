@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const Tasks = (props) => {
+const SidebarTasks = (props) => {
   const { name, style } = props;
 
   const state = useSelector((s) => s.sidebar.id);
@@ -38,9 +38,11 @@ const Tasks = (props) => {
   );
 
   return (
-    <Link to="/task" className={style}>
-      <div className={logoStyle}>LOG</div>
-      <span className={textStyle}>{name}</span>
+    <div>
+      <Link to="/task" className={style}>
+        <div className={logoStyle}>LOG</div>
+        <span className={textStyle}>{name}</span>
+      </Link>
       <Link
         role="button"
         to="/create"
@@ -48,13 +50,13 @@ const Tasks = (props) => {
       >
         {svg}
       </Link>
-    </Link>
+    </div>
   );
 };
 
-Tasks.propTypes = {
-  name: PropTypes.instanceOf(Array).isRequired,
+SidebarTasks.propTypes = {
+  name: PropTypes.string.isRequired,
   style: PropTypes.string.isRequired,
 };
 
-export default Tasks;
+export default SidebarTasks;

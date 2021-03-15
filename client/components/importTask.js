@@ -36,9 +36,8 @@ const ImportTask = () => {
   }
 
   const onClick = () => {
-    console.log('click import')
+    console.log(items)
   }
-  console.log(items)
 
   return (
     <div className="import">

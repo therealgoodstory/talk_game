@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Account from "./account";
 import SideBarItems from "./sidebaritems";
-import Tasks from "./tasks";
+import SidebarTasks from "./sidebarTasks";
 
 const Sidebar = () => {
   const state = useSelector((s) => s.sidebar.id);
@@ -35,7 +35,7 @@ const Sidebar = () => {
           <SideBarItems name="Каталог услуг" style={style} />
         </div>
         <div className={location.pathname === "/create" || location.pathname === "/task" ? "select-menu" : "not-selected"}>
-          <Tasks name="Задачи" style={style} />
+          <SidebarTasks name="Задачи" style={style} />
         </div>
         <div className={location.pathname === "/2" ? "select-menu" : "not-selected"}>
           <SideBarItems name="Инвойсы" style={style} />

@@ -31,7 +31,7 @@ const SideBarItems = (props) => {
 };
 
 SideBarItems.propTypes = {
-  name: PropTypes.instanceOf(Array).isRequired,
+  name: PropTypes.string.isRequired,
   style: PropTypes.string.isRequired,
 };
 
