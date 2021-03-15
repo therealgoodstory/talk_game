@@ -1,11 +1,23 @@
-import React from 'react'
+import React from "react";
 import PropTypes from "prop-types";
 
-const RunningTitle = ({style}) => <div className="page"><div className={style}>RunningTitle</div></div>
+const RunningTitle = ({ style }) => {
+  const table = ["ID", "НАЗВАНИЕ", "СУММА", "МЕТОД", "ДЕДЛАЙН", "СТАТУС"];
+  return (
+    <div className="page">
+      <div className={style}>
+        <div className="task-description title-alltask">
+          {table.map((title) => (
+            <div key={title}>{title}</div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
-Task.propTypes = {
+RunningTitle.propTypes = {
   style: PropTypes.string.isRequired,
 };
 
-export default RunningTitle
-
+export default RunningTitle;
