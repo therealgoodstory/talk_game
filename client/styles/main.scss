@@ -32,6 +32,15 @@ body {
   border: none;
   margin-left: 30px;
   margin-bottom: 30px;
+  z-index: 0;
+}
+.opacity {
+  z-index: 1;
+  width: 140px;
+  height: 40px;
+  border: none;
+  margin-left: 30px;
+  margin-bottom: 30px;
 }
 
 button:focus {
@@ -66,6 +75,18 @@ button:focus {
   right: 0;
   font-family: "Semibold";
   font-size: 13px;
+}
+
+.error-cell {
+  box-shadow: red;
+  border-color: red;
+  color: red;
+  outline: none;
+}
+
+.cell {
+  outline: none;
+  border-color: rgb(156, 156, 156);
 }
 
 h5 {

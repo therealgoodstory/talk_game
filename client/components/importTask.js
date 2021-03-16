@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import * as XLSX from "xlsx";
 import { useForm } from "react-hook-form";
-import MainButton from "./mainButton";
 
 const ImportTask = () => {
   const [items, setItems] = useState([]);
   const [nameFile, setNameFile] = useState("Выберите файл");
+  const [validateForm, setValidateForm] = useState(0);
+  const [editForm, setEditForm] = useState(0);
   const readExel = (file) => {
     const promise = new Promise((res, rej) => {
       const fileReader = new global.FileReader();
@@ -38,15 +39,39 @@ const ImportTask = () => {
     setNameFile(file.name);
   };
 
-  const onClick = () => {
-    console.log(items);
-  };
-  const onClick1 = () => {
-    console.log('asd')
-  }
+  const onClick = () => (editForm === 0 ? console.log('server') : setValidateForm(1));
 
+  const data = items.map((it, idx) => Object.keys(it).map((_, id) => `1${idx}${id}`));
+
+  const editFormComponent = (
+    <table>
+      <tbody>
+        {items.map((task, idx) => (
+          <tr key={task.id}>
+            {Object.keys(task).map((title, k) => {
+              const keyName = data[idx][k];
+              return (
+                <td key={title}>
+                  <input
+                    className={
+                      errors[keyName] === undefined ? "cell" : "error-cell"
+                    }
+                    name={keyName}
+                    key={keyName}
+                    defaultValue={title}
+                    placeholder={title}
+                    ref={register({ required: true, minLength: 3 })}
+                  />
+                </td>
+              );
+            })}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
   return (
-    <div>
+    <form onSubmit={handleSubmit((info) => setEditForm(info))}>
       <div className="import">
         <span className="input-title">
           Вы можете импортировать список задач из XLS или CSV файла
@@ -62,34 +87,13 @@ const ImportTask = () => {
               onChange={onChange}
             />
           </label>
-          <MainButton onClick={onClick} />
+          <button type="submit" className="main-button" onClick={onClick}>
+            Отправить
+          </button>
         </div>
       </div>
-      <form onSubmit={handleSubmit((info) => console.log(info))}>
-        <table>
-          <tbody>
-            {items.map((task) => (
-              <tr key={task.id}>
-                {Object.keys(task).map((title, idx) => (
-                  <td key={title}>
-                    <div>
-                      <input
-                        name={idx}
-                        key={task.id}
-                        placeholder={task[title]}
-                        ref={register({ required: true, minLength: 3 })}
-                      />
-                      {errors.idx && <p>Заполните поле</p>}
-                    </div>
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <input type="submit" className="main-button" onClick={onClick1} />
-      </form>
-    </div>
+      <div>{validateForm === 1 ? editFormComponent : null}</div>
+    </form>
   );
 };
 
