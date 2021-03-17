@@ -256,6 +256,13 @@
     width: auto;
     margin-right: 15px;
   }
+  .page__input-small {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    width: auto;
+    margin-right: 15px;
+  }
   .canvas {
     display: none;
   }

@@ -39,19 +39,29 @@ const ImportTask = () => {
     setNameFile(file.name);
   };
 
-  const onClick = () => (editForm === 0 ? console.log('server') : setValidateForm(1));
+  const onClick = () => {
+    if (Object.keys(editForm) > 2) {
+      setValidateForm(0);
+    }
+    if (Object.keys(editForm) < 2) {
+      setValidateForm(1);
+    }
+  };
 
+  const validations = () => (items.map((it) => Object.keys(it).map((i) => it[i].toString() > 5)))
+  console.log(validations())
   const data = items.map((it, idx) => Object.keys(it).map((_, id) => `1${idx}${id}`));
 
   const editFormComponent = (
-    <table>
-      <tbody>
+    <table className="table">
+      <thead>head</thead>
+      <tbody className="table-body">
         {items.map((task, idx) => (
-          <tr key={task.id}>
+          <tr key={task.id} className="column-table">
             {Object.keys(task).map((title, k) => {
               const keyName = data[idx][k];
               return (
-                <td key={title}>
+                <td key={title} className="table-cell">
                   <input
                     className={
                       errors[keyName] === undefined ? "cell" : "error-cell"
@@ -92,7 +102,9 @@ const ImportTask = () => {
           </button>
         </div>
       </div>
-      <div>{validateForm === 1 ? editFormComponent : null}</div>
+      <div className="border-table">
+        {validateForm === 1 ? editFormComponent : null}
+      </div>
     </form>
   );
 };
