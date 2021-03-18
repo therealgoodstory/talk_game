@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Select, { components } from "react-select";
+import ReactSelect, { components } from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { useForm, Controller } from "react-hook-form";
 
 const InputTask = () => {
   const [load, setLoad] = useState(0);
   const [data, setData] = useState(null);
-  const [workerEmail, setWorkerEmail] = useState("");
-
+  // const [workerEmail, setWorkerEmail] = useState("");
   useEffect(() => setLoad(1), []);
 
   const {
@@ -71,9 +70,9 @@ const InputTask = () => {
     }),
   };
   /* eslint-disable react/jsx-props-no-spreading */
-  const emailWorker = ({ children, ...props }) => (
+  const WorkerStyle = ({ children, ...props }) => (
     <components.Option {...props}>
-      <div className="row">
+      <div className="col">
         <div>{children[0]}</div>
         <div>{children[1]}</div>
       </div>
@@ -136,7 +135,8 @@ const InputTask = () => {
   ];
 
   const verificationRules = {
-    length: { required: true, minLength: 10 },
+    length: { required: true, minLength: 2 },
+    email: { required: true, pattern: /\d/g },
   };
 
   const select = (
@@ -145,7 +145,7 @@ const InputTask = () => {
       options={options}
       placeholder="Выберите тип работ"
       control={control}
-      as={Select}
+      as={ReactSelect}
       rules={verificationRules.length}
       styles={customStyles}
       defaultValue=""
@@ -158,7 +158,8 @@ const InputTask = () => {
       options={options}
       styles={customStyles}
       control={control}
-      as={Select}
+      rules={verificationRules.length}
+      as={ReactSelect}
       defaultValue=""
       classNamePrefix={errors.atr1 === undefined ? "" : "react-select"}
     />
@@ -169,7 +170,7 @@ const InputTask = () => {
       options={options}
       styles={customStyles}
       control={control}
-      as={Select}
+      as={ReactSelect}
       rules={verificationRules.length}
       defaultValue=""
       classNamePrefix={errors.atr2 === undefined ? "" : "react-select"}
@@ -181,17 +182,19 @@ const InputTask = () => {
       options={options}
       styles={customStyles}
       control={control}
-      as={Select}
+      as={ReactSelect}
       rules={verificationRules.length}
       defaultValue=""
       classNamePrefix={errors.atr3 === undefined ? "" : "react-select"}
     />
   );
   const errorMesage = <p className="error-message">Заполните поле</p>;
-  const handleInputChange = (inputValue = "") => {
-    setWorkerEmail(inputValue);
-  };
-  console.log(workerEmail);
+  // const handleInputChange = (inputValue = "") => {
+  //   setWorkerEmail(inputValue);
+  // };
+  // console.log(`${workerEmail} adsadas`);
+
+  console.log(data)
   return (
     <form onSubmit={handleSubmit((info) => setData(info))}>
       <div className="page__size page__input">
@@ -245,82 +248,84 @@ const InputTask = () => {
         <div className="page__input-small">
           <div className="page__size">
             <span className="font-page page__name">Исполнитель</span>
-            <div>
-              <input name="qqqqqqq" value={workerEmail} ref={register(verificationRules.length)} />
-              <Controller
-                isClearable
-                name="work"
-                styles={workerStyles}
-                control={control}
-                options={optionsWorker}
-                components={{ Option: emailWorker }}
-                as={CreatableSelect}
-                onInputChange={handleInputChange}
-                defaultValue=""
-                classNamePrefix={
-                  errors.worker === undefined ? "" : "react-select"
-                }
-              />
-              {errors.qqqqqqq && <p className="error-message-fake">Заполните поле</p>}
-            </div>
+            <Controller
+              isClearable
+              styles={workerStyles}
+              control={control}
+              options={optionsWorker}
+              components={{ Option: WorkerStyle }}
+              as={CreatableSelect}
+              // onInputChange={handleInputChange}
+              rules={verificationRules.email}
+              defaultValue=""
+              classNamePrefix={errors.workerEmail === undefined ? "" : "react-select"}
+            />
+            {errors.workerEmail && <p className="error-message">Неверный Email</p>}
           </div>
         </div>
         <div className="page__input-small">
           <div className="page__size">
             <span className="font-page page__name">Счёт списания</span>
             <Controller
-              name="atr300"
+              control={control}
+              name="writeOfAccount"
+              as={ReactSelect}
               options={optionsWorker}
+              rules={verificationRules.email}
               components={{ Option: writeOffAccount }}
               styles={writeOffAccountStyle}
-              control={control}
-              as={Select}
               defaultValue=""
-              classNamePrefix={errors.atr3 === undefined ? "" : "react-select"}
+              classNamePrefix={errors.writeOfAccount === undefined ? "" : "react-select"}
             />
-            {errors.type && errorMesage}
+            {errors.writeOfAccount && errorMesage}
           </div>
         </div>
         <div className="page__input-small">
           <div className="page__size">
             <span className="font-page page__name">Способ оплаты</span>
             <Controller
-              name="atr3"
+              name="typePal"
               styles={customStyles}
               control={control}
-              as={Select}
+              options={options}
+              as={ReactSelect}
+              rules={verificationRules.length}
               defaultValue=""
-              classNamePrefix={errors.atr3 === undefined ? "" : "react-select"}
+              classNamePrefix={errors.typePal === undefined ? "" : "react-select"}
             />
-            {errors.type && errorMesage}
+            {errors.typePal && errorMesage}
           </div>
         </div>
         <div className="page__input-small">
           <div className="page__size">
             <span className="font-page page__name">Сумма зачисления</span>
             <Controller
-              name="atr3"
+              name="many"
+              options={options}
+              rules={verificationRules.length}
               styles={customStyles}
               control={control}
-              as={Select}
+              as={ReactSelect}
               defaultValue=""
-              classNamePrefix={errors.atr3 === undefined ? "" : "react-select"}
+              classNamePrefix={errors.many === undefined ? "" : "react-select"}
             />
-            {errors.type && errorMesage}
+            {errors.many && errorMesage}
           </div>
         </div>
         <div className="page__input-small">
           <div className="page__size">
             <span className="font-page page__name">Сумма списания</span>
             <Controller
-              name="atr3"
+              name="howmany"
+              options={options}
+              rules={verificationRules.length}
               styles={customStyles}
               control={control}
-              as={Select}
+              as={ReactSelect}
               defaultValue=""
-              classNamePrefix={errors.atr3 === undefined ? "" : "react-select"}
+              classNamePrefix={errors.howmany === undefined ? "" : "react-select"}
             />
-            {errors.type && errorMesage}
+            {errors.howmany && errorMesage}
           </div>
         </div>
       </div>
