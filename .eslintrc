@@ -10,5 +10,12 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "quotes": [2, ["backtick", "single"]],
     "react/prop-types": ["off"]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
   }
 }

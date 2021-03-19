@@ -1,12 +1,49 @@
 import React, { useState, useEffect } from "react";
 import ReactSelect, { components } from "react-select";
 import CreatableSelect from "react-select/creatable";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
+import * as yup from "yup";
+import {
+  customStyles,
+  workerStyles,
+  writeOffAccountStyle,
+  writeOffAccount,
+} from "./module.js/select";
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint react/forbid-prop-types: 0 */
+const schema = yup.object().shape({
+  taskName: yup.string().required(),
+  atr1: yup.object({
+    label: yup.string().test('len', 'Must be exactly 5 characters', (val) => val.length > 0),
+    value: yup.string(),
+  }),
+  atr2: yup.object({
+    label: yup.string().test('len', 'Must be exactly 5 characters', (val) => val.length > 0),
+    value: yup.string(),
+  }),
+  atr3: yup.object({
+    label: yup.string().test('len', 'Must be exactly 5 characters', (val) => val.length > 0),
+    value: yup.string(),
+  }),
+  type: yup.object({
+    label: yup.string().test('len', 'Must be exactly 5 characters', (val) => val.length > 0),
+    value: yup.string(),
+  }),
+  description: yup.string().required(),
+  workerEmail: yup.object({
+    label: yup.string().email().required(),
+    value: yup.string(),
+  }),
+});
 
 const InputTask = () => {
   const [load, setLoad] = useState(0);
   const [data, setData] = useState(null);
-  // const [workerEmail, setWorkerEmail] = useState("");
+  const [workerEmail, setWorkerEmail] = useState("null");
+  const [submit, setSummit] = useState("button")
+  const [many, setMany] = useState(-1)
+
   useEffect(() => setLoad(1), []);
 
   const {
@@ -14,129 +51,48 @@ const InputTask = () => {
     handleSubmit,
     control,
     errors,
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const onClick = () => {
+    setSummit("submit")
     console.log(data);
-  };
-
-  const customStyles = {
-    option: (provided, state) => ({
-      ...provided,
-      color: state.isSelected ? "gray" : "black",
-      height: 40,
-      background: state.isFocused ? "#FBFDFF" : "white",
-      paddingLeft: 60,
-      fontFamily: "Semibold",
-      fontSize: 12,
-    }),
-    groupHeading: (provided) => ({
-      ...provided,
-      color: "black",
-      height: 40,
-      background: "#F3F5F8",
-      paddingLeft: 30,
-      display: "flex",
-      alignItems: "center",
-      marginBottom: 0,
-      fontFamily: "Semibold",
-      fontSize: 12,
-    }),
-    group: (provided) => ({
-      ...provided,
-      paddingTop: 0,
-      paddingBottom: 0,
-      borderRadius: 7,
-    }),
-    menuList: (provided) => ({
-      ...provided,
-      paddingTop: 0,
-      paddingBottom: 0,
-      borderRadius: 7,
-    }),
-    control: (provided, state) => ({
-      ...provided,
-      borderColor: state.isFocused ? "blue" : "#D6DEE6",
-      boxShadow: state.isFocused ? "blue" : "white",
-      fontFamily: "Semibold",
-      fontSize: 12,
-      height: 45,
-    }),
-    placeholder: (provided, state) => ({
-      ...provided,
-      color: state.isFocused ? "white" : "gray",
-      fontFamily: "Semibold",
-      fontSize: 13,
-    }),
-  };
-  /* eslint-disable react/jsx-props-no-spreading */
-  const WorkerStyle = ({ children, ...props }) => (
-    <components.Option {...props}>
-      <div className="col">
-        <div>{children[0]}</div>
-        <div>{children[1]}</div>
-      </div>
-    </components.Option>
-  );
-
-  const writeOffAccount = ({ children, ...props }) => (
-    <components.Option {...props}>
-      <div className="row">
-        <div className="write-ff-logo">$</div>
-        <div className="col">
-          <div>{children[0]}</div>
-          <div>{children[1]}</div>
-        </div>
-      </div>
-    </components.Option>
-  );
-
-  const workerStyles = {
-    ...customStyles,
-    option: (provided, state) => ({
-      ...provided,
-      color: state.isSelected ? "gray" : "black",
-      height: 45,
-      width: 500,
-      paddinfLeft: 15,
-      background: state.isFocused ? "#FBFDFF" : "white",
-      fontFamily: "Semibold",
-      fontSize: 12,
-    }),
-  };
-
-  const writeOffAccountStyle = {
-    ...customStyles,
-    option: (provided, state) => ({
-      ...provided,
-      color: state.isSelected ? "gray" : "black",
-      height: 45,
-      paddinfLeft: 15,
-      background: state.isFocused ? "#FBFDFF" : "white",
-      fontFamily: "Semibold",
-      fontSize: 12,
-      whiteSpace: "pre-wrap",
-    }),
   };
 
   const options = [
     {
       label: "Group 1",
       options: [
-        { label: "11231323123", value: "value_1" },
-        { label: "2123123123", value: "value_2" },
+        { label: "dasdasd", value: "value_1" },
+        { label: "asdasdasd", value: "value_2" },
       ],
     },
   ];
 
   const optionsWorker = [
-    { label: ["vasya\n", "test@gmail.com"], value: "1" },
-    { label: ["victor\n", "qqqqq@gmail.com"], value: "2" },
+    { label: "test@gmail.com", value: "test@gmail.com", name: "dasds" },
+    { label: "qqqqq@gmail.com", value: "qqqqq@gmail.com", name: "asdas" },
   ];
 
-  const verificationRules = {
-    length: { required: true, minLength: 2 },
-    email: { required: true, pattern: /\d/g },
+  const WorkerStyle = ({ children, ...props }) => {
+    const manyChildren = (
+      <components.Option {...props}>
+        <div className="col">
+          <div>{props.data.name}</div>
+          <div className="bold">{children}</div>
+        </div>
+      </components.Option>
+    );
+    const oneChildren = (
+      <components.Option {...props}>
+        <div className="center row">
+          <span>{workerEmail}</span>
+          <span className="left">Получит приглашение</span>
+        </div>
+      </components.Option>
+    );
+    return children.length === 1 ? oneChildren : manyChildren;
   };
 
   const select = (
@@ -146,19 +102,20 @@ const InputTask = () => {
       placeholder="Выберите тип работ"
       control={control}
       as={ReactSelect}
-      rules={verificationRules.length}
+      rules={register}
       styles={customStyles}
       defaultValue=""
       classNamePrefix={errors.type === undefined ? "" : "react-select"}
     />
   );
+
   const atribute1 = (
     <Controller
       name="atr1"
       options={options}
       styles={customStyles}
       control={control}
-      rules={verificationRules.length}
+      rules={register}
       as={ReactSelect}
       defaultValue=""
       classNamePrefix={errors.atr1 === undefined ? "" : "react-select"}
@@ -171,7 +128,7 @@ const InputTask = () => {
       styles={customStyles}
       control={control}
       as={ReactSelect}
-      rules={verificationRules.length}
+      rules={register}
       defaultValue=""
       classNamePrefix={errors.atr2 === undefined ? "" : "react-select"}
     />
@@ -183,18 +140,20 @@ const InputTask = () => {
       styles={customStyles}
       control={control}
       as={ReactSelect}
-      rules={verificationRules.length}
+      rules={register}
       defaultValue=""
       classNamePrefix={errors.atr3 === undefined ? "" : "react-select"}
     />
   );
   const errorMesage = <p className="error-message">Заполните поле</p>;
-  // const handleInputChange = (inputValue = "") => {
-  //   setWorkerEmail(inputValue);
-  // };
-  // console.log(`${workerEmail} adsadas`);
+  const handleInputChange = (inputValue = "") => {
+    setWorkerEmail(inputValue);
+  };
 
-  console.log(data)
+  const changemany = () => setMany(many * -1)
+
+  console.log(data);
+
   return (
     <form onSubmit={handleSubmit((info) => setData(info))}>
       <div className="page__size page__input">
@@ -202,7 +161,7 @@ const InputTask = () => {
         <input
           name="taskName"
           className={errors.taskName === undefined ? "input" : "input-err"}
-          ref={register(verificationRules.length)}
+          ref={register}
         />
         {errors.taskName && errorMesage}
       </div>
@@ -234,7 +193,7 @@ const InputTask = () => {
         <div className="page__size">
           <span className="page__name">Описание</span>
           <textarea
-            ref={register(verificationRules.length)}
+            ref={register}
             name="description"
             className={
               errors.description === undefined ? "textarea" : "textarea-err"
@@ -249,18 +208,22 @@ const InputTask = () => {
           <div className="page__size">
             <span className="font-page page__name">Исполнитель</span>
             <Controller
-              isClearable
+              name="workerEmail"
               styles={workerStyles}
               control={control}
               options={optionsWorker}
               components={{ Option: WorkerStyle }}
               as={CreatableSelect}
-              // onInputChange={handleInputChange}
-              rules={verificationRules.email}
+              backspaceRemovesValue="true"
+              formatCreateLabel={() => ":"}
+              onInputChange={handleInputChange}
+              rules={register}
               defaultValue=""
-              classNamePrefix={errors.workerEmail === undefined ? "" : "react-select"}
+              classNamePrefix={
+                errors.workerEmail === undefined ? "" : "react-select"
+              }
             />
-            {errors.workerEmail && <p className="error-message">Неверный Email</p>}
+            {errors.workerEmail && errorMesage}
           </div>
         </div>
         <div className="page__input-small">
@@ -271,11 +234,13 @@ const InputTask = () => {
               name="writeOfAccount"
               as={ReactSelect}
               options={optionsWorker}
-              rules={verificationRules.email}
+              rules={register}
               components={{ Option: writeOffAccount }}
               styles={writeOffAccountStyle}
               defaultValue=""
-              classNamePrefix={errors.writeOfAccount === undefined ? "" : "react-select"}
+              classNamePrefix={
+                errors.writeOfAccount === undefined ? "" : "react-select"
+              }
             />
             {errors.writeOfAccount && errorMesage}
           </div>
@@ -289,9 +254,11 @@ const InputTask = () => {
               control={control}
               options={options}
               as={ReactSelect}
-              rules={verificationRules.length}
+              rules={register}
               defaultValue=""
-              classNamePrefix={errors.typePal === undefined ? "" : "react-select"}
+              classNamePrefix={
+                errors.typePal === undefined ? "" : "react-select"
+              }
             />
             {errors.typePal && errorMesage}
           </div>
@@ -299,16 +266,12 @@ const InputTask = () => {
         <div className="page__input-small">
           <div className="page__size">
             <span className="font-page page__name">Сумма зачисления</span>
-            <Controller
-              name="many"
-              options={options}
-              rules={verificationRules.length}
-              styles={customStyles}
-              control={control}
-              as={ReactSelect}
-              defaultValue=""
-              classNamePrefix={errors.many === undefined ? "" : "react-select"}
-            />
+            <div className="custom-input row">
+              <input className="input-many" type="number" />
+              <button className="input-button col" onClick={changemany} type="button">
+                {many}
+              </button>
+            </div>
             {errors.many && errorMesage}
           </div>
         </div>
@@ -318,19 +281,21 @@ const InputTask = () => {
             <Controller
               name="howmany"
               options={options}
-              rules={verificationRules.length}
+              rules={register}
               styles={customStyles}
               control={control}
               as={ReactSelect}
               defaultValue=""
-              classNamePrefix={errors.howmany === undefined ? "" : "react-select"}
+              classNamePrefix={
+                errors.howmany === undefined ? "" : "react-select"
+              }
             />
             {errors.howmany && errorMesage}
           </div>
         </div>
       </div>
       <div className="margin" />
-      <input type="submit" className="main-button" onClick={onClick} />
+      <input type={submit} className="main-button" onClick={onClick} value="Отправить" />
     </form>
   );
 };

@@ -48,7 +48,30 @@ const ImportTask = () => {
     }
   };
 
-  const validations = () => (items.map((it) => Object.keys(it).map((i) => it[i].toString() > 5)))
+  const validations = () => items.map((task) => {
+    const email = task["Email Исполнителя"].length > 0
+    const deadline = task["Дедлайн"].length > 0
+    const name = task["Имя Фамилия"].length > 0
+    const nameTask = task["Название задачи"].length > 0
+    const accountNumber = task["Номер счета"].length > 0
+    const telephone = task["Номер телефона в межд. Формате"].length > 0
+    const description = task["Описание"].length > 0
+    const method = task["Способ"].length > 0
+    const price = task["Стоимость задачи"].length > 0
+    return {
+      ...task,
+      "Email Исполнителя": email,
+      Дедлайн: deadline,
+      "Имя Фамилия": name,
+      "Название задачи": nameTask,
+      "Номер счета": accountNumber,
+      "Номер телефона в межд. Формате": telephone,
+      Описание: description,
+      Способ: method,
+      "Стоимость задачи": price,
+    }
+  })
+
   console.log(validations())
   const data = items.map((it, idx) => Object.keys(it).map((_, id) => `1${idx}${id}`));
 

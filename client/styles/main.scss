@@ -55,10 +55,39 @@ tbody {
   width: 100%;
 }
 
+.bold {
+  font-family: "Bold";
+}
+
+.input-many {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+  outline: none;
+  border: 1px solid rgba(214, 214, 214, 0.73);
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.input-button {
+  width: 40px;
+  height: 44px;
+  background-color: #F2F6F9;
+  border: 1px solid rgba(214, 214, 214, 0.73);
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+.custom-input {
+  height: 40px;
+}
+
 .write-ff-logo {
   width: 30px;
   height: 30px;
-  background: gray;
+  background: #D6DEE6;
   color: black;
   border-radius: 100%;
   display: flex;
@@ -85,6 +114,13 @@ tbody {
   height: 1px;
   background: rgb(226, 226, 226);
   margin-bottom: 30px;
+}
+
+.center {
+  align-items: center;
+  display: flex;
+  padding-top: 6px;
+  justify-content: space-between;
 }
 
 .input-futer {
