@@ -44,9 +44,8 @@ export const customStyles = {
     fontSize: 12,
     height: 45,
   }),
-  placeholder: (provided, state) => ({
+  placeholder: (provided) => ({
     ...provided,
-    color: state.isFocused ? "white" : "gray",
     fontFamily: "Semibold",
     fontSize: 13,
   }),
@@ -58,10 +57,25 @@ export const workerStyles = {
     ...provided,
     color: state.isSelected ? "gray" : "black",
     height: 45,
-    paddinfLeft: 15,
-    background: state.isFocused ? "#FBFDFF" : "white",
+    left: 15,
+    background: state.isFocused ? "#FBFDFF" : "none",
     fontFamily: "Semibold",
     fontSize: 12,
+    paddingTop: 5,
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    padding: 0,
+    display: "flex",
+    flexDirection: "row",
+    overflow: "none",
+    wigth: 90,
+    left: 15,
+  }),
+  input: (provided) => ({
+    ...provided,
+    visibility: "visible",
+    position: "absolute",
   }),
 };
 
@@ -81,23 +95,110 @@ export const writeOffAccountStyle = {
   ...customStyles,
   option: (provided, state) => ({
     ...provided,
+    paddingTop: 7,
     color: state.isSelected ? "gray" : "black",
     height: 45,
     paddinfLeft: 15,
-    background: state.isFocused ? "#FBFDFF" : "white",
+    background: state.isFocused ? "#FBFDFF" : "none",
     fontFamily: "Semibold",
     fontSize: 12,
     whiteSpace: "pre-wrap",
   }),
+  valueContainer: (provided) => ({
+    ...provided,
+    padding: 0,
+    display: "flex",
+    flexDirection: "row",
+    overflow: "none",
+    wigth: 90,
+    left: 15,
+  }),
+  input: (provided) => ({
+    ...provided,
+    visibility: "visible",
+    position: "absolute",
+  }),
 };
 
+export const currencyStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    paddingLeft: 15,
+    color: state.isSelected ? "gray" : "black",
+    background: state.isFocused ? "#FBFDFF" : "none",
+    fontFamily: "Semibold",
+    fontSize: 12,
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    paddingTop: 0,
+    paddingBottom: 0,
+    borderRadius: 7,
+  }),
+  control: (provided) => ({
+    ...provided,
+    width: 40,
+    height: 44,
+    fontFamily: "Semibold",
+    fontSize: 12,
+    backgroundColor: "#F2F6F9",
+    borderTopRightRadius: 7,
+    borderBottomRightRadius: 7,
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
+    boxShadow: "none",
+  }),
+  input: (provided) => ({
+    ...provided,
+    opacity: 0,
+    zIndex: 1,
+  }),
+  indicatorsContainer: (provided) => ({
+    ...provided,
+    visibility: "hidden",
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    width: "100%",
+    height: "100%",
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    alignItems: "center",
+    paddingLeft: "5px",
+  }),
+}
+// .input-button {
+//   outline: none;
+//   width: 40px;
+//   height: 44px;
+//   background-color: #F2F6F9;
+//   border: 1px solid rgba(214, 214, 214, 0.73);
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   border-top-right-radius: 7px;
+//   border-bottom-right-radius: 7px;
+// }
 export const writeOffAccount = ({ children, ...props }) => (
   <components.Option {...props}>
     <div className="row">
       <div className="write-ff-logo">$</div>
       <div className="col">
-        <div className="bold">{props.data.name}</div>
-        <div>{children}</div>
+        <div className="bold">{children[0]}</div>
+        <div>{children[1]}</div>
+      </div>
+    </div>
+  </components.Option>
+);
+
+export const writeOffAccountValue = ({ children, ...props }) => (
+  <components.Option {...props} className="email-worker">
+    <div className="row">
+      <div className="write-ff-logo">$</div>
+      <div className="col">
+        <div className="bold">{children[0]}</div>
+        <div>{children[1]}</div>
       </div>
     </div>
   </components.Option>

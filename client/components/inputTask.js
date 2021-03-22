@@ -9,7 +9,10 @@ import {
   workerStyles,
   writeOffAccountStyle,
   writeOffAccount,
+  writeOffAccountValue,
+  currencyStyles,
 } from "./module.js/select";
+
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint react/forbid-prop-types: 0 */
 const schema = yup.object().shape({
@@ -50,7 +53,6 @@ const InputTask = () => {
   const [data, setData] = useState(null);
   const [workerEmail, setWorkerEmail] = useState("null");
   const [submit, setSummit] = useState("button");
-  const [many, setMany] = useState(-1);
 
   useEffect(() => setLoad(1), []);
 
@@ -79,16 +81,22 @@ const InputTask = () => {
   ];
 
   const optionsWorker = [
-    { label: "test@gmail.com", value: "test@gmail.com", name: "dasds" },
-    { label: "qqqqq@gmail.com", value: "qqqqq@gmail.com", name: "asdas" },
+    { label: ["Sasds", "test@gmail.com"], value: "test@gmail.com" },
+    { label: ["Sasdas", "qqqqq@gmail.com"], value: "qqqqq@gmail.com" },
+  ];
+
+  const money = [
+    { label: "₽", value: "1" },
+    { label: "$", value: "2" },
+    { label: "€", value: "3" },
   ];
 
   const WorkerStyle = ({ children, ...props }) => {
     const manyChildren = (
       <components.Option {...props}>
         <div className="col">
-          <div>{props.data.name}</div>
-          <div className="bold">{children}</div>
+          <div className="bold">{children[0]}</div>
+          <div>{children[1]}</div>
         </div>
       </components.Option>
     );
@@ -102,6 +110,26 @@ const InputTask = () => {
     );
     return children.length === 1 ? oneChildren : manyChildren;
   };
+
+  const singleValue = ({ children, ...props }) => {
+    const manyChildren = (
+      <components.Option {...props} className="email-worker">
+        <div>
+          <div className="bold">{children[0]}</div>
+          <div>{children[1]}</div>
+        </div>
+      </components.Option>
+    )
+    const oneChildren = (
+      <components.Option {...props} className="email-worker">
+        <div className="row center-option">
+          <span>{children}</span>
+          <span className="left">Получит приглашение</span>
+        </div>
+      </components.Option>
+    )
+    return typeof (children) === "string" ? oneChildren : manyChildren;
+  }
 
   const select = (
     <Controller
@@ -156,8 +184,6 @@ const InputTask = () => {
   const handleInputChange = (inputValue = "") => {
     setWorkerEmail(inputValue);
   };
-
-  const changemany = () => setMany(many * -1);
 
   console.log(data);
 
@@ -221,13 +247,14 @@ const InputTask = () => {
               styles={workerStyles}
               control={control}
               options={optionsWorker}
-              components={{ Option: WorkerStyle }}
+              components={
+                { Option: WorkerStyle, SingleValue: singleValue }
+              }
               as={CreatableSelect}
               backspaceRemovesValue="true"
               formatCreateLabel={() => ":"}
               onInputChange={handleInputChange}
               rules={register}
-              defaultValue=""
               classNamePrefix={errors.workerEmail === undefined ? "" : "react-select"}
             />
           )}
@@ -242,7 +269,7 @@ const InputTask = () => {
               as={ReactSelect}
               options={optionsWorker}
               rules={register}
-              components={{ Option: writeOffAccount }}
+              components={{ Option: writeOffAccount, SingleValue: writeOffAccountValue }}
               styles={writeOffAccountStyle}
               defaultValue=""
               classNamePrefix={errors.writeOfAccount === undefined ? "" : "react-select"}
@@ -267,17 +294,17 @@ const InputTask = () => {
           label="Способ оплаты"
         />
         <AtrLabel
-          errors={errors.many && errorMesage}
+          errors={errors.currency && errorMesage}
           select={(
             <div className="custom-input row">
-              <input className="input-many" type="number" />
-              <button
-                className="input-button col"
-                onClick={changemany}
-                type="button"
-              >
-                {many}
-              </button>
+              <input className="input-many" type="number" name="currency" />
+              <ReactSelect
+                className="input-button"
+                options={money}
+                styles={currencyStyles}
+                isSearchable={false}
+                defaultValue={{ label: "₽", value: "test@gmail.com" }}
+              />
             </div>
           )}
           label="Сумма зачисления"

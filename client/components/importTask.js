@@ -58,6 +58,9 @@ const ImportTask = () => {
     const description = task["Описание"].length > 0
     const method = task["Способ"].length > 0
     const price = task["Стоимость задачи"].length > 0
+    const result = [email, deadline, name, nameTask,
+      accountNumber, telephone, description, method, price]
+      .filter((error) => error === false)
     return {
       ...task,
       "Email Исполнителя": email,
@@ -69,6 +72,7 @@ const ImportTask = () => {
       Описание: description,
       Способ: method,
       "Стоимость задачи": price,
+      Errors: result.length,
     }
   })
 

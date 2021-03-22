@@ -2,6 +2,11 @@ span {
   font-family: "Semibold";
   font-size: 13px;
 }
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
 body {
   margin: 0%;
   cursor: default;
@@ -70,16 +75,6 @@ tbody {
   padding-right: 15px;
 }
 
-.input-button {
-  width: 40px;
-  height: 44px;
-  background-color: #F2F6F9;
-  border: 1px solid rgba(214, 214, 214, 0.73);
-  align-items: center;
-  justify-content: center;
-  border-top-right-radius: 7px;
-  border-bottom-right-radius: 7px;
-}
 .custom-input {
   height: 40px;
 }
@@ -343,6 +338,25 @@ h5 {
   flex-direction: column;
   position: relative;
   height: auto;
+}
+.email-worker {
+  padding-left: 0 !important;
+}
+
+.select-maney {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 0 !important;
+  height: 100%;
+  justify-content: space-between;
+  padding-right: 15px;
 }
 
 .page__input {
