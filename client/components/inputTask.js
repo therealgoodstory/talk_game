@@ -15,19 +15,19 @@ import {
 const schema = yup.object().shape({
   taskName: yup.string().required(),
   atr1: yup.object({
-    label: yup.string().test('len', 'Must be exactly 5 characters', (val) => val.length > 0),
+    label: yup.string().test((val) => val.length > 0),
     value: yup.string(),
   }),
   atr2: yup.object({
-    label: yup.string().test('len', 'Must be exactly 5 characters', (val) => val.length > 0),
+    label: yup.string().test((val) => val.length > 0),
     value: yup.string(),
   }),
   atr3: yup.object({
-    label: yup.string().test('len', 'Must be exactly 5 characters', (val) => val.length > 0),
+    label: yup.string().test((val) => val.length > 0),
     value: yup.string(),
   }),
   type: yup.object({
-    label: yup.string().test('len', 'Must be exactly 5 characters', (val) => val.length > 0),
+    label: yup.string().test((val) => val.length > 0),
     value: yup.string(),
   }),
   description: yup.string().required(),
@@ -37,12 +37,20 @@ const schema = yup.object().shape({
   }),
 });
 
+const AtrLabel = ({ label, select, errors }) => (
+  <div className="page__size">
+    <span className="font-page page__name">{label}</span>
+    {select}
+    {errors}
+  </div>
+);
+
 const InputTask = () => {
   const [load, setLoad] = useState(0);
   const [data, setData] = useState(null);
   const [workerEmail, setWorkerEmail] = useState("null");
-  const [submit, setSummit] = useState("button")
-  const [many, setMany] = useState(-1)
+  const [submit, setSummit] = useState("button");
+  const [many, setMany] = useState(-1);
 
   useEffect(() => setLoad(1), []);
 
@@ -56,7 +64,7 @@ const InputTask = () => {
   });
 
   const onClick = () => {
-    setSummit("submit")
+    setSummit("submit");
     console.log(data);
   };
 
@@ -108,7 +116,6 @@ const InputTask = () => {
       classNamePrefix={errors.type === undefined ? "" : "react-select"}
     />
   );
-
   const atribute1 = (
     <Controller
       name="atr1"
@@ -150,63 +157,65 @@ const InputTask = () => {
     setWorkerEmail(inputValue);
   };
 
-  const changemany = () => setMany(many * -1)
+  const changemany = () => setMany(many * -1);
 
   console.log(data);
 
   return (
     <form onSubmit={handleSubmit((info) => setData(info))}>
-      <div className="page__size page__input">
-        <span className="font-page page__name">Название задачи*</span>
-        <input
-          name="taskName"
-          className={errors.taskName === undefined ? "input" : "input-err"}
-          ref={register}
-        />
-        {errors.taskName && errorMesage}
-      </div>
       <div className="page__input">
-        <div className="page__size">
-          <span className="font-page page__name">Тип работ</span>
-          {load === 1 ? select : null}
-          {errors.type && errorMesage}
-        </div>
+        <AtrLabel
+          errors={errors.taskName && errorMesage}
+          select={(
+            <input
+              name="taskName"
+              className={errors.taskName === undefined ? "input" : "input-err"}
+              ref={register}
+            />
+          )}
+          label="Название задачи*"
+        />
+        <AtrLabel
+          errors={errors.type && errorMesage}
+          select={load === 1 ? select : null}
+          label="Тип работ"
+        />
       </div>
       <div className="page__atribute">
-        <div className="page__size">
-          <span className="font-page page__name">Атрибут1</span>
-          {load === 1 ? atribute1 : null}
-          {errors.atr1 && errorMesage}
-        </div>
-        <div className="page__size">
-          <span className="font-page page__name">Атрибут2</span>
-          {load === 1 ? atribute2 : null}
-          {errors.atr2 && errorMesage}
-        </div>
-        <div className="page__size">
-          <span className="font-page page__name">Атрибут3</span>
-          {load === 1 ? atribute3 : null}
-          {errors.atr3 && errorMesage}
-        </div>
+        <AtrLabel
+          errors={errors.atr1 && errorMesage}
+          select={load === 1 ? atribute1 : ""}
+          label="Атрибут1"
+        />
+        <AtrLabel
+          errors={errors.atr2 && errorMesage}
+          select={load === 1 ? atribute2 : ""}
+          label="Атрибут2"
+        />
+        <AtrLabel
+          errors={errors.atr3 && errorMesage}
+          select={load === 1 ? atribute3 : ""}
+          label="Атрибут3"
+        />
       </div>
       <div className="page__input">
-        <div className="page__size">
-          <span className="page__name">Описание</span>
-          <textarea
-            ref={register}
-            name="description"
-            className={
-              errors.description === undefined ? "textarea" : "textarea-err"
-            }
-          />
-          {errors.description && errorMesage}
-        </div>
+        <AtrLabel
+          errors={errors.description && errorMesage}
+          select={(
+            <textarea
+              ref={register}
+              name="description"
+              className={errors.description === undefined ? "textarea" : "textarea-err"}
+            />
+          )}
+          label="Описание"
+        />
       </div>
       <div className="hr" />
-      <div>
-        <div className="page__input-small">
-          <div className="page__size">
-            <span className="font-page page__name">Исполнитель</span>
+      <div className="page__input-small">
+        <AtrLabel
+          errors={errors.workerEmail && errorMesage}
+          select={(
             <Controller
               name="workerEmail"
               styles={workerStyles}
@@ -219,16 +228,14 @@ const InputTask = () => {
               onInputChange={handleInputChange}
               rules={register}
               defaultValue=""
-              classNamePrefix={
-                errors.workerEmail === undefined ? "" : "react-select"
-              }
+              classNamePrefix={errors.workerEmail === undefined ? "" : "react-select"}
             />
-            {errors.workerEmail && errorMesage}
-          </div>
-        </div>
-        <div className="page__input-small">
-          <div className="page__size">
-            <span className="font-page page__name">Счёт списания</span>
+          )}
+          label="Исполнитель"
+        />
+        <AtrLabel
+          errors={errors.writeOfAccount && errorMesage}
+          select={(
             <Controller
               control={control}
               name="writeOfAccount"
@@ -238,16 +245,14 @@ const InputTask = () => {
               components={{ Option: writeOffAccount }}
               styles={writeOffAccountStyle}
               defaultValue=""
-              classNamePrefix={
-                errors.writeOfAccount === undefined ? "" : "react-select"
-              }
+              classNamePrefix={errors.writeOfAccount === undefined ? "" : "react-select"}
             />
-            {errors.writeOfAccount && errorMesage}
-          </div>
-        </div>
-        <div className="page__input-small">
-          <div className="page__size">
-            <span className="font-page page__name">Способ оплаты</span>
+          )}
+          label="Счёт списания"
+        />
+        <AtrLabel
+          errors={errors.typePal && errorMesage}
+          select={(
             <Controller
               name="typePal"
               styles={customStyles}
@@ -256,28 +261,30 @@ const InputTask = () => {
               as={ReactSelect}
               rules={register}
               defaultValue=""
-              classNamePrefix={
-                errors.typePal === undefined ? "" : "react-select"
-              }
+              classNamePrefix={errors.typePal === undefined ? "" : "react-select"}
             />
-            {errors.typePal && errorMesage}
-          </div>
-        </div>
-        <div className="page__input-small">
-          <div className="page__size">
-            <span className="font-page page__name">Сумма зачисления</span>
+          )}
+          label="Способ оплаты"
+        />
+        <AtrLabel
+          errors={errors.many && errorMesage}
+          select={(
             <div className="custom-input row">
               <input className="input-many" type="number" />
-              <button className="input-button col" onClick={changemany} type="button">
+              <button
+                className="input-button col"
+                onClick={changemany}
+                type="button"
+              >
                 {many}
               </button>
             </div>
-            {errors.many && errorMesage}
-          </div>
-        </div>
-        <div className="page__input-small">
-          <div className="page__size">
-            <span className="font-page page__name">Сумма списания</span>
+          )}
+          label="Сумма зачисления"
+        />
+        <AtrLabel
+          errors={errors.howmany && errorMesage}
+          select={(
             <Controller
               name="howmany"
               options={options}
@@ -286,16 +293,19 @@ const InputTask = () => {
               control={control}
               as={ReactSelect}
               defaultValue=""
-              classNamePrefix={
-                errors.howmany === undefined ? "" : "react-select"
-              }
+              classNamePrefix={errors.howmany === undefined ? "" : "react-select"}
             />
-            {errors.howmany && errorMesage}
-          </div>
-        </div>
+          )}
+          label="Сумма списания"
+        />
       </div>
       <div className="margin" />
-      <input type={submit} className="main-button" onClick={onClick} value="Отправить" />
+      <input
+        type={submit}
+        className="main-button"
+        onClick={onClick}
+        value="Отправить"
+      />
     </form>
   );
 };
