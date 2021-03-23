@@ -123,11 +123,11 @@ export const writeOffAccountStyle = {
 export const currencyStyles = {
   option: (provided, state) => ({
     ...provided,
-    paddingLeft: 15,
     color: state.isSelected ? "gray" : "black",
     background: state.isFocused ? "#FBFDFF" : "none",
     fontFamily: "Semibold",
     fontSize: 12,
+    paddingLeft: 8,
   }),
   menuList: (provided) => ({
     ...provided,
@@ -161,11 +161,11 @@ export const currencyStyles = {
     ...provided,
     width: "100%",
     height: "100%",
+    paddingLeft: 5,
   }),
   singleValue: (provided) => ({
     ...provided,
     alignItems: "center",
-    paddingLeft: "5px",
   }),
 }
 // .input-button {

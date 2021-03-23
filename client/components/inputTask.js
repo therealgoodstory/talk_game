@@ -35,7 +35,9 @@ const schema = yup.object().shape({
   }),
   description: yup.string().required(),
   workerEmail: yup.object({
-    label: yup.string().email().required(),
+    label: yup.lazy((val) => (Array.isArray(val)
+      ? yup.array().of(yup.string())
+      : yup.string().email().required())),
     value: yup.string(),
   }),
 });
@@ -81,21 +83,21 @@ const InputTask = () => {
   ];
 
   const optionsWorker = [
-    { label: ["Sasds", "test@gmail.com"], value: "test@gmail.com" },
-    { label: ["Sasdas", "qqqqq@gmail.com"], value: "qqqqq@gmail.com" },
+    { label: ["Sasds", "test@gmail.com"], value: "test@gmail.com", nameWorker: "test@gmail.com" },
+    { label: ["Sasdas", "qqqqq@gmail.com"], value: "qqqqq@gmail.com", nameWorker: "qqqqq@gmail.com" },
   ];
 
   const money = [
-    { label: "₽", value: "1" },
-    { label: "$", value: "2" },
-    { label: "€", value: "3" },
+    { label: "USD", value: "1" },
+    { label: "EUR", value: "2" },
+    { label: "RUB", value: "3" },
   ];
 
   const WorkerStyle = ({ children, ...props }) => {
     const manyChildren = (
       <components.Option {...props}>
         <div className="col">
-          <div className="bold">{children[0]}</div>
+          <div className="bold">{props.data.nameWorker}</div>
           <div>{children[1]}</div>
         </div>
       </components.Option>
@@ -115,8 +117,8 @@ const InputTask = () => {
     const manyChildren = (
       <components.Option {...props} className="email-worker">
         <div>
-          <div className="bold">{children[0]}</div>
-          <div>{children[1]}</div>
+          <div className="bold">{props.data.nameWorker}</div>
+          <div>{children}</div>
         </div>
       </components.Option>
     )
@@ -128,6 +130,7 @@ const InputTask = () => {
         </div>
       </components.Option>
     )
+    console.log(children)
     return typeof (children) === "string" ? oneChildren : manyChildren;
   }
 
@@ -303,7 +306,7 @@ const InputTask = () => {
                 options={money}
                 styles={currencyStyles}
                 isSearchable={false}
-                defaultValue={{ label: "₽", value: "test@gmail.com" }}
+                defaultValue={{ label: "RUB", value: "test@gmail.com" }}
               />
             </div>
           )}
