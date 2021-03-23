@@ -40,6 +40,10 @@ const schema = yup.object().shape({
       : yup.string().email().required())),
     value: yup.string(),
   }),
+  writeOfAccount: yup.object({
+    label: yup.array().of(yup.string()),
+    value: yup.string(),
+  }),
 });
 
 const AtrLabel = ({ label, select, errors }) => (
@@ -106,7 +110,7 @@ const InputTask = () => {
       <components.Option {...props}>
         <div className="center row">
           <span>{workerEmail}</span>
-          <span className="left">Получит приглашение</span>
+          <span className="left italics">Получит приглашение</span>
         </div>
       </components.Option>
     );
@@ -126,11 +130,10 @@ const InputTask = () => {
       <components.Option {...props} className="email-worker">
         <div className="row center-option">
           <span>{children}</span>
-          <span className="left">Получит приглашение</span>
+          <span className="left italics">Получит приглашение</span>
         </div>
       </components.Option>
     )
-    console.log(children)
     return typeof (children) === "string" ? oneChildren : manyChildren;
   }
 

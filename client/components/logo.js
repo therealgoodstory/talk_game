@@ -8,8 +8,8 @@ const Logo = () => {
   const state = useSelector((s) => s.sidebar.id)
   const dispatch = useDispatch();
 
-  const [style, setStyle] = useState("")
-  const [logoStyle, setLogoStyle] = useState("")
+  const [style, setStyle] = useState("header__menu--svg")
+  const [logoStyle, setLogoStyle] = useState("header__menu--logo")
 
   useLayoutEffect(() => (
     state === 1

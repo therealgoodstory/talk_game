@@ -78,6 +78,15 @@ tbody {
 .custom-input {
   height: 40px;
 }
+.italics {
+  white-space: nowrap;
+  color: #6283A6;
+  background: white;
+  z-index: 1;
+  position: absolute;
+  right: 30px;
+  padding-left: 15px;
+}
 
 .write-ff-logo {
   width: 30px;

@@ -7,8 +7,8 @@ const SideBarItems = (props) => {
 
   const state = useSelector((s) => s.sidebar.id)
 
-  const [logoStyle, setLogoStyle] = useState("")
-  const [textStyle, setTextStyle] = useState("")
+  const [logoStyle, setLogoStyle] = useState("sidebar__open--logo")
+  const [textStyle, setTextStyle] = useState("sidebar__open--name")
 
   useLayoutEffect(() => (
     state === 1

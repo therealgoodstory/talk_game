@@ -6,7 +6,7 @@ import InputTask from "./inputTask";
 const CreateTaskPage = () => {
   const state = useSelector((s) => s.sidebar.id);
 
-  const [style, setStyle] = useState("");
+  const [style, setStyle] = useState("page__open");
   const [statePage, setStatePage] = useState(true);
 
   useEffect(() => (

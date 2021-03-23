@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 const ImportTask = () => {
   const [items, setItems] = useState([]);
   const [nameFile, setNameFile] = useState("Выберите файл");
-  const [validateForm, setValidateForm] = useState(0);
-  const [editForm, setEditForm] = useState(0);
+  // const [validateForm, setValidateForm] = useState(0);
+  // const [editForm, setEditForm] = useState(0);
   const readExel = (file) => {
     const promise = new Promise((res, rej) => {
       const fileReader = new global.FileReader();
@@ -31,7 +31,7 @@ const ImportTask = () => {
     });
   };
 
-  const { register, errors, handleSubmit } = useForm();
+  const { handleSubmit } = useForm();
 
   const onChange = (e) => {
     const file = e.target.files[0];
@@ -39,14 +39,14 @@ const ImportTask = () => {
     setNameFile(file.name);
   };
 
-  const onClick = () => {
-    if (Object.keys(editForm) > 2) {
-      setValidateForm(0);
-    }
-    if (Object.keys(editForm) < 2) {
-      setValidateForm(1);
-    }
-  };
+  // const onClick = () => {
+  //   if (Object.keys(editForm) > 2) {
+  //     setValidateForm(0);
+  //   }
+  //   if (Object.keys(editForm) < 2) {
+  //     setValidateForm(1);
+  //   }
+  // };
 
   const validations = () => items.map((task) => {
     const email = task["Email Исполнителя"].length > 0
@@ -77,38 +77,38 @@ const ImportTask = () => {
   })
 
   console.log(validations())
-  const data = items.map((it, idx) => Object.keys(it).map((_, id) => `1${idx}${id}`));
+  // const data = items.map((it, idx) => Object.keys(it).map((_, id) => `1${idx}${id}`));
 
-  const editFormComponent = (
-    <table className="table">
-      <thead>head</thead>
-      <tbody className="table-body">
-        {items.map((task, idx) => (
-          <tr key={task.id} className="column-table">
-            {Object.keys(task).map((title, k) => {
-              const keyName = data[idx][k];
-              return (
-                <td key={title} className="table-cell">
-                  <input
-                    className={
-                      errors[keyName] === undefined ? "cell" : "error-cell"
-                    }
-                    name={keyName}
-                    key={keyName}
-                    defaultValue={title}
-                    placeholder={title}
-                    ref={register({ required: true, minLength: 3 })}
-                  />
-                </td>
-              );
-            })}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+  // const editFormComponent = (
+  //   <table className="table">
+  //     <thead>head</thead>
+  //     <tbody className="table-body">
+  //       {items.map((task, idx) => (
+  //         <tr key={task.id} className="column-table">
+  //           {Object.keys(task).map((title, k) => {
+  //             const keyName = data[idx][k];
+  //             return (
+  //               <td key={title} className="table-cell">
+  //                 <input
+  //                   className={
+  //                     errors[keyName] === undefined ? "cell" : "error-cell"
+  //                   }
+  //                   name={keyName}
+  //                   key={keyName}
+  //                   defaultValue={title}
+  //                   placeholder={title}
+  //                   ref={register({ required: true, minLength: 3 })}
+  //                 />
+  //               </td>
+  //             );
+  //           })}
+  //         </tr>
+  //       ))}
+  //     </tbody>
+  //   </table>
+  // );
   return (
-    <form onSubmit={handleSubmit((info) => setEditForm(info))}>
+    <form onSubmit={handleSubmit((info) => console.log(info))}>
       <div className="import">
         <span className="input-title">
           Вы можете импортировать список задач из XLS или CSV файла
@@ -124,13 +124,10 @@ const ImportTask = () => {
               onChange={onChange}
             />
           </label>
-          <button type="submit" className="main-button" onClick={onClick}>
+          <button type="submit" className="main-button">
             Отправить
           </button>
         </div>
-      </div>
-      <div className="border-table">
-        {validateForm === 1 ? editFormComponent : null}
       </div>
     </form>
   );

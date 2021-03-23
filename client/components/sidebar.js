@@ -8,8 +8,8 @@ import SidebarTasks from "./sidebarTasks";
 const Sidebar = () => {
   const state = useSelector((s) => s.sidebar.id);
 
-  const [style, setStyle] = useState("");
-  const [menuStyle, setMenuStyle] = useState("");
+  const [style, setStyle] = useState("sidebar__open");
+  const [menuStyle, setMenuStyle] = useState("sidebar__menu--open");
 
   useLayoutEffect(() => (
     state === 1
