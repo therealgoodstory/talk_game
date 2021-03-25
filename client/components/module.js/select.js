@@ -35,6 +35,8 @@ export const customStyles = {
     paddingTop: 0,
     paddingBottom: 0,
     borderRadius: 7,
+    position: "relative",
+    zIndex: 2,
   }),
   control: (provided, state) => ({
     ...provided,
@@ -71,6 +73,7 @@ export const workerStyles = {
     overflow: "none",
     wigth: 90,
     left: 15,
+    caretColor: "transparent",
   }),
   input: (provided) => ({
     ...provided,
@@ -112,6 +115,7 @@ export const writeOffAccountStyle = {
     overflow: "none",
     wigth: 90,
     left: 15,
+    caretColor: "transparent",
   }),
   input: (provided) => ({
     ...provided,
@@ -120,66 +124,55 @@ export const writeOffAccountStyle = {
   }),
 };
 
-export const currencyStyles = {
-  option: (provided, state) => ({
-    ...provided,
-    color: state.isSelected ? "gray" : "black",
-    background: state.isFocused ? "#FBFDFF" : "none",
-    fontFamily: "Semibold",
-    fontSize: 12,
-    paddingLeft: 8,
-  }),
-  menuList: (provided) => ({
-    ...provided,
-    paddingTop: 0,
-    paddingBottom: 0,
-    borderRadius: 7,
-  }),
-  control: (provided) => ({
-    ...provided,
-    width: 40,
-    height: 44,
-    fontFamily: "Semibold",
-    fontSize: 12,
-    backgroundColor: "#F2F6F9",
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
-    borderTopLeftRadius: 0,
-    borderBottomLeftRadius: 0,
-    boxShadow: "none",
-  }),
-  input: (provided) => ({
-    ...provided,
-    opacity: 0,
-    zIndex: 1,
-  }),
-  indicatorsContainer: (provided) => ({
-    ...provided,
-    visibility: "hidden",
-  }),
-  valueContainer: (provided) => ({
-    ...provided,
-    width: "100%",
-    height: "100%",
-    paddingLeft: 5,
-  }),
-  singleValue: (provided) => ({
-    ...provided,
-    alignItems: "center",
-  }),
-}
-// .input-button {
-//   outline: none;
-//   width: 40px;
-//   height: 44px;
-//   background-color: #F2F6F9;
-//   border: 1px solid rgba(214, 214, 214, 0.73);
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   border-top-right-radius: 7px;
-//   border-bottom-right-radius: 7px;
+// export const currencyStyles = {
+//   option: (provided, state) => ({
+//     ...provided,
+//     color: state.isSelected ? "gray" : "black",
+//     background: state.isFocused ? "#FBFDFF" : "none",
+//     fontFamily: "Semibold",
+//     fontSize: 12,
+//     paddingLeft: 8,
+//   }),
+//   menuList: (provided) => ({
+//     ...provided,
+//     paddingTop: 0,
+//     paddingBottom: 0,
+//     borderRadius: 7,
+//   }),
+//   control: (provided) => ({
+//     ...provided,
+//     width: 40,
+//     height: 44,
+//     fontFamily: "Semibold",
+//     fontSize: 12,
+//     backgroundColor: "#F2F6F9",
+//     borderTopRightRadius: 7,
+//     borderBottomRightRadius: 7,
+//     borderTopLeftRadius: 0,
+//     borderBottomLeftRadius: 0,
+//     boxShadow: "none",
+//   }),
+//   input: (provided) => ({
+//     ...provided,
+//     opacity: 0,
+//     zIndex: 1,
+//   }),
+//   indicatorsContainer: (provided) => ({
+//     ...provided,
+//     visibility: "hidden",
+//   }),
+//   valueContainer: (provided) => ({
+//     ...provided,
+//     width: "100%",
+//     height: "100%",
+//     paddingLeft: 5,
+//   }),
+//   singleValue: (provided) => ({
+//     ...provided,
+//     alignItems: "center",
+//   }),
 // }
+
 export const writeOffAccount = ({ children, ...props }) => (
   <components.Option {...props}>
     <div className="row">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactSelect, { components } from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,7 +10,6 @@ import {
   writeOffAccountStyle,
   writeOffAccount,
   writeOffAccountValue,
-  currencyStyles,
 } from "./module.js/select";
 
 /* eslint-disable react/jsx-props-no-spreading */
@@ -44,6 +43,12 @@ const schema = yup.object().shape({
     label: yup.array().of(yup.string()),
     value: yup.string(),
   }),
+  currency: yup.number().test((val) => val > 0),
+  typePal: yup.object({
+    label: yup.string().required(),
+    value: yup.string(),
+  }),
+  howmany: yup.number(),
 });
 
 const AtrLabel = ({ label, select, errors }) => (
@@ -59,8 +64,32 @@ const InputTask = () => {
   const [data, setData] = useState(null);
   const [workerEmail, setWorkerEmail] = useState("null");
   const [submit, setSummit] = useState("button");
+  const [method, setMethod] = useState({ currency: [""] })
+  const [stateCurrence, setStateCurrence] = useState(true)
+  const [currence, setCurrence] = useState(["USD"])
+  const [amountCredited, setAmountCredited] = useState(0)
+  const [totalScore, setTotalScore] = useState(0)
 
   useEffect(() => setLoad(1), []);
+
+  useEffect(() => (method.currency[0] === "" ? setCurrence(["USD"]) : setCurrence(method.currency)), [method])
+  console.log(method.currency)
+  function useOutsideAlerter(ref) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          setStateCurrence(true)
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  }
+
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
 
   const {
     register,
@@ -76,6 +105,14 @@ const InputTask = () => {
     console.log(data);
   };
 
+  const Currency = () => (
+    stateCurrence === false ? setStateCurrence(true) : setStateCurrence(false)
+  )
+
+  const selectCurrence = (e) => {
+    setStateCurrence(true)
+    setCurrence([e])
+  }
   const options = [
     {
       label: "Group 1",
@@ -87,21 +124,49 @@ const InputTask = () => {
   ];
 
   const optionsWorker = [
-    { label: ["Sasds", "test@gmail.com"], value: "test@gmail.com", nameWorker: "test@gmail.com" },
-    { label: ["Sasdas", "qqqqq@gmail.com"], value: "qqqqq@gmail.com", nameWorker: "qqqqq@gmail.com" },
+    { label: ["Sasds", "test@gmail.com"], value: "test@gmail.com" },
+    { label: ["Sasdas", "qqqqq@gmail.com"], value: "qqqqq@gmail.com" },
   ];
 
-  const money = [
-    { label: "USD", value: "1" },
-    { label: "EUR", value: "2" },
-    { label: "RUB", value: "3" },
-  ];
+  // const exchangeRates = {
+  //   USD: {
+  //     EUR: 1.1,
+  //     RUB: 0.3,
+  //     USD: 1,
+  //   },
+  //   EUR: {
+  //     USD: 1.1,
+  //     EUR: 1,
+  //     RUB: 0.3,
+  //   },
+  //   RUB: {
+  //     USD: 1.1,
+  //     EUR: 1.1,
+  //     RUB: 1,
+  //   },
+  // };
+  // проценты минималка фикс<>
+  useEffect(() => {
+    const interest = 1.03
+    const fix = 20
+    const min = amountCredited < 500 ? 50 : 0
+    const max = amountCredited > 5000 ? 0 : 10
+    const result = (amountCredited * interest) + fix + max + min
+    setTotalScore(result.toFixed(2))
+  }, [amountCredited])
+
+  const card = [
+    { label: "yandex", value: "1", currency: ["USD", "RUB"] },
+    { label: "webmoney", value: "2", currency: ["EUR", "RUB"] },
+    { label: "yandex", value: "1", currency: ["USD", "RUB"] },
+    { label: "webmoney", value: "2", currency: ["EUR", "RUB"] },
+  ]
 
   const WorkerStyle = ({ children, ...props }) => {
     const manyChildren = (
       <components.Option {...props}>
         <div className="col">
-          <div className="bold">{props.data.nameWorker}</div>
+          <div className="bold">{children[0]}</div>
           <div>{children[1]}</div>
         </div>
       </components.Option>
@@ -121,8 +186,8 @@ const InputTask = () => {
     const manyChildren = (
       <components.Option {...props} className="email-worker">
         <div>
-          <div className="bold">{props.data.nameWorker}</div>
-          <div>{children}</div>
+          <div className="bold">{children[0]}</div>
+          <div>{children[1]}</div>
         </div>
       </components.Option>
     )
@@ -191,8 +256,8 @@ const InputTask = () => {
     setWorkerEmail(inputValue);
   };
 
-  console.log(data);
-
+  const validateMethod = () => (method.currency[0] !== '' ? "" : "react-select")
+  const errorMethod = () => (method.currency[0] === '' ? <p className="error-message">Заполните поле</p> : "")
   return (
     <form onSubmit={handleSubmit((info) => setData(info))}>
       <div className="page__input">
@@ -284,17 +349,17 @@ const InputTask = () => {
           label="Счёт списания"
         />
         <AtrLabel
-          errors={errors.typePal && errorMesage}
+          errors={errors.typePal !== undefined ? errorMethod() : ""}
           select={(
-            <Controller
+            <ReactSelect
               name="typePal"
-              styles={customStyles}
-              control={control}
-              options={options}
-              as={ReactSelect}
               rules={register}
+              onChange={(e) => setMethod(e)}
+              options={card}
+              styles={customStyles}
               defaultValue=""
-              classNamePrefix={errors.typePal === undefined ? "" : "react-select"}
+              classNamePrefix={errors.typePal !== undefined ? validateMethod() : ""}
+              onClick={() => stateCurrence(true)}
             />
           )}
           label="Способ оплаты"
@@ -302,31 +367,47 @@ const InputTask = () => {
         <AtrLabel
           errors={errors.currency && errorMesage}
           select={(
-            <div className="custom-input row">
-              <input className="input-many" type="number" name="currency" />
-              <ReactSelect
-                className="input-button"
-                options={money}
-                styles={currencyStyles}
-                isSearchable={false}
-                defaultValue={{ label: "RUB", value: "test@gmail.com" }}
+            <div className="row">
+              <input
+                className="input-many"
+                type="number"
+                name="currency"
+                ref={register}
+                onChange={(e) => setAmountCredited(e.target.value)}
+                min="0"
               />
+              <div className="col" ref={wrapperRef}>
+                <button className="currencyMain" onClick={Currency} type="button" onKeyDown={() => console.log("open")}>
+                  {currence[0]}
+                </button>
+                {stateCurrence ? "" : (
+                  <div className="col currencyMenu">
+                    {method.currency[0] !== "" ? method.currency.map((currency) => (
+                      <button
+                        key={currency}
+                        onClick={() => selectCurrence(currency)}
+                        onKeyDown={() => console.log("open")}
+                        type="button"
+                        className="currency"
+                      >
+                        {currency}
+                      </button>
+                    )) : ""}
+                  </div>
+                )}
+              </div>
             </div>
           )}
           label="Сумма зачисления"
         />
         <AtrLabel
-          errors={errors.howmany && errorMesage}
+          errors=""
           select={(
-            <Controller
+            <input
+              value={totalScore}
               name="howmany"
-              options={options}
-              rules={register}
-              styles={customStyles}
-              control={control}
-              as={ReactSelect}
-              defaultValue=""
-              classNamePrefix={errors.howmany === undefined ? "" : "react-select"}
+              className="input none-caret"
+              ref={register}
             />
           )}
           label="Сумма списания"

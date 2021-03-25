@@ -66,7 +66,7 @@ tbody {
 
 .input-many {
   width: 100%;
-  height: 100%;
+  height: 40px;
   border-top-left-radius: 7px;
   border-bottom-left-radius: 7px;
   outline: none;
@@ -103,11 +103,13 @@ tbody {
 .row {
   display: flex;
   flex-direction: row;
+  position: relative;
 }
 
 .col {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .margin {
   margin-bottom: 30px;
@@ -345,15 +347,52 @@ h5 {
 .page__size {
   display: flex;
   flex-direction: column;
-  position: relative;
   height: auto;
+  position: relative;
 }
 .email-worker {
   padding-left: 0 !important;
 }
 
+.currencyMenu {
+  position: absolute;
+  z-index: 2;
+  background: white;
+  border-radius: 4px;
+  margin-top: 50px;
+  box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+}
+.none-caret {
+  caret-color: transparent;
+}
+
+.currency {
+  position: relative;
+  z-index: 2;
+  height: 45px;
+  width: 40px;
+  padding-left: 5px;
+  background: white;
+  border: none;
+}
+.currency:hover {
+  background: rgb(243, 243, 243);
+}
+.currencyMain {
+  position: relative;
+  width: 40px;
+  height: 44px;
+  background: #F2F6F9;
+  border-right: 1px solid #dbdbdb;
+  border-top: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-left: none;
+}
 .select-maney {
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
 }
@@ -372,13 +411,14 @@ h5 {
   display: flex;
   flex-direction: column;
   margin-left: 30px;
-  width: 40%;
+  width: 60%;
 }
 .page__input-small {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin-left: 30px;
-  width: 20%;
+  width: 30%;
 }
 
 .input {
@@ -428,7 +468,7 @@ textarea {
   padding-bottom: 15px;
   padding-left: 15px;
   padding-right: 15px;
-  width: 40%;
+  width: 60%;
   border-radius: 7px;
   border: 1px solid #ecf8ff;
 }
@@ -436,6 +476,7 @@ textarea {
 .page__name {
   margin-top: 10px;
   margin-bottom: 10px;
+  position: relative;
 }
 
 .button-border {
