@@ -124,54 +124,35 @@ export const writeOffAccountStyle = {
   }),
 };
 
-// export const currencyStyles = {
-//   option: (provided, state) => ({
-//     ...provided,
-//     color: state.isSelected ? "gray" : "black",
-//     background: state.isFocused ? "#FBFDFF" : "none",
-//     fontFamily: "Semibold",
-//     fontSize: 12,
-//     paddingLeft: 8,
-//   }),
-//   menuList: (provided) => ({
-//     ...provided,
-//     paddingTop: 0,
-//     paddingBottom: 0,
-//     borderRadius: 7,
-//   }),
-//   control: (provided) => ({
-//     ...provided,
-//     width: 40,
-//     height: 44,
-//     fontFamily: "Semibold",
-//     fontSize: 12,
-//     backgroundColor: "#F2F6F9",
-//     borderTopRightRadius: 7,
-//     borderBottomRightRadius: 7,
-//     borderTopLeftRadius: 0,
-//     borderBottomLeftRadius: 0,
-//     boxShadow: "none",
-//   }),
-//   input: (provided) => ({
-//     ...provided,
-//     opacity: 0,
-//     zIndex: 1,
-//   }),
-//   indicatorsContainer: (provided) => ({
-//     ...provided,
-//     visibility: "hidden",
-//   }),
-//   valueContainer: (provided) => ({
-//     ...provided,
-//     width: "100%",
-//     height: "100%",
-//     paddingLeft: 5,
-//   }),
-//   singleValue: (provided) => ({
-//     ...provided,
-//     alignItems: "center",
-//   }),
-// }
+export const currencyStyles = {
+  ...writeOffAccountStyle,
+  option: (provided, state) => ({
+    ...provided,
+    paddingLeft: 15,
+    paddingTop: 7,
+    color: state.isSelected ? "gray" : "black",
+    height: 45,
+    background: state.isFocused ? "#FBFDFF" : "none",
+    fontFamily: "Semibold",
+    fontSize: 12,
+    whiteSpace: "pre-wrap",
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    position: "absolue",
+    display: "flex",
+    flexDirection: "row",
+    overflow: "none",
+    wigth: 90,
+    paddingLeft: 15,
+    padding: 0,
+    caretColor: "transparent",
+  }),
+  input: (provided) => ({
+    ...provided,
+    position: "absolute",
+  }),
+}
 
 export const writeOffAccount = ({ children, ...props }) => (
   <components.Option {...props}>
@@ -189,10 +170,32 @@ export const writeOffAccountValue = ({ children, ...props }) => (
   <components.Option {...props} className="email-worker">
     <div className="row">
       <div className="write-ff-logo">$</div>
-      <div className="col">
+      <div className="col account">
         <div className="bold">{children[0]}</div>
         <div>{children[1]}</div>
       </div>
+    </div>
+  </components.Option>
+);
+
+export const typePalStyle = ({ children, ...props }) => (
+  <components.Option {...props}>
+    <div className="row typePal">
+      <div className="write-ff-logo">
+        $
+      </div>
+      {children}
+    </div>
+  </components.Option>
+);
+
+export const typePalStyleValue = ({ children, ...props }) => (
+  <components.Option {...props} className="email-worker">
+    <div className="row typePal">
+      <div className="write-ff-logo">
+        $
+      </div>
+      {children}
     </div>
   </components.Option>
 );

@@ -235,6 +235,9 @@ h5 {
   margin-top: 15px;
 }
 
+.typePal {
+  align-items: center;
+}
 .main-title__size{
   font-size: 16px;
   margin-bottom: 10px;
@@ -353,7 +356,14 @@ h5 {
 .email-worker {
   padding-left: 0 !important;
 }
-
+.account {
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  bottom: 1px;
+  position: absolute;
+  left: 40px;
+}
 .currencyMenu {
   position: absolute;
   z-index: 2;
@@ -405,6 +415,11 @@ h5 {
   height: 100%;
   justify-content: space-between;
   padding-right: 15px;
+}
+
+.border-error {
+  border: 1px solid red;
+  border-radius: 8px;
 }
 
 .page__input {

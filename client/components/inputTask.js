@@ -10,6 +10,9 @@ import {
   writeOffAccountStyle,
   writeOffAccount,
   writeOffAccountValue,
+  typePalStyle,
+  currencyStyles,
+  typePalStyleValue,
 } from "./module.js/select";
 
 /* eslint-disable react/jsx-props-no-spreading */
@@ -73,7 +76,7 @@ const InputTask = () => {
   useEffect(() => setLoad(1), []);
 
   useEffect(() => (method.currency[0] === "" ? setCurrence(["USD"]) : setCurrence(method.currency)), [method])
-  console.log(method.currency)
+
   function useOutsideAlerter(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
@@ -255,7 +258,7 @@ const InputTask = () => {
   const handleInputChange = (inputValue = "") => {
     setWorkerEmail(inputValue);
   };
-  console.log(123)
+
   const validateMethod = () => (method.currency[0] !== '' ? "" : "react-select")
   const errorMethod = () => (method.currency[0] === '' ? <p className="error-message">Заполните поле</p> : "")
   return (
@@ -356,7 +359,8 @@ const InputTask = () => {
               rules={register}
               onChange={(e) => setMethod(e)}
               options={card}
-              styles={customStyles}
+              components={{ Option: typePalStyle, SingleValue: typePalStyleValue }}
+              styles={currencyStyles}
               defaultValue=""
               classNamePrefix={errors.typePal !== undefined ? validateMethod() : ""}
               onClick={() => stateCurrence(true)}
@@ -367,7 +371,7 @@ const InputTask = () => {
         <AtrLabel
           errors={errors.currency && errorMesage}
           select={(
-            <div className="row">
+            <div className={errors.currency !== undefined ? "border-error row" : "row"}>
               <input
                 className="input-many"
                 type="number"
@@ -376,7 +380,7 @@ const InputTask = () => {
                 onChange={(e) => setAmountCredited(e.target.value)}
                 min="0"
               />
-              <div className="col" ref={wrapperRef}>
+              <div ref={wrapperRef} className="col">
                 <button className="currencyMain" onClick={Currency} type="button" onKeyDown={() => console.log("open")}>
                   {currence[0]}
                 </button>
