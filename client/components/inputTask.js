@@ -255,7 +255,7 @@ const InputTask = () => {
   const handleInputChange = (inputValue = "") => {
     setWorkerEmail(inputValue);
   };
-
+  console.log(123)
   const validateMethod = () => (method.currency[0] !== '' ? "" : "react-select")
   const errorMethod = () => (method.currency[0] === '' ? <p className="error-message">Заполните поле</p> : "")
   return (
