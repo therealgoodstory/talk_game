@@ -72,6 +72,7 @@ const InputTask = () => {
   const [currence, setCurrence] = useState(["USD"])
   const [amountCredited, setAmountCredited] = useState(0)
   const [totalScore, setTotalScore] = useState(0)
+  const [score, setScore] = useState(0)
 
   useEffect(() => setLoad(1), []);
 
@@ -258,9 +259,12 @@ const InputTask = () => {
   const handleInputChange = (inputValue = "") => {
     setWorkerEmail(inputValue);
   };
-
+  console.log(data)
   const validateMethod = () => (method.currency[0] !== '' ? "" : "react-select")
   const errorMethod = () => (method.currency[0] === '' ? <p className="error-message">Заполните поле</p> : "")
+  const validateMethodScore = () => (typeof (score) !== "object" ? "" : "react-select")
+  const errorMethodScore = () => (typeof (score) === "object" ? <p className="error-message">Заполните поле</p> : "")
+
   return (
     <form onSubmit={handleSubmit((info) => setData(info))}>
       <div className="page__input">
@@ -335,18 +339,17 @@ const InputTask = () => {
           label="Исполнитель"
         />
         <AtrLabel
-          errors={errors.writeOfAccount && errorMesage}
+          errors={errors.writeOfAccount !== undefined ? errorMethodScore() : ""}
           select={(
-            <Controller
-              control={control}
+            <ReactSelect
               name="writeOfAccount"
-              as={ReactSelect}
+              onChange={(value) => setScore(value)}
               options={optionsWorker}
-              rules={register}
               components={{ Option: writeOffAccount, SingleValue: writeOffAccountValue }}
               styles={writeOffAccountStyle}
               defaultValue=""
-              classNamePrefix={errors.writeOfAccount === undefined ? "" : "react-select"}
+              classNamePrefix={errors.writeOfAccount !== undefined ? validateMethodScore() : ""}
+              rules={register}
             />
           )}
           label="Счёт списания"
@@ -368,6 +371,7 @@ const InputTask = () => {
           )}
           label="Способ оплаты"
         />
+        {console.log(errors.typePal)}
         <AtrLabel
           errors={errors.currency && errorMesage}
           select={(
