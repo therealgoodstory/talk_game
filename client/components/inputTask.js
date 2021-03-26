@@ -43,7 +43,7 @@ const schema = yup.object().shape({
     value: yup.string(),
   }),
   writeOfAccount: yup.object({
-    label: yup.array().of(yup.string()),
+    label: yup.string().required(),
     value: yup.string(),
   }),
   currency: yup.number().test((val) => val > 0),
@@ -210,8 +210,8 @@ const InputTask = () => {
     <Controller
       name="type"
       options={options}
-      placeholder="Выберите тип работ"
       control={control}
+      placeholder={<span className="placeholder">Выберите тип работ</span>}
       as={ReactSelect}
       rules={register}
       styles={customStyles}
@@ -225,6 +225,7 @@ const InputTask = () => {
       options={options}
       styles={customStyles}
       control={control}
+      placeholder={<span className="placeholder">Выберите атрибут</span>}
       rules={register}
       as={ReactSelect}
       defaultValue=""
@@ -237,6 +238,7 @@ const InputTask = () => {
       options={options}
       styles={customStyles}
       control={control}
+      placeholder={<span className="placeholder">Выберите атрибут</span>}
       as={ReactSelect}
       rules={register}
       defaultValue=""
@@ -249,6 +251,7 @@ const InputTask = () => {
       options={options}
       styles={customStyles}
       control={control}
+      placeholder={<span className="placeholder">Выберите атрибут</span>}
       as={ReactSelect}
       rules={register}
       defaultValue=""
@@ -259,11 +262,11 @@ const InputTask = () => {
   const handleInputChange = (inputValue = "") => {
     setWorkerEmail(inputValue);
   };
-  console.log(data)
+
   const validateMethod = () => (method.currency[0] !== '' ? "" : "react-select")
   const errorMethod = () => (method.currency[0] === '' ? <p className="error-message">Заполните поле</p> : "")
-  const validateMethodScore = () => (typeof (score) !== "object" ? "" : "react-select")
-  const errorMethodScore = () => (typeof (score) === "object" ? <p className="error-message">Заполните поле</p> : "")
+  const validateMethodScore = () => (typeof (score) === "object" ? "" : "react-select")
+  const errorMethodScore = () => (typeof (score) !== "object" ? <p className="error-message">Заполните поле</p> : "")
 
   return (
     <form onSubmit={handleSubmit((info) => setData(info))}>
@@ -275,6 +278,7 @@ const InputTask = () => {
               name="taskName"
               className={errors.taskName === undefined ? "input" : "input-err"}
               ref={register}
+              placeholder="Введите название задачи"
             />
           )}
           label="Название задачи*"
@@ -329,6 +333,7 @@ const InputTask = () => {
                 { Option: WorkerStyle, SingleValue: singleValue }
               }
               as={CreatableSelect}
+              placeholder={<span className="placeholder">Выберите исполнителя</span>}
               backspaceRemovesValue="true"
               formatCreateLabel={() => ":"}
               onInputChange={handleInputChange}
@@ -343,6 +348,7 @@ const InputTask = () => {
           select={(
             <ReactSelect
               name="writeOfAccount"
+              placeholder={<span className="placeholder">Выберите счёт списания</span>}
               onChange={(value) => setScore(value)}
               options={optionsWorker}
               components={{ Option: writeOffAccount, SingleValue: writeOffAccountValue }}
@@ -360,6 +366,7 @@ const InputTask = () => {
             <ReactSelect
               name="typePal"
               rules={register}
+              placeholder={<span className="placeholder">Выберите способ оплаты</span>}
               onChange={(e) => setMethod(e)}
               options={card}
               components={{ Option: typePalStyle, SingleValue: typePalStyleValue }}
@@ -371,18 +378,18 @@ const InputTask = () => {
           )}
           label="Способ оплаты"
         />
-        {console.log(errors.typePal)}
         <AtrLabel
           errors={errors.currency && errorMesage}
           select={(
             <div className={errors.currency !== undefined ? "border-error row" : "row"}>
               <input
-                className="input-many"
+                className="input-many input"
                 type="number"
                 name="currency"
                 ref={register}
                 onChange={(e) => setAmountCredited(e.target.value)}
                 min="0"
+                placeholder="Введите сумму зачисления"
               />
               <div ref={wrapperRef} className="col">
                 <button className="currencyMain" onClick={Currency} type="button" onKeyDown={() => console.log("open")}>

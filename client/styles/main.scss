@@ -69,6 +69,8 @@ tbody {
   height: 40px;
   border-top-left-radius: 7px;
   border-bottom-left-radius: 7px;
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
   outline: none;
   border: 1px solid rgba(214, 214, 214, 0.73);
   padding-left: 15px;
@@ -437,14 +439,28 @@ h5 {
 }
 
 .input {
+  font-family: "Semibold";
+  font-size: 13px;
   height: 40px;
   border-radius: 7px;
   border: 1px solid rgba(214, 214, 214, 0.73);
   outline: none;
   padding-left: 15px;
 }
+.input::placeholder {
+  font-family: "Semibold";
+  font-size: 13px;
+  color: #939EA9; 
+  font-weight: 400;
+}
 
+.placeholder {
+  color: #939EA9; 
+  font-weight: 400;
+}
 .input-err {
+  font-family: "Semibold";
+  font-size: 13px;
   height: 40px;
   border-radius: 7px;
   border: 2px solid rgb(255, 0, 0);
@@ -489,6 +505,8 @@ textarea {
 }
 
 .page__name {
+  color: #2D3E50;
+  font-weight: 600;
   margin-top: 10px;
   margin-bottom: 10px;
   position: relative;
