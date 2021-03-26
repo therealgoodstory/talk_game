@@ -418,12 +418,17 @@ const InputTask = () => {
         <AtrLabel
           errors=""
           select={(
-            <input
-              value={totalScore}
-              name="howmany"
-              className="input none-caret"
-              ref={register}
-            />
+            <div className="row">
+              <input
+                value={totalScore}
+                name="howmany"
+                className="input-result"
+                ref={register}
+              />
+              <div className="currencyResult">
+                USD
+              </div>
+            </div>
           )}
           label="Сумма списания"
         />

@@ -378,6 +378,20 @@ h5 {
   caret-color: transparent;
 }
 
+.currencyResult {
+  position: absolute;
+  color: #939EA9;
+  font-family: "Semibold";
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 12px;
+  right: 5px;
+  width: 32px;
+  height: 14px;
+}
+.width {
+  width: 100%;
+}
 .currency {
   position: relative;
   z-index: 2;
@@ -386,12 +400,26 @@ h5 {
   padding-left: 5px;
   background: white;
   border: none;
+  padding-top: 12px;
+  padding-bottom: 20px;
+  padding-left: 4px;
+  padding-right: 4px;
+  color: #939EA9;
+  font-family: "Semibold";
+  font-weight: 400;
 }
 .currency:hover {
   background: rgb(243, 243, 243);
 }
 .currencyMain {
   position: relative;
+  padding-top: 12px;
+  padding-bottom: 20px;
+  padding-left: 4px;
+  padding-right: 4px;
+  color: #939EA9;
+  font-family: "Semibold";
+  font-weight: 400;
   width: 40px;
   height: 44px;
   background: #F2F6F9;
@@ -436,6 +464,17 @@ h5 {
   flex-direction: column;
   margin-left: 30px;
   width: 30%;
+}
+
+.input-result {
+  width: 100%;
+  font-family: "Semibold";
+  font-size: 13px;
+  height: 40px;
+  border-radius: 7px;
+  border: 1px solid rgba(214, 214, 214, 0.73);
+  outline: none;
+  padding-left: 15px;
 }
 
 .input {
