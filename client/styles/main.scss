@@ -476,6 +476,19 @@ h5 {
   outline: none;
   padding-left: 15px;
 }
+
+.italic {
+  color: #939EA9;
+  font-size: 11;
+}
+
+.animation-container {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
 .input-result::placeholder {
   font-family: "Semibold";
   font-size: 13px;

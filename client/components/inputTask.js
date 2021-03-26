@@ -134,28 +134,33 @@ const InputTask = () => {
   ];
 
   const optionsWorker = [
-    { label: ["Sasds", "test@gmail.com"], value: "test@gmail.com" },
-    { label: ["Sasdas", "qqqqq@gmail.com"], value: "qqqqq@gmail.com" },
+    { label: ["Vitaliy Vyatkin", "test@gmail.com"], value: "1" },
+    { label: ["Ivanov Ivan", "qqqqq@gmail.com"], value: "2" },
   ];
 
-  // const exchangeRates = {
-  //   USD: {
-  //     EUR: 1.1,
-  //     RUB: 0.3,
-  //     USD: 1,
-  //   },
-  //   EUR: {
-  //     USD: 1.1,
-  //     EUR: 1,
-  //     RUB: 0.3,
-  //   },
-  //   RUB: {
-  //     USD: 1.1,
-  //     EUR: 1.1,
-  //     RUB: 1,
-  //   },
-  // };
-  // проценты минималка фикс<>
+  const userCard = [
+    {
+      name: 'Карта',
+      icon: '<svg>.....</svg>',
+      currencies: ['RUB', 'UAH', 'USD'],
+      fees: [
+        { type: 'percent', value: 0.054 },
+        {
+          type: 'fix',
+          value: {
+            USD: 0.7,
+            RUB: 50,
+            EUR: 0.5,
+            UAH: 15,
+          },
+          condition: 0,
+          amount: 3000,
+        },
+      ],
+    },
+  ]
+
+  console.log(JSON.stringify(userCard))
   useEffect(() => {
     const interest = 1.03
     const fix = 20
@@ -177,7 +182,7 @@ const InputTask = () => {
       <components.Option {...props}>
         <div className="col">
           <div className="bold">{children[0]}</div>
-          <div>{children[1]}</div>
+          <div className="italic">{children[1]}</div>
         </div>
       </components.Option>
     );
@@ -197,7 +202,7 @@ const InputTask = () => {
       <components.Option {...props} className="email-worker">
         <div>
           <div className="bold">{children[0]}</div>
-          <div>{children[1]}</div>
+          <div className="italic">{children[1]}</div>
         </div>
       </components.Option>
     )
@@ -441,7 +446,7 @@ const InputTask = () => {
         {console.log(totalScore)}
       </div>
       <div className="margin" />
-      <div>
+      <div className="animation-container">
         <input
           type={submit}
           className="main-button"

@@ -98,7 +98,7 @@ export const writeOffAccountStyle = {
   ...customStyles,
   option: (provided, state) => ({
     ...provided,
-    paddingTop: 7,
+    // paddingTop: 7,
     color: state.isSelected ? "gray" : "black",
     height: 45,
     paddinfLeft: 15,
@@ -113,7 +113,6 @@ export const writeOffAccountStyle = {
     display: "flex",
     flexDirection: "row",
     overflow: "none",
-    wigth: 90,
     left: 15,
     caretColor: "transparent",
   }),
@@ -160,7 +159,7 @@ export const writeOffAccount = ({ children, ...props }) => (
       <div className="write-ff-logo">$</div>
       <div className="col">
         <div className="bold">{children[0]}</div>
-        <div>{children[1]}</div>
+        <div className="italic">{children[1]}</div>
       </div>
     </div>
   </components.Option>
@@ -172,7 +171,7 @@ export const writeOffAccountValue = ({ children, ...props }) => (
       <div className="write-ff-logo">$</div>
       <div className="col account">
         <div className="bold">{children[0]}</div>
-        <div>{children[1]}</div>
+        <div className="italic">{children[1]}</div>
       </div>
     </div>
   </components.Option>
