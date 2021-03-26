@@ -476,6 +476,12 @@ h5 {
   outline: none;
   padding-left: 15px;
 }
+.input-result::placeholder {
+  font-family: "Semibold";
+  font-size: 13px;
+  color: #939EA9; 
+  font-weight: 400;
+}
 
 .input {
   font-family: "Semibold";

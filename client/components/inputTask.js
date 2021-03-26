@@ -62,6 +62,12 @@ const AtrLabel = ({ label, select, errors }) => (
   </div>
 );
 
+const animationSpiner = (
+  <svg className="spinner" viewBox="0 0 50 50">
+    <circle className="path" cx="25" cy="25" r="20" fill="none" strokeWidth="5" />
+  </svg>
+)
+
 const InputTask = () => {
   const [load, setLoad] = useState(0);
   const [data, setData] = useState(null);
@@ -420,7 +426,7 @@ const InputTask = () => {
           select={(
             <div className="row">
               <input
-                value={totalScore}
+                placeholder="Введите сумму"
                 name="howmany"
                 className="input-result"
                 ref={register}
@@ -432,14 +438,18 @@ const InputTask = () => {
           )}
           label="Сумма списания"
         />
+        {console.log(totalScore)}
       </div>
       <div className="margin" />
-      <input
-        type={submit}
-        className="main-button"
-        onClick={onClick}
-        value="Отправить"
-      />
+      <div>
+        <input
+          type={submit}
+          className="main-button"
+          onClick={onClick}
+          value=""
+        />
+        {animationSpiner}
+      </div>
     </form>
   );
 };
