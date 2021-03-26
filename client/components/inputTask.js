@@ -138,11 +138,37 @@ const InputTask = () => {
     { label: ["Ivanov Ivan", "qqqqq@gmail.com"], value: "2" },
   ];
 
+  const writeOfAccountScore = [
+    { label: ["USD", "1500"], value: "1", currency: "USD" },
+    { label: ["RUB", "1233.123"], value: "2", currency: "RUB" },
+  ];
+
   const userCard = [
     {
-      name: 'Карта',
+      label: 'Карта',
+      value: 1,
       icon: '<svg>.....</svg>',
-      currencies: ['RUB', 'UAH', 'USD'],
+      currency: ['RUB', 'UAH', 'USD'],
+      fees: [
+        { type: 'percent', value: 0.054 },
+        {
+          type: 'fix',
+          value: {
+            USD: 0.7,
+            RUB: 50,
+            EUR: 0.5,
+            UAH: 15,
+          },
+          condition: 0,
+          amount: 3000,
+        },
+      ],
+    },
+    {
+      label: 'Карта2',
+      value: 2,
+      icon: '<svg>.....</svg>',
+      currency: ['UAH', 'USD'],
       fees: [
         { type: 'percent', value: 0.054 },
         {
@@ -159,23 +185,20 @@ const InputTask = () => {
       ],
     },
   ]
-
-  console.log(JSON.stringify(userCard))
+  // карта списания валюта списания деньги объект карты
+  // console.log([score.currency, currence[0], amountCredited, method])
+  console.log(currence)
   useEffect(() => {
-    const interest = 1.03
-    const fix = 20
-    const min = amountCredited < 500 ? 50 : 0
-    const max = amountCredited > 5000 ? 0 : 10
-    const result = (amountCredited * interest) + fix + max + min
-    setTotalScore(result.toFixed(2))
-  }, [amountCredited])
-
-  const card = [
-    { label: "yandex", value: "1", currency: ["USD", "RUB"] },
-    { label: "webmoney", value: "2", currency: ["EUR", "RUB"] },
-    { label: "yandex", value: "1", currency: ["USD", "RUB"] },
-    { label: "webmoney", value: "2", currency: ["EUR", "RUB"] },
-  ]
+    if (method.currency[0] !== "") {
+      const percent = method.fees[0].value
+      const fix = method.fees[1].value[currence[0]]
+      // const key = method.fees[1].value.condition
+      // const key2 = method.fees[1].value.amount
+      // const res = amountCredited
+      const result = (amountCredited * 1) + (amountCredited * percent) + fix
+      setTotalScore(result)
+    }
+  }, [amountCredited, currence])
 
   const WorkerStyle = ({ children, ...props }) => {
     const manyChildren = (
@@ -361,7 +384,7 @@ const InputTask = () => {
               name="writeOfAccount"
               placeholder={<span className="placeholder">Выберите счёт списания</span>}
               onChange={(value) => setScore(value)}
-              options={optionsWorker}
+              options={writeOfAccountScore}
               components={{ Option: writeOffAccount, SingleValue: writeOffAccountValue }}
               styles={writeOffAccountStyle}
               defaultValue=""
@@ -379,7 +402,7 @@ const InputTask = () => {
               rules={register}
               placeholder={<span className="placeholder">Выберите способ оплаты</span>}
               onChange={(e) => setMethod(e)}
-              options={card}
+              options={userCard}
               components={{ Option: typePalStyle, SingleValue: typePalStyleValue }}
               styles={currencyStyles}
               defaultValue=""
@@ -435,9 +458,10 @@ const InputTask = () => {
                 name="howmany"
                 className="input-result"
                 ref={register}
+                onChange={(e) => setAmountCredited(e.target.value)}
               />
               <div className="currencyResult">
-                USD
+                {currence[0]}
               </div>
             </div>
           )}
@@ -446,6 +470,12 @@ const InputTask = () => {
         {console.log(totalScore)}
       </div>
       <div className="margin" />
+      <section className="col result">
+        <span>{`Комиссия сервиса ${123}`}</span>
+        <br />
+        <span>{`Сумма списания расчитана по курсу${2 + 2}`}</span>
+        <span>В момент оплаты задачи курс может измениться</span>
+      </section>
       <div className="animation-container">
         <input
           type={submit}

@@ -156,7 +156,9 @@ export const currencyStyles = {
 export const writeOffAccount = ({ children, ...props }) => (
   <components.Option {...props}>
     <div className="row">
-      <div className="write-ff-logo">$</div>
+      <div className="write-ff-logo">
+        {props.data.currency}
+      </div>
       <div className="col">
         <div className="bold">{children[0]}</div>
         <div className="italic">{children[1]}</div>
@@ -168,7 +170,9 @@ export const writeOffAccount = ({ children, ...props }) => (
 export const writeOffAccountValue = ({ children, ...props }) => (
   <components.Option {...props} className="email-worker">
     <div className="row">
-      <div className="write-ff-logo">$</div>
+      <div className="write-ff-logo">
+        {props.data.currency}
+      </div>
       <div className="col account">
         <div className="bold">{children[0]}</div>
         <div className="italic">{children[1]}</div>
@@ -181,7 +185,7 @@ export const typePalStyle = ({ children, ...props }) => (
   <components.Option {...props}>
     <div className="row typePal">
       <div className="write-ff-logo">
-        $
+        .
       </div>
       {children}
     </div>
@@ -192,7 +196,7 @@ export const typePalStyleValue = ({ children, ...props }) => (
   <components.Option {...props} className="email-worker">
     <div className="row typePal">
       <div className="write-ff-logo">
-        $
+        .
       </div>
       {children}
     </div>
