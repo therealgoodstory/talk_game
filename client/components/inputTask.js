@@ -171,10 +171,10 @@ const InputTask = () => {
       const percent = method.fees.filter(({ type }) => type === 'percent')[0].value
       const fix = method.fees.filter(({ type }) => type === 'fix')
       const result = (amountCredited * 1) + (amountCredited * percent)
-      if (fix.length !== 0) {
+      if (fix.length !== 0 && amountCredited !== "") {
         const act = (result + (fix[0].value[currence[0]])).toFixed(2)
         commission(setTotalScore, fix, result, act, amountCredited)
-      } else {
+      } else if (amountCredited !== "") {
         setTotalScore(result)
       }
     }
@@ -182,15 +182,18 @@ const InputTask = () => {
 
   useEffect(() => {
     if (method.currency[0] !== "") {
-      const percent = method.fees.filter(({ type }) => type === 'percent')[0].value
-      const fix = method.fees.filter(({ type }) => type === 'fix')
-      const result = (totalScore / (percent + 1))
-      if (fix.length !== 0) {
-        const act = (result - (fix[0].value[currence[0]])).toFixed(2)
-        commission(setAmountCredited, fix, result, act, result)
-      } else {
-        setAmountCredited(result)
-      }
+      // const percent = method.fees.filter(({ type }) => type === 'percent')[0].value
+      // const result = (totalScore / (percent + 1))
+      console.log([amountCredited, totalScore])
+      // const percent = method.fees.filter(({ type }) => type === 'percent')[0].value
+      // const fix = method.fees.filter(({ type }) => type === 'fix')
+      // const result = (totalScore / (percent + 1))
+      // if (fix.length !== 0) {
+      //   const act = (result - (fix[0].value[currence[0]])).toFixed(2)
+      //   commission(setAmountCredited, fix, result, act, result)
+      // } else {
+      //   setAmountCredited(result)
+      // }
     }
   }, [totalScore])
 
