@@ -3,6 +3,7 @@ import ReactSelect, { components } from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
+import { useSelector } from 'react-redux'
 import * as yup from "yup";
 import {
   customStyles,
@@ -76,8 +77,8 @@ const InputTask = () => {
   const [method, setMethod] = useState({ currency: [""] })
   const [stateCurrence, setStateCurrence] = useState(true)
   const [currence, setCurrence] = useState(["USD"])
-  const [amountCredited, setAmountCredited] = useState(0)
-  const [totalScore, setTotalScore] = useState(0)
+  const [amountCredited, setAmountCredited] = useState("")
+  const [totalScore, setTotalScore] = useState("")
   const [score, setScore] = useState(0)
 
   useEffect(() => setLoad(1), []);
@@ -143,62 +144,55 @@ const InputTask = () => {
     { label: ["RUB", "1233.123"], value: "2", currency: "RUB" },
   ];
 
-  const userCard = [
-    {
-      label: 'Карта',
-      value: 1,
-      icon: '<svg>.....</svg>',
-      currency: ['RUB', 'UAH', 'USD'],
-      fees: [
-        { type: 'percent', value: 0.054 },
-        {
-          type: 'fix',
-          value: {
-            USD: 0.7,
-            RUB: 50,
-            EUR: 0.5,
-            UAH: 15,
-          },
-          condition: 0,
-          amount: 3000,
-        },
-      ],
-    },
-    {
-      label: 'Карта2',
-      value: 2,
-      icon: '<svg>.....</svg>',
-      currency: ['UAH', 'USD'],
-      fees: [
-        { type: 'percent', value: 0.054 },
-        {
-          type: 'fix',
-          value: {
-            USD: 0.7,
-            RUB: 50,
-            EUR: 0.5,
-            UAH: 15,
-          },
-          condition: 0,
-          amount: 3000,
-        },
-      ],
-    },
-  ]
+  const userCard = useSelector((s) => s.userCard.cards)
   // карта списания валюта списания деньги объект карты
   // console.log([score.currency, currence[0], amountCredited, method])
-  console.log(currence)
+
+  const commission = (func, fix, result, act, money) => {
+    if (fix[0].condition === 0 && (money * 1) === fix[0].amount) {
+      func(act)
+    } else if (fix[0].condition === 1 && (money * 1) < fix[0].amount) {
+      func(act)
+    } else if (fix[0].condition === 2 && (money * 1) <= fix[0].amount) {
+      func(act)
+    } else if (fix[0].condition === 3 && (money * 1) > fix[0].amount) {
+      func(act)
+    } else if (fix[0].condition === 4 && (money * 1) >= fix[0].amount) {
+      func(act)
+    } else if (fix[0].condition === 5) {
+      func(act)
+    } else {
+      func(result.toFixed(2))
+    }
+  }
+
   useEffect(() => {
     if (method.currency[0] !== "") {
-      const percent = method.fees[0].value
-      const fix = method.fees[1].value[currence[0]]
-      // const key = method.fees[1].value.condition
-      // const key2 = method.fees[1].value.amount
-      // const res = amountCredited
-      const result = (amountCredited * 1) + (amountCredited * percent) + fix
-      setTotalScore(result)
+      const percent = method.fees.filter(({ type }) => type === 'percent')[0].value
+      const fix = method.fees.filter(({ type }) => type === 'fix')
+      const result = (amountCredited * 1) + (amountCredited * percent)
+      if (fix.length !== 0) {
+        const act = (result + (fix[0].value[currence[0]])).toFixed(2)
+        commission(setTotalScore, fix, result, act, amountCredited)
+      } else {
+        setTotalScore(result)
+      }
     }
   }, [amountCredited, currence])
+
+  useEffect(() => {
+    if (method.currency[0] !== "") {
+      const percent = method.fees.filter(({ type }) => type === 'percent')[0].value
+      const fix = method.fees.filter(({ type }) => type === 'fix')
+      const result = (totalScore / (percent + 1))
+      if (fix.length !== 0) {
+        const act = (result - (fix[0].value[currence[0]])).toFixed(2)
+        commission(setAmountCredited, fix, result, act, result)
+      } else {
+        setAmountCredited(result)
+      }
+    }
+  }, [totalScore])
 
   const WorkerStyle = ({ children, ...props }) => {
     const manyChildren = (
@@ -424,6 +418,7 @@ const InputTask = () => {
                 onChange={(e) => setAmountCredited(e.target.value)}
                 min="0"
                 placeholder="Введите сумму зачисления"
+                value={amountCredited}
               />
               <div ref={wrapperRef} className="col">
                 <button className="currencyMain" onClick={Currency} type="button" onKeyDown={() => console.log("open")}>
@@ -458,7 +453,8 @@ const InputTask = () => {
                 name="howmany"
                 className="input-result"
                 ref={register}
-                onChange={(e) => setAmountCredited(e.target.value)}
+                onChange={(e) => setTotalScore(e.target.value)}
+                value={totalScore}
               />
               <div className="currencyResult">
                 {currence[0]}
@@ -467,7 +463,6 @@ const InputTask = () => {
           )}
           label="Сумма списания"
         />
-        {console.log(totalScore)}
       </div>
       <div className="margin" />
       <section className="col result">
