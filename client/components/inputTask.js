@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
 import { useSelector } from 'react-redux'
 import * as yup from "yup";
+// import InputMask from "react-input-mask";
 import {
   customStyles,
   workerStyles,
@@ -53,6 +54,9 @@ const schema = yup.object().shape({
     value: yup.string(),
   }),
   howmany: yup.number(),
+  cardNumber: yup.string().test((val) => (
+    val.match(/^4[0-9]{12}(?:[0-9]{3})?$/) || val.match(/^5[1-5]\d{14}$/) || val.match(/^(5018|5020|5038|6304|6759|6761|6763)[0-9]{8,15}$/)
+  )),
 });
 
 const AtrLabel = ({ label, select, errors }) => (
@@ -80,6 +84,9 @@ const InputTask = () => {
   const [amountCredited, setAmountCredited] = useState("")
   const [totalScore, setTotalScore] = useState("")
   const [score, setScore] = useState(0)
+  const [cardNumber, setCardNumber] = useState('')
+  const [brandsCard, setBrandsCard] = useState('')
+  const [moonValid, setMoonValid] = useState(false)
 
   useEffect(() => setLoad(1), []);
 
@@ -147,11 +154,13 @@ const InputTask = () => {
   const userCard = useSelector((s) => s.userCard.cards)
   // карта списания валюта списания деньги объект карты
   // console.log([score.currency, currence[0], amountCredited, method])
+  // минималка шрифты rкурсы в меню номер карты разный
+  // виза мастер югион маэстро Б-знак  --- яндекс веб-м(z) киви
 
   const commission = (func, fix, result, act, money) => {
     if (fix[0].condition === 0 && (money * 1) === fix[0].amount) {
       func(act)
-    } else if (fix[0].condition === 1 && (money * 1) < fix[0].amount) {
+    } else if (fix[0].condition === 1 && +money < fix[0].amount) {
       func(act)
     } else if (fix[0].condition === 2 && (money * 1) <= fix[0].amount) {
       func(act)
@@ -180,22 +189,20 @@ const InputTask = () => {
     }
   }, [amountCredited, currence])
 
-  useEffect(() => {
-    if (method.currency[0] !== "") {
-      // const percent = method.fees.filter(({ type }) => type === 'percent')[0].value
-      // const result = (totalScore / (percent + 1))
-      console.log([amountCredited, totalScore])
-      // const percent = method.fees.filter(({ type }) => type === 'percent')[0].value
-      // const fix = method.fees.filter(({ type }) => type === 'fix')
-      // const result = (totalScore / (percent + 1))
-      // if (fix.length !== 0) {
-      //   const act = (result - (fix[0].value[currence[0]])).toFixed(2)
-      //   commission(setAmountCredited, fix, result, act, result)
-      // } else {
-      //   setAmountCredited(result)
-      // }
-    }
-  }, [totalScore])
+  // const currenceOnChange = (e) => {
+  //   setAmountCredited(e.target.value)
+  //   if (method.currency[0] !== "") {
+  //     const percent = method.fees.filter(({ type }) => type === 'percent')[0].value
+  //     const fix = method.fees.filter(({ type }) => type === 'fix')
+  //     const result = (amountCredited * 1) + (amountCredited * percent)
+  //     if (fix.length !== 0 && amountCredited !== "") {
+  //       const act = (result + (fix[0].value[currence[0]])).toFixed(2)
+  //       commission(setTotalScore, fix, result, act, amountCredited)
+  //     } else if (amountCredited !== "") {
+  //       setTotalScore(result)
+  //     }
+  //   }
+  // }
 
   const WorkerStyle = ({ children, ...props }) => {
     const manyChildren = (
@@ -236,6 +243,22 @@ const InputTask = () => {
     )
     return typeof (children) === "string" ? oneChildren : manyChildren;
   }
+
+  useEffect(() => {
+    const result = cardNumber.split("").map((it, id) => (id % 2 === 0 ? it * 2 : it))
+      .map((it, id) => (id % 2 === 0 && it >= 10 ? +it.toString()[0] + +it.toString()[1] : it))
+      .reduce((a, r) => +a + +r, 0)
+    setMoonValid(result % 10 === 0)
+    if (cardNumber.match(/^4[0-9]{12}(?:[0-9]{3})?$/)) {
+      setBrandsCard("VISA")
+    } else if (cardNumber.match(/^5[1-5]\d{14}$/)) {
+      setBrandsCard("MASTERCARD")
+    } else if (cardNumber.match(/^(5018|5020|5038|6304|6759|6761|6763)[0-9]{8,15}$/)) {
+      setBrandsCard("MAESTRO")
+    } else {
+      setBrandsCard("")
+    }
+  }, [cardNumber])
 
   const select = (
     <Controller
@@ -310,6 +333,7 @@ const InputTask = () => {
               className={errors.taskName === undefined ? "input" : "input-err"}
               ref={register}
               placeholder="Введите название задачи"
+              autoComplete="new-password"
             />
           )}
           label="Название задачи*"
@@ -345,6 +369,7 @@ const InputTask = () => {
               ref={register}
               name="description"
               className={errors.description === undefined ? "textarea" : "textarea-err"}
+              autoСomplete="off"
             />
           )}
           label="Описание"
@@ -410,10 +435,33 @@ const InputTask = () => {
           label="Способ оплаты"
         />
         <AtrLabel
+          errors={errors.cardNumber && errorMesage}
+          select={(
+            <div className="row">
+              <input
+                autoСomplete="off"
+                placeholder="Введите номер карты"
+                name="cardNumber"
+                className={errors.cardNumber === undefined && moonValid !== false ? "input-result" : "input-result-err"}
+                ref={register}
+                onChange={(e) => setCardNumber(e.target.value)}
+                value={cardNumber}
+                minLength="16"
+              />
+              <div>
+                {brandsCard}
+              </div>
+            </div>
+          )}
+          label="Номер карты"
+        />
+        {console.log(cardNumber)}
+        <AtrLabel
           errors={errors.currency && errorMesage}
           select={(
             <div className={errors.currency !== undefined ? "border-error row" : "row"}>
               <input
+                autoСomplete="off"
                 className="input-many input"
                 type="number"
                 name="currency"
@@ -452,6 +500,7 @@ const InputTask = () => {
           select={(
             <div className="row">
               <input
+                autoСomplete="off"
                 placeholder="Введите сумму"
                 name="howmany"
                 className="input-result"
