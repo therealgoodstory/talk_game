@@ -63,6 +63,11 @@ tbody {
 .bold {
   font-family: "Bold";
 }
+.bold-size {
+  font-family: "Bold";
+  font-size: 10px;
+  font-weight: 200;
+}
 
 .input-many {
   width: 100%;
@@ -88,6 +93,7 @@ tbody {
   position: absolute;
   right: 30px;
   padding-left: 15px;
+  font-size: 11;
 }
 
 .result {
@@ -366,6 +372,7 @@ h5 {
 }
 .email-worker {
   padding-left: 0 !important;
+  pointer-events: none;
 }
 .account {
   display: flex;
@@ -478,31 +485,49 @@ h5 {
 }
 
 .input-result {
+  border: 1px solid #D6DEE7;
   width: 100%;
-  font-family: "Regular";
+  font-family: "Semibold";
   font-size: 13px;
   height: 40px;
-  border-radius: 7px;
-  border: 1px solid rgba(214, 214, 214, 0.73);
+  border-radius: 4px;
   outline: none;
   padding-left: 15px;
+}
+
+.input-result::placeholder {
+  font-family: "Regular";
+  font-size: 13px;
+  color: #939EA9; 
+  font-weight: 400;
 }
 .input-result-err {
   width: 100%;
   font-family: "Regular";
   font-size: 13px;
   height: 40px;
-  border-radius: 7px;
+  border-radius: 4px;
   outline: none;
   padding-left: 15px;
   border: 1px solid  #e44a4a;
+}
+.input-result-err::placeholder {
+  font-family: "Regular";
+  font-size: 13px;
+  color: #939EA9; 
+  font-weight: 400;
 }
 
 .italic {
   color: #939EA9;
   font-size: 11;
+  font-family: "Regular";
 }
-
+.italic-color {
+  color: #5B636A;
+  font-size: 11;
+  font-family: "Regular";
+}
 .animation-container {
   width: 200px;
   display: flex;
@@ -511,7 +536,7 @@ h5 {
 }
 
 .input-result::placeholder {
-  font-family: "Semibold";
+  font-family: "Regular";
   font-size: 13px;
   color: #939EA9; 
   font-weight: 400;
@@ -522,7 +547,7 @@ h5 {
   font-size: 13px;
   height: 40px;
   border-radius: 4px;
-  border: 1px solid rgba(214, 214, 214, 0.73);
+  border: 1px solid #D6DEE7;
   outline: none;
   padding-left: 15px;
 }
@@ -547,6 +572,12 @@ h5 {
   border: 1px solid #e44a4a;
   outline: none;
   padding-left: 15px;
+}
+.input-err::placeholder {
+  font-family: "Regular";
+  font-size: 13px;
+  color: #939EA9; 
+  font-weight: 400;
 }
 
 .red {
@@ -616,7 +647,7 @@ textarea {
   width: 100vw;
   height: 70px;
   border-bottom: 1px solid rgba(214, 214, 214, 0.73);
-  box-shadow: 0px 4px 21px -7px rgba(0, 0, 0, 0.38);
+  box-shadow: 0px 27px 30px -4px rgba(210, 210, 210, 0.2);
 }
 
 .header__menu {

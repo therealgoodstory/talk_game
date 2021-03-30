@@ -21,18 +21,9 @@ import {
 /* eslint react/forbid-prop-types: 0 */
 const schema = yup.object().shape({
   taskName: yup.string().required(),
-  atr1: yup.object({
-    label: yup.string().test((val) => val.length > 0),
-    value: yup.string(),
-  }),
-  atr2: yup.object({
-    label: yup.string().test((val) => val.length > 0),
-    value: yup.string(),
-  }),
-  atr3: yup.object({
-    label: yup.string().test((val) => val.length > 0),
-    value: yup.string(),
-  }),
+  atr1: yup.string().required(),
+  atr2: yup.string().required(),
+  atr3: yup.string().required(),
   type: yup.object({
     label: yup.string().test((val) => val.length > 0),
     value: yup.string(),
@@ -54,9 +45,10 @@ const schema = yup.object().shape({
     value: yup.string(),
   }),
   howmany: yup.number(),
-  cardNumber: yup.string().test((val) => (
-    val.match(/^4[0-9]{12}(?:[0-9]{3})?$/) || val.match(/^5[1-5]\d{14}$/) || val.match(/^(5018|5020|5038|6304|6759|6761|6763)[0-9]{8,15}$/)
-  )),
+  cardNumber: yup.string().test((val) => {
+    const newVal = val.replace(/[^0-9]/g, '')
+    return newVal.match(/^4[0-9]{12}(?:[0-9]{3})?$/) || newVal.match(/^5[1-5]\d{14}$/) || newVal.match(/^(5018|5020|5038|6304|6759|6761|6763)[0-9]{8,15}$/)
+  }),
 });
 
 const AtrLabel = ({ label, select, errors }) => (
@@ -147,15 +139,11 @@ const InputTask = () => {
   ];
 
   const writeOfAccountScore = [
-    { label: ["USD", "1500"], value: "1", currency: "USD" },
-    { label: ["RUB", "1233.123"], value: "2", currency: "RUB" },
+    { label: ["USD", "1 500 123"], value: "1", currency: "USD" },
+    { label: ["RUB", "1 233 123"], value: "2", currency: "RUB" },
   ];
 
   const userCard = useSelector((s) => s.userCard.cards)
-  // карта списания валюта списания деньги объект карты
-  // console.log([score.currency, currence[0], amountCredited, method])
-  // минималка шрифты rкурсы в меню номер карты разный
-  // виза мастер югион маэстро Б-знак  --- яндекс веб-м(z) киви
 
   const commission = (func, fix, result, act, money) => {
     if (fix[0].condition === 0 && (money * 1) === fix[0].amount) {
@@ -189,26 +177,15 @@ const InputTask = () => {
     }
   }, [amountCredited, currence])
 
-  // const currenceOnChange = (e) => {
-  //   setAmountCredited(e.target.value)
-  //   if (method.currency[0] !== "") {
-  //     const percent = method.fees.filter(({ type }) => type === 'percent')[0].value
-  //     const fix = method.fees.filter(({ type }) => type === 'fix')
-  //     const result = (amountCredited * 1) + (amountCredited * percent)
-  //     if (fix.length !== 0 && amountCredited !== "") {
-  //       const act = (result + (fix[0].value[currence[0]])).toFixed(2)
-  //       commission(setTotalScore, fix, result, act, amountCredited)
-  //     } else if (amountCredited !== "") {
-  //       setTotalScore(result)
-  //     }
-  //   }
-  // }
+  const onChangeCuurency = (e) => {
+    setAmountCredited(e.target.value)
+  }
 
   const WorkerStyle = ({ children, ...props }) => {
     const manyChildren = (
       <components.Option {...props}>
         <div className="col">
-          <div className="bold">{children[0]}</div>
+          <div>{children[0]}</div>
           <div className="italic">{children[1]}</div>
         </div>
       </components.Option>
@@ -243,12 +220,12 @@ const InputTask = () => {
     )
     return typeof (children) === "string" ? oneChildren : manyChildren;
   }
-
+  // mir amer-axpress
   useEffect(() => {
     const result = cardNumber.split("").map((it, id) => (id % 2 === 0 ? it * 2 : it))
       .map((it, id) => (id % 2 === 0 && it >= 10 ? +it.toString()[0] + +it.toString()[1] : it))
       .reduce((a, r) => +a + +r, 0)
-    setMoonValid(result % 10 === 0)
+    setMoonValid(cardNumber.length < 9 ? result % 10 === 0 : false)
     if (cardNumber.match(/^4[0-9]{12}(?:[0-9]{3})?$/)) {
       setBrandsCard("VISA")
     } else if (cardNumber.match(/^5[1-5]\d{14}$/)) {
@@ -273,45 +250,7 @@ const InputTask = () => {
       classNamePrefix={errors.type === undefined ? "" : "react-select"}
     />
   );
-  const atribute1 = (
-    <Controller
-      name="atr1"
-      options={options}
-      styles={customStyles}
-      control={control}
-      placeholder={<span className="placeholder">Выберите атрибут</span>}
-      rules={register}
-      as={ReactSelect}
-      defaultValue=""
-      classNamePrefix={errors.atr1 === undefined ? "" : "react-select"}
-    />
-  );
-  const atribute2 = (
-    <Controller
-      name="atr2"
-      options={options}
-      styles={customStyles}
-      control={control}
-      placeholder={<span className="placeholder">Выберите атрибут</span>}
-      as={ReactSelect}
-      rules={register}
-      defaultValue=""
-      classNamePrefix={errors.atr2 === undefined ? "" : "react-select"}
-    />
-  );
-  const atribute3 = (
-    <Controller
-      name="atr3"
-      options={options}
-      styles={customStyles}
-      control={control}
-      placeholder={<span className="placeholder">Выберите атрибут</span>}
-      as={ReactSelect}
-      rules={register}
-      defaultValue=""
-      classNamePrefix={errors.atr3 === undefined ? "" : "react-select"}
-    />
-  );
+
   const errorMesage = <p className="error-message">Заполните поле</p>;
   const handleInputChange = (inputValue = "") => {
     setWorkerEmail(inputValue);
@@ -347,17 +286,41 @@ const InputTask = () => {
       <div className="page__atribute">
         <AtrLabel
           errors={errors.atr1 && errorMesage}
-          select={load === 1 ? atribute1 : ""}
+          select={(
+            <input
+              name="atr1"
+              className={errors.taskName === undefined ? "input" : "input-err"}
+              ref={register}
+              placeholder="Выберите атрибут"
+              autoComplete="off"
+            />
+          )}
           label="Атрибут1"
         />
         <AtrLabel
           errors={errors.atr2 && errorMesage}
-          select={load === 1 ? atribute2 : ""}
+          select={(
+            <input
+              name="atr2"
+              className={errors.taskName === undefined ? "input" : "input-err"}
+              ref={register}
+              placeholder="Выберите атрибут"
+              autoComplete="off"
+            />
+          )}
           label="Атрибут2"
         />
         <AtrLabel
           errors={errors.atr3 && errorMesage}
-          select={load === 1 ? atribute3 : ""}
+          select={(
+            <input
+              name="atr2"
+              className={errors.taskName === undefined ? "input" : "input-err"}
+              ref={register}
+              placeholder="Выберите атрибут"
+              autoComplete="off"
+            />
+          )}
           label="Атрибут3"
         />
       </div>
@@ -442,11 +405,14 @@ const InputTask = () => {
                 autoСomplete="off"
                 placeholder="Введите номер карты"
                 name="cardNumber"
-                className={errors.cardNumber === undefined && moonValid !== false ? "input-result" : "input-result-err"}
+                className={errors.cardNumber !== undefined && moonValid === false ? "input-result-err" : "input-result"}
                 ref={register}
-                onChange={(e) => setCardNumber(e.target.value)}
-                value={cardNumber}
-                minLength="16"
+                onInput={(e) => {
+                  const val = e.target.value.replace(/[^0-9]/g, '').replace(/(\d{4})/g, '$1 ').trim();
+                  e.target.value = val
+                  setCardNumber(e.target.value.replace(/[^0-9]/g, ''))
+                }}
+                maxLength="23"
               />
               <div>
                 {brandsCard}
@@ -455,7 +421,6 @@ const InputTask = () => {
           )}
           label="Номер карты"
         />
-        {console.log(cardNumber)}
         <AtrLabel
           errors={errors.currency && errorMesage}
           select={(
@@ -466,7 +431,7 @@ const InputTask = () => {
                 type="number"
                 name="currency"
                 ref={register}
-                onChange={(e) => setAmountCredited(e.target.value)}
+                onChange={(e) => onChangeCuurency(e)}
                 min="0"
                 placeholder="Введите сумму зачисления"
                 value={amountCredited}
@@ -509,7 +474,7 @@ const InputTask = () => {
                 value={totalScore}
               />
               <div className="currencyResult">
-                {currence[0]}
+                {score.currency}
               </div>
             </div>
           )}
@@ -518,9 +483,9 @@ const InputTask = () => {
       </div>
       <div className="margin" />
       <section className="col result">
-        <span>{`Комиссия сервиса ${123}`}</span>
+        <span>{`Комиссия сервиса ${(totalScore - amountCredited) !== 0 ? `${(((totalScore - amountCredited) / amountCredited) * 100).toFixed(2)} %` : "..."}`}</span>
         <br />
-        <span>{`Сумма списания расчитана по курсу${2 + 2}`}</span>
+        <span>{`Сумма списания расчитана по курсу ${currence[0]}/${score.currency !== undefined ? score.currency : "..."}`}</span>
         <span>В момент оплаты задачи курс может измениться</span>
       </section>
       <div className="animation-container">

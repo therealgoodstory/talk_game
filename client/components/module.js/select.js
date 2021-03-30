@@ -61,7 +61,7 @@ export const workerStyles = {
     height: 45,
     left: 15,
     background: state.isFocused ? "#FBFDFF" : "none",
-    fontFamily: "Semibold",
+    fontFamily: "Bold",
     fontSize: 12,
     paddingTop: 5,
   }),
@@ -69,6 +69,8 @@ export const workerStyles = {
     ...provided,
     padding: 0,
     display: "flex",
+    fontFamily: "Bold",
+    fontSize: 12,
     flexDirection: "row",
     overflow: "none",
     wigth: 90,
@@ -160,8 +162,8 @@ export const writeOffAccount = ({ children, ...props }) => (
         {props.data.currency}
       </div>
       <div className="col">
-        <div className="bold">{children[0]}</div>
-        <div className="italic">{children[1]}</div>
+        <div className="italic-color">{children[0]}</div>
+        <div className="bold-size">{children[1]}</div>
       </div>
     </div>
   </components.Option>
@@ -174,8 +176,8 @@ export const writeOffAccountValue = ({ children, ...props }) => (
         {props.data.currency}
       </div>
       <div className="col account">
-        <div className="bold">{children[0]}</div>
-        <div className="italic">{children[1]}</div>
+        <div className="italic-color">{children[0]}</div>
+        <div className="bold-size">{children[1]}</div>
       </div>
     </div>
   </components.Option>
