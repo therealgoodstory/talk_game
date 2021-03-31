@@ -53,7 +53,7 @@ const schema = yup.object().shape({
 
 const AtrLabel = ({ label, select, errors }) => (
   <div className="page__size">
-    <span className="font-page page__name">{label}</span>
+    <p className="font-page page__name">{label}</p>
     {select}
     {errors}
   </div>
@@ -79,6 +79,7 @@ const InputTask = () => {
   const [cardNumber, setCardNumber] = useState('')
   const [brandsCard, setBrandsCard] = useState('')
   const [moonValid, setMoonValid] = useState(false)
+  const [stateInput, setStateInput] = useState(true)
 
   useEffect(() => setLoad(1), []);
 
@@ -145,41 +146,85 @@ const InputTask = () => {
 
   const userCard = useSelector((s) => s.userCard.cards)
 
-  const commission = (func, fix, result, act, money) => {
-    if (fix[0].condition === 0 && (money * 1) === fix[0].amount) {
-      func(act)
-    } else if (fix[0].condition === 1 && +money < fix[0].amount) {
-      func(act)
-    } else if (fix[0].condition === 2 && (money * 1) <= fix[0].amount) {
-      func(act)
-    } else if (fix[0].condition === 3 && (money * 1) > fix[0].amount) {
-      func(act)
-    } else if (fix[0].condition === 4 && (money * 1) >= fix[0].amount) {
-      func(act)
-    } else if (fix[0].condition === 5) {
-      func(act)
-    } else {
-      func(result.toFixed(2))
-    }
-  }
-
   useEffect(() => {
     if (method.currency[0] !== "") {
-      const percent = method.fees.filter(({ type }) => type === 'percent')[0].value
-      const fix = method.fees.filter(({ type }) => type === 'fix')
-      const result = (amountCredited * 1) + (amountCredited * percent)
-      if (fix.length !== 0 && amountCredited !== "") {
-        const act = (result + (fix[0].value[currence[0]])).toFixed(2)
-        commission(setTotalScore, fix, result, act, amountCredited)
-      } else if (amountCredited !== "") {
-        setTotalScore(result)
-      }
-    }
-  }, [amountCredited, currence])
+      method.fees.reduce((acc, rec) => {
+        if (rec.type === "percent") {
+          acc.push(amountCredited * rec.value)
+        }
+        if (rec.type === "fix") {
+          if (rec.condition === 0 && rec.amount === +amountCredited) {
+            acc.push(rec.value[currence[0]])
+          }
+          if (rec.condition === 1 && rec.amount < +amountCredited) {
+            acc.push(rec.value[currence[0]])
+          }
+          if (rec.condition === 2 && rec.amount <= +amountCredited) {
+            acc.push(rec.value[currence[0]])
+          }
+          if (rec.condition === 3 && rec.amount > +amountCredited) {
+            acc.push(rec.value[currence[0]])
+          }
+          if (rec.condition === 4 && rec.amount >= +amountCredited) {
+            acc.push(rec.value[currence[0]])
+          }
+          if (rec.condition === 4) {
+            acc.push(rec.value[currence[0]])
+          }
+        }
+        const allComision = (acc.reduce((a, r) => a + r, 0))
 
+        if (stateInput) { setTotalScore((+amountCredited + allComision).toFixed(2)) } else {
+          setAmountCredited((+totalScore - allComision).toFixed(2))
+        }
+        return acc
+      }, [])
+    }
+  }, [amountCredited, currence, totalScore])
   const onChangeCuurency = (e) => {
     setAmountCredited(e.target.value)
+    setStateInput(true)
   }
+  const onChangeTotalScore = (e) => {
+    setTotalScore(e.target.value)
+    setStateInput(false)
+  }
+  // useEffect(() => {
+  //   commission(stateInput)
+  // }, [amountCredited, currence, totalScore])
+  // console.log(amountCredited)
+
+  // const commission = (func, fix, result, act, money) => {
+  //   if (fix[0].condition === 0 && (money * 1) === fix[0].amount) {
+  //     func(act)
+  //   } else if (fix[0].condition === 1 && +money < fix[0].amount) {
+  //     func(act)
+  //   } else if (fix[0].condition === 2 && (money * 1) <= fix[0].amount) {
+  //     func(act)
+  //   } else if (fix[0].condition === 3 && (money * 1) > fix[0].amount) {
+  //     func(act)
+  //   } else if (fix[0].condition === 4 && (money * 1) >= fix[0].amount) {
+  //     func(act)
+  //   } else if (fix[0].condition === 5) {
+  //     func(act)
+  //   } else {
+  //     func(result.toFixed(2))
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   if (method.currency[0] !== "") {
+  //     const percent = method.fees.filter(({ type }) => type === 'percent')[0].value
+  //     const fix = method.fees.filter(({ type }) => type === 'fix')
+  //     const result = (amountCredited * 1) + (amountCredited * percent)
+  //     if (fix.length !== 0 && amountCredited !== "") {
+  //       const act = (result + (fix[0].value[currence[0]])).toFixed(2)
+  //       commission(setTotalScore, fix, result, act, amountCredited)
+  //     } else if (amountCredited !== "") {
+  //       setTotalScore(result)
+  //     }
+  //   }
+  // }, [amountCredited, currence])
 
   const WorkerStyle = ({ children, ...props }) => {
     const manyChildren = (
@@ -470,8 +515,9 @@ const InputTask = () => {
                 name="howmany"
                 className="input-result"
                 ref={register}
-                onChange={(e) => setTotalScore(e.target.value)}
+                onChange={(e) => onChangeTotalScore(e)}
                 value={totalScore}
+                type="number"
               />
               <div className="currencyResult">
                 {score.currency}
