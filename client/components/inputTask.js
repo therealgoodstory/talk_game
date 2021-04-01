@@ -162,67 +162,57 @@ const InputTask = () => {
     [COND_ALWAYS]: (() => true),
   }
 
-  const addCommission = (newValue) => (
-    method.fees.reduce((acc, rec) => {
-      if (rec.type === "percent") {
-        acc.push(newValue * rec.value)
+  const addCommission = (newValue) => {
+    const commission = Object.keys(method.fees).reduce((acc, rec) => {
+      if (rec === "percent") {
+        acc.push(newValue * method.fees[rec].value)
       }
-      if (rec.type === "fix") {
-        if (conditions[rec.condition](+newValue, +rec.amount)) { acc.push(rec.value[currence[0]]) }
+      if (rec === "fix") {
+        if (conditions[method.fees[rec].condition](+newValue, +method.fees[rec].amount)) {
+          acc.push(method.fees[rec].value[currence[0]])
+        }
       }
       return acc
-    }, [])
-  )
-  // console.log([currency[0]], )
-  // useEffect(() => , [])
+    }, []).reduce((a, r) => a + r, 0)
+    return Math.max(+commission, method.fees.min.value[currence[0]])
+  }
+
+  const exchangeRates = useSelector((s) => s.exchangeRates.rates)
+
+  const deleteCommission = (amount) => {
+    const amountVithoutMin = amount - method.fees.min.value[score.currency]
+    if (addCommission(amountVithoutMin) <= method.fees.min.value[score.currency]) {
+      return Math.max((amountVithoutMin * exchangeRates[score.currency][currence[0]]), 0)
+    }
+    const amountWithoutFixAndPercent = (+amount - method.fees.fix.value[score.currency])
+    / (1 + method.fees.percent.value);
+    if (
+      conditions[method.fees.fix.condition](
+        amountWithoutFixAndPercent,
+        +method.fees.fix.amount,
+      )
+    ) {
+      return amountWithoutFixAndPercent * exchangeRates[score.currency][currence[0]]
+    }
+    return (amount / (1 + method.fees.percent.value)) * exchangeRates[score.currency][currence[0]]
+  }
+
   const onChangeCuurency = (e) => {
     const newValue = e.target.value
     setAmountCredited(newValue)
     if (method.currency[0] !== "") {
-      const result = addCommission(newValue).reduce((acc, rec) => acc + rec)
-      setTotalScore(+newValue + +result)
+      const result = addCommission(newValue)
+      setTotalScore(((+newValue / exchangeRates[currence[0]][score.currency]) + +result).toFixed(2))
     }
   }
   const onChangeTotalScore = (e) => {
-    setTotalScore(e.target.value)
-    // com(setAmountCredited)
+    const newValue = e.target.value
+    setTotalScore(newValue)
+    if (method.currency[0] !== "") {
+      const result = deleteCommission(newValue)
+      setAmountCredited(result.toFixed(2))
+    }
   }
-  // useEffect(() => {
-  //   commission(stateInput)
-  // }, [amountCredited, currence, totalScore])
-  // console.log(amountCredited)
-
-  // const commission = (func, fix, result, act, money) => {
-  //   if (fix[0].condition === 0 && (money * 1) === fix[0].amount) {
-  //     func(act)
-  //   } else if (fix[0].condition === 1 && +money < fix[0].amount) {
-  //     func(act)
-  //   } else if (fix[0].condition === 2 && (money * 1) <= fix[0].amount) {
-  //     func(act)
-  //   } else if (fix[0].condition === 3 && (money * 1) > fix[0].amount) {
-  //     func(act)
-  //   } else if (fix[0].condition === 4 && (money * 1) >= fix[0].amount) {
-  //     func(act)
-  //   } else if (fix[0].condition === 5) {
-  //     func(act)
-  //   } else {
-  //     func(result.toFixed(2))
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   if (method.currency[0] !== "") {
-  //     const percent = method.fees.filter(({ type }) => type === 'percent')[0].value
-  //     const fix = method.fees.filter(({ type }) => type === 'fix')
-  //     const result = (amountCredited * 1) + (amountCredited * percent)
-  //     if (fix.length !== 0 && amountCredited !== "") {
-  //       const act = (result + (fix[0].value[currence[0]])).toFixed(2)
-  //       commission(setTotalScore, fix, result, act, amountCredited)
-  //     } else if (amountCredited !== "") {
-  //       setTotalScore(result)
-  //     }
-  //   }
-  // }, [amountCredited, currence])
 
   const WorkerStyle = ({ children, ...props }) => {
     const manyChildren = (

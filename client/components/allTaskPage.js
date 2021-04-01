@@ -7,7 +7,7 @@ import Task from "./task";
 const AllTaskPage = () => {
   const state = useSelector((s) => s.sidebar.id);
 
-  const [style, setStyle] = useState("");
+  const [style, setStyle] = useState("page__open");
 
   useEffect(() => (state === 1 ? setStyle("page__close") : setStyle("page__open")), [state]);
 

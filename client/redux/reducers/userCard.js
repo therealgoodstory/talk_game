@@ -3,44 +3,62 @@
 const initialState = {
   cards: [
     {
-      label: 'Карта',
+      label: "Карта",
       value: 1,
-      icon: '<svg>.....</svg>',
-      currency: ['RUB', 'UAH', 'USD'],
-      fees: [
-        { type: 'percent', value: 0.054 },
-        {
-          type: 'fix',
+      icon: "<svg>.....</svg>",
+      currency: ["RUB", "UAH", "USD"],
+      fees: {
+        min: {
           value: {
-            USD: 0.7,
-            RUB: 50,
-            EUR: 0.5,
-            UAH: 15,
+            USD: 1,
+            RUB: 2,
+            EUR: 3,
+            UAH: 4,
+          },
+        },
+        percent: {
+          value: 0,
+        },
+        fix: {
+          value: {
+            USD: 1,
+            RUB: 2,
+            EUR: 3,
+            UAH: 4,
           },
           condition: 0,
           amount: 3000,
         },
-      ],
+      },
     },
     {
-      label: 'Карта2',
+      label: "Карта2",
       value: 2,
-      icon: '<svg>.....</svg>',
-      currency: ['UAH', 'USD'],
-      fees: [
-        { type: 'percent', value: 0.054 },
-        {
-          type: 'fix',
+      icon: "<svg>.....</svg>",
+      currency: ["UAH", "USD"],
+      fees: {
+        min: {
           value: {
-            USD: 0.7,
-            RUB: 50,
-            EUR: 0.5,
-            UAH: 15,
+            USD: 1,
+            RUB: 2,
+            EUR: 3,
+            UAH: 4,
+          },
+        },
+        percent: {
+          value: 0,
+        },
+        fix: {
+          value: {
+            USD: 1,
+            RUB: 2,
+            EUR: 3,
+            UAH: 4,
           },
           condition: 0,
           amount: 3000,
         },
-      ],
+      },
     },
   ],
 };
