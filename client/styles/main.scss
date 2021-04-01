@@ -1,5 +1,6 @@
 span {
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 13px;
 }
 select {
@@ -32,7 +33,8 @@ body {
   background: #c3ae8c;
   border-radius: 7px;
   color: white;
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 13px;
   border: none;
   margin-left: 30px;
@@ -61,12 +63,13 @@ tbody {
 }
 
 .bold {
-  font-family: "Bold";
+  font-family: "Open-Sans";
+  font-weight: 700;
 }
 .bold-size {
-  font-family: "Bold";
+  font-family: "Open-Sans";
   font-size: 10px;
-  font-weight: 200;
+  font-weight: 700;
 }
 
 .input-many {
@@ -99,7 +102,8 @@ tbody {
 .result {
   padding-left: 30px;
   padding-bottom: 30px;
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 11px;
   color: #939EA9;
   font-weight: 100;
@@ -162,7 +166,8 @@ tbody {
   width: 100%;
   padding: 0%;
   height: 30px;
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 11px;
   text-align: center;
 }
@@ -174,7 +179,8 @@ tbody {
   width: auto;
   outline: none;
   padding: 0%;
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 11px;
   text-align: center;
 }
@@ -210,7 +216,8 @@ button:focus {
   flex-direction: row;
   align-items: center;
   padding-left: 30px;
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 13px;
   color: black;
 }
@@ -221,7 +228,8 @@ button:focus {
   position: absolute;
   white-space: nowrap;
   right: 0;
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 13px;
 }
 
@@ -230,7 +238,8 @@ button:focus {
 }
 
 h5 {
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 14px;
   color: rgb(190, 190, 190);
 }
@@ -264,7 +273,8 @@ h5 {
   height: 20px;
   background: #9F9F9F;
   color: white;
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 14px;
   padding-left: 15px;
   border-top-right-radius: 7px;
@@ -284,7 +294,8 @@ h5 {
   justify-content: space-between;
 }
 .title-alltask {
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 13px;
   color: #9F9F9F;
   height: 45px;
@@ -326,7 +337,7 @@ h5 {
 
 
 .font-page {
-  font-family: "Semibold";
+  font-family: "Open-Sans";
   font-size: 14px;
 }
 
@@ -397,7 +408,8 @@ h5 {
 .currencyResult {
   position: absolute;
   color: #939EA9;
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 14px;
   font-weight: 400;
   margin-top: 12px;
@@ -421,7 +433,8 @@ h5 {
   padding-left: 5px;
   padding-right: 5px;
   color: #939EA9;
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 13px;
   font-weight: 400;
 }
@@ -435,7 +448,8 @@ h5 {
   padding-left: 5px;
   padding-right: 5px;
   color: #939EA9;
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 13px;
   font-weight: 400;
   width: 40px;
@@ -487,7 +501,8 @@ h5 {
 .input-result {
   border: 1px solid #D6DEE7;
   width: 100%;
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 13px;
   height: 40px;
   border-radius: 4px;
@@ -496,14 +511,15 @@ h5 {
 }
 
 .input-result::placeholder {
-  font-family: "Regular";
+  font-family: "Open-Sans";
   font-size: 13px;
   color: #939EA9; 
   font-weight: 400;
 }
 .input-result-err {
   width: 100%;
-  font-family: "Regular";
+  font-family: "Open-Sans";
+  font-weight: 400;
   font-size: 13px;
   height: 40px;
   border-radius: 4px;
@@ -512,7 +528,7 @@ h5 {
   border: 1px solid  #e44a4a;
 }
 .input-result-err::placeholder {
-  font-family: "Regular";
+  font-family: "Open-Sans";
   font-size: 13px;
   color: #939EA9; 
   font-weight: 400;
@@ -521,12 +537,14 @@ h5 {
 .italic {
   color: #939EA9;
   font-size: 11;
-  font-family: "Regular";
+  font-family: "Open-Sans";
+  font-weight: 400;
 }
 .italic-color {
   color: #5B636A;
   font-size: 11;
-  font-family: "Regular";
+  font-family: "Open-Sans";
+  font-weight: 400;
 }
 .animation-container {
   width: 200px;
@@ -536,14 +554,15 @@ h5 {
 }
 
 .input-result::placeholder {
-  font-family: "Regular";
+  font-family: "Open-Sans";
   font-size: 13px;
   color: #939EA9; 
   font-weight: 400;
 }
 
 .input {
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 13px;
   height: 40px;
   border-radius: 4px;
@@ -552,7 +571,7 @@ h5 {
   padding-left: 15px;
 }
 .input::placeholder {
-  font-family: "Regular";
+  font-family: "Open-Sans";
   font-size: 13px;
   color: #939EA9; 
   font-weight: 400;
@@ -560,12 +579,13 @@ h5 {
 
 .placeholder {
   color: #939EA9;
-  font-family: "Regular";
+  font-family: "Open-Sans";
   font-size: 13px;
   font-weight: 400;
 }
 .input-err {
-  font-family: "Semibold";
+  font-family: "Open-Sans";
+  font-weight: 600;
   font-size: 13px;
   height: 40px;
   border-radius: 4px;
@@ -574,7 +594,7 @@ h5 {
   padding-left: 15px;
 }
 .input-err::placeholder {
-  font-family: "Regular";
+  font-family: "Open-Sans";
   font-size: 13px;
   color: #939EA9; 
   font-weight: 400;

@@ -79,7 +79,7 @@ const InputTask = () => {
   const [cardNumber, setCardNumber] = useState('')
   const [brandsCard, setBrandsCard] = useState('')
   const [moonValid, setMoonValid] = useState(false)
-  const [stateInput, setStateInput] = useState(true)
+  // const [stateInput, setStateInput] = useState(true)
 
   useEffect(() => setLoad(1), []);
 
@@ -146,48 +146,46 @@ const InputTask = () => {
 
   const userCard = useSelector((s) => s.userCard.cards)
 
-  useEffect(() => {
-    if (method.currency[0] !== "") {
-      method.fees.reduce((acc, rec) => {
-        if (rec.type === "percent") {
-          acc.push(amountCredited * rec.value)
-        }
-        if (rec.type === "fix") {
-          if (rec.condition === 0 && rec.amount === +amountCredited) {
-            acc.push(rec.value[currence[0]])
-          }
-          if (rec.condition === 1 && rec.amount < +amountCredited) {
-            acc.push(rec.value[currence[0]])
-          }
-          if (rec.condition === 2 && rec.amount <= +amountCredited) {
-            acc.push(rec.value[currence[0]])
-          }
-          if (rec.condition === 3 && rec.amount > +amountCredited) {
-            acc.push(rec.value[currence[0]])
-          }
-          if (rec.condition === 4 && rec.amount >= +amountCredited) {
-            acc.push(rec.value[currence[0]])
-          }
-          if (rec.condition === 4) {
-            acc.push(rec.value[currence[0]])
-          }
-        }
-        const allComision = (acc.reduce((a, r) => a + r, 0))
+  const COND_EQUALS = 0;
+  const COND_LESS = 1;
+  const COND_LESS_OR_EQUAL = 2;
+  const COND_MORE = 3;
+  const COND_MORE_OR_EQUAL = 4;
+  const COND_ALWAYS = 5;
 
-        if (stateInput) { setTotalScore((+amountCredited + allComision).toFixed(2)) } else {
-          setAmountCredited((+totalScore - allComision).toFixed(2))
-        }
-        return acc
-      }, [])
-    }
-  }, [amountCredited, currence, totalScore])
+  const conditions = {
+    [COND_EQUALS]: ((a, b) => a === b),
+    [COND_LESS]: ((a, b) => a < b),
+    [COND_LESS_OR_EQUAL]: ((a, b) => a <= b),
+    [COND_MORE]: ((a, b) => a > b),
+    [COND_MORE_OR_EQUAL]: ((a, b) => a >= b),
+    [COND_ALWAYS]: (() => true),
+  }
+
+  const addCommission = (newValue) => (
+    method.fees.reduce((acc, rec) => {
+      if (rec.type === "percent") {
+        acc.push(newValue * rec.value)
+      }
+      if (rec.type === "fix") {
+        if (conditions[rec.condition](+newValue, +rec.amount)) { acc.push(rec.value[currence[0]]) }
+      }
+      return acc
+    }, [])
+  )
+  // console.log([currency[0]], )
+  // useEffect(() => , [])
   const onChangeCuurency = (e) => {
-    setAmountCredited(e.target.value)
-    setStateInput(true)
+    const newValue = e.target.value
+    setAmountCredited(newValue)
+    if (method.currency[0] !== "") {
+      const result = addCommission(newValue).reduce((acc, rec) => acc + rec)
+      setTotalScore(+newValue + +result)
+    }
   }
   const onChangeTotalScore = (e) => {
     setTotalScore(e.target.value)
-    setStateInput(false)
+    // com(setAmountCredited)
   }
   // useEffect(() => {
   //   commission(stateInput)
