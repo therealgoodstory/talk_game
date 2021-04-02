@@ -120,10 +120,6 @@ const InputTask = () => {
     stateCurrence === false ? setStateCurrence(true) : setStateCurrence(false)
   )
 
-  const selectCurrence = (e) => {
-    setStateCurrence(true)
-    setCurrence([e])
-  }
   const options = [
     {
       label: "Group 1",
@@ -169,12 +165,12 @@ const InputTask = () => {
       }
       if (rec === "fix") {
         if (conditions[method.fees[rec].condition](+newValue, +method.fees[rec].amount)) {
-          acc.push(method.fees[rec].value[currence[0]])
+          acc.push(method.fees[rec].value[score.currency])
         }
       }
       return acc
     }, []).reduce((a, r) => a + r, 0)
-    return Math.max(+commission, method.fees.min.value[currence[0]])
+    return Math.max(+commission, method.fees.min.value[score.currency])
   }
 
   const exchangeRates = useSelector((s) => s.exchangeRates.rates)
@@ -197,21 +193,37 @@ const InputTask = () => {
     return (amount / (1 + method.fees.percent.value)) * exchangeRates[score.currency][currence[0]]
   }
 
-  const onChangeCuurency = (e) => {
-    const newValue = e.target.value
-    setAmountCredited(newValue)
+  const plusCommision = (newValue) => {
     if (method.currency[0] !== "") {
-      const result = addCommission(newValue)
+      const result = addCommission(newValue / exchangeRates[currence[0]][score.currency])
       setTotalScore(((+newValue / exchangeRates[currence[0]][score.currency]) + +result).toFixed(2))
     }
   }
-  const onChangeTotalScore = (e) => {
-    const newValue = e.target.value
-    setTotalScore(newValue)
+  const minusCommision = (newValue) => {
     if (method.currency[0] !== "") {
       const result = deleteCommission(newValue)
       setAmountCredited(result.toFixed(2))
     }
+  }
+
+  const onChangeCuurency = (e) => {
+    const newValue = e.target.value || e
+    setAmountCredited(newValue)
+    plusCommision(newValue)
+  }
+  const onChangeTotalScore = (e) => {
+    const newValue = e.target.value || e
+    setTotalScore(newValue)
+    minusCommision(newValue)
+  }
+
+  useEffect(() => {
+    plusCommision(amountCredited)
+  }, [currence, score])
+
+  const selectCurrence = (e) => {
+    setStateCurrence(true)
+    setCurrence([e])
   }
 
   const WorkerStyle = ({ children, ...props }) => {

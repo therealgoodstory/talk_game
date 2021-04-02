@@ -21,7 +21,7 @@ const initialState = {
         },
         fix: {
           value: {
-            USD: 1,
+            USD: 100,
             RUB: 2,
             EUR: 3,
             UAH: 4,
@@ -50,7 +50,7 @@ const initialState = {
         },
         fix: {
           value: {
-            USD: 1,
+            USD: 100,
             RUB: 2,
             EUR: 3,
             UAH: 4,
