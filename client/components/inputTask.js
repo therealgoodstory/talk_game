@@ -27,28 +27,28 @@ const schema = yup.object().shape({
   type: yup.object({
     label: yup.string().test((val) => val.length > 0),
     value: yup.string(),
-  }),
+  }).required(),
   description: yup.string().required(),
   workerEmail: yup.object({
     label: yup.lazy((val) => (Array.isArray(val)
       ? yup.array().of(yup.string())
-      : yup.string().email().required())),
+      : yup.string().email())),
     value: yup.string(),
-  }),
+  }).required(),
   writeOfAccount: yup.object({
-    label: yup.string().required(),
+    label: yup.string(),
     value: yup.string(),
   }),
-  currency: yup.number().test((val) => val > 0),
+  currency: yup.number().test((val) => val > 0).required(),
   typePal: yup.object({
-    label: yup.string().required(),
+    label: yup.string(),
     value: yup.string(),
   }),
-  howmany: yup.number(),
+  howmany: yup.number().required(),
   cardNumber: yup.string().test((val) => {
     const newVal = val.replace(/[^0-9]/g, '')
     return newVal.match(/^4[0-9]{12}(?:[0-9]{3})?$/) || newVal.match(/^5[1-5]\d{14}$/) || newVal.match(/^(5018|5020|5038|6304|6759|6761|6763)[0-9]{8,15}$/)
-  }),
+  }).required(),
 });
 
 const AtrLabel = ({ label, select, errors }) => (
@@ -113,8 +113,37 @@ const InputTask = () => {
 
   const onClick = () => {
     setSummit("submit");
-    console.log(data);
   };
+  const allInformation = { ...data, writeOfAccount: score, typePal: method }
+
+  if (data !== null) {
+    const resultData = {
+      name: allInformation.taskName,
+      typeId: allInformation.type.value,
+      attributes: [
+        { value: allInformation.atr1 },
+        { value: allInformation.atr2 },
+        { value: allInformation.atr3 },
+      ],
+      desc: allInformation.description,
+      worker: {
+        email: allInformation.workerEmail.label[1],
+        id: allInformation.workerEmail.value,
+      },
+      payment: {
+        chargeAccountId: allInformation.writeOfAccount.value,
+        methodId: allInformation.typePal.value,
+        accountNumber: allInformation.cardNumber,
+        amount: allInformation.currency,
+        currency: allInformation.writeOfAccount.currency,
+        extra: {
+          key1: "Значение",
+          key2: "Значение2",
+        },
+      },
+    }
+    console.log(resultData)
+  }
 
   const Currency = () => (
     stateCurrence === false ? setStateCurrence(true) : setStateCurrence(false)
@@ -359,7 +388,7 @@ const InputTask = () => {
           errors={errors.atr3 && errorMesage}
           select={(
             <input
-              name="atr2"
+              name="atr3"
               className={errors.taskName === undefined ? "input" : "input-err"}
               ref={register}
               placeholder="Выберите атрибут"
