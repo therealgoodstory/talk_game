@@ -4,7 +4,7 @@ const initialState = {
   id: -1,
 };
 
-const SideBar = (state = initialState, action) => {
+const Test = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_STATE: {
       return {
@@ -25,11 +25,4 @@ export function updateState() {
   };
 }
 
-// export function getUserFile () {
-//   return (dispatch) => {
-//     axios('https://jsonplaceholder.typicode.com/users').then(({data}) => {
-//     dispatch ({type: GET_USER_FILE, profil: data})
-//   })}
-// }
-
-export default SideBar;
+export default Test;

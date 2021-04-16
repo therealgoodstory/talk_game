@@ -1,14 +1,13 @@
 const { resolve } = require("path");
 const CopyWebpackPlugins = require("copy-webpack-plugin");
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin")
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 const config = {
   entry: "./client/main.js",
   mode: "development",
   output: {
     filename: "js[name].bundle.js",
-    path: resolve(__dirname, "dist"),
+    path: resolve(__dirname, "build"),
     publicPath: "/",
   },
   module: {
@@ -64,7 +63,6 @@ const config = {
     new MiniCSSExtractPlugin({
       filename: 'css/main.css'
     }),
-    new FaviconsWebpackPlugin('./client/public/favicon/logo.png'),
     new CopyWebpackPlugins({
       patterns: [{ from: `${__dirname}/client/index.html`, to: "index.html" }],
     }),

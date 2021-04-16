@@ -7,8 +7,6 @@ import { ConnectedRouter } from "connected-react-router";
 import "./main.scss";
 import store, { history } from "./redux";
 import App from "./App";
-import CreateTask from "./pages/createTask";
-import AllTask from "./pages/allTask";
 
 const Main = () => (
   <Provider store={store}>
@@ -16,8 +14,6 @@ const Main = () => (
       <HashRouter>
         <Switch>
           <Route exact path="/" render={() => <App />} />
-          <Route exact path="/create" component={() => <CreateTask />} />
-          <Route exact path="/task" component={() => <AllTask />} />
         </Switch>
       </HashRouter>
     </ConnectedRouter>

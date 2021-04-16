@@ -1,14 +1,12 @@
 import React from "react";
-import Header from "./components/header";
-import Sidebar from "./components/sidebar";
 
-const App = () => (
-  <div>
-    <div>
-      <Header />
-      <Sidebar />
+const App = () => {
+  console.log("asdasd")
+  return (
+    <div className="main">
+      123
     </div>
-  </div>
-);
+  )
+}
 
 export default App;

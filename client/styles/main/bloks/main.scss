@@ -1,0 +1,25 @@
+
+@for $i from 0 to 30 {
+  .main__logo-#{$i} {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: random(100) + vw;
+    top: random(100) + vh;
+    animation: spin 10s linear 5s infinite;
+    &:hover {
+      transition: opacity 2s;
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform:rotate(0deg);
+  }
+  to {
+    transform:rotate(360deg);
+    bottom: 10vh;
+  }
+}

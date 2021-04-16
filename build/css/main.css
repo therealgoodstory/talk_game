@@ -1,0 +1,352 @@
+@font-face {
+  font-family: "Open-Sans";
+  font-weight: 600;
+  src: url(../029b9bc9d72f4d799803735f6295f763.ttf); }
+
+@font-face {
+  font-family: "Open-Sans";
+  font-weight: 700;
+  src: url(../043771c999cd4d47d9f33c9c7e42c392.ttf); }
+
+@font-face {
+  font-family: "Open-Sans";
+  font-weight: 400;
+  src: url(../17e98b9e5586529b13ccb1f7af16861c.ttf); }
+
+.main__logo-0 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 7vw;
+  top: 31vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-0:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-1 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 6vw;
+  top: 36vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-1:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-2 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 50vw;
+  top: 74vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-2:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-3 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 98vw;
+  top: 55vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-3:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-4 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 74vw;
+  top: 76vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-4:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-5 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 92vw;
+  top: 90vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-5:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-6 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 100vw;
+  top: 6vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-6:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-7 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 30vw;
+  top: 72vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-7:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-8 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 19vw;
+  top: 14vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-8:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-9 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 22vw;
+  top: 72vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-9:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-10 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 91vw;
+  top: 58vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-10:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-11 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 38vw;
+  top: 61vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-11:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-12 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 19vw;
+  top: 51vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-12:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-13 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 67vw;
+  top: 40vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-13:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-14 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 30vw;
+  top: 71vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-14:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-15 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 46vw;
+  top: 1vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-15:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-16 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 81vw;
+  top: 53vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-16:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-17 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 26vw;
+  top: 65vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-17:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-18 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 80vw;
+  top: 56vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-18:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-19 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 94vw;
+  top: 15vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-19:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-20 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 67vw;
+  top: 99vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-20:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-21 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 39vw;
+  top: 46vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-21:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-22 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 87vw;
+  top: 47vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-22:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-23 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 72vw;
+  top: 94vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-23:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-24 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 91vw;
+  top: 99vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-24:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-25 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 58vw;
+  top: 93vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-25:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-26 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 50vw;
+  top: 10vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-26:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-27 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 65vw;
+  top: 64vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-27:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-28 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 18vw;
+  top: 88vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-28:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+.main__logo-29 {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 62vw;
+  top: 59vh;
+  animation: spin 10s linear 5s infinite; }
+  .main__logo-29:hover {
+    transition: opacity 2s;
+    opacity: 0; }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg);
+    bottom: 10vh; } }
+
