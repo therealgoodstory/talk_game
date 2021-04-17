@@ -13,7 +13,16 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.(png|jpe?g|gif|ttf|ico|woff2)$/i,
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {name: './[name].[ext]'}  
+          }
+        ]
+      },
+      {
+        test: /\.(ttf|ico|woff2)$/i,
         use: [
           {
             loader: 'file-loader',
