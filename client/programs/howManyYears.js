@@ -15,7 +15,7 @@ const HowManyYears = () => {
         <h1 className="how-many-old__title">Узнайте сколько вам лет!</h1>
         <label htmlFor="old" className="how-many-old__label">
           <span className="how-many-old__text">
-            Введите дату рождения
+            Введите дату рождения !
           </span>
           <input id="old" type="date" onChange={(e) => setDate(e.target.value)} className="how-many-old__input" />
           <button type="button" onClick={() => setResult(+now - +year)} className="how-many-old__btn">
