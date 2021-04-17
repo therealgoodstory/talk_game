@@ -7,7 +7,7 @@ const config = {
   mode: "development",
   output: {
     filename: "js[name].bundle.js",
-    path: resolve(__dirname, "build"),
+    path: resolve(__dirname, "dist"),
     publicPath: "/",
   },
   module: {
@@ -40,7 +40,6 @@ const config = {
               publicPath: "../",
             },
           },
-          "style-loader",
           "css-loader",
           "sass-loader"
         ],
