@@ -7,13 +7,13 @@ const config = {
   mode: "development",
   output: {
     filename: "js[name].bundle.js",
-    path: resolve(__dirname, "build"),
+    path: resolve(__dirname, "dist"),
     publicPath: "/",
   },
   module: {
     rules: [
       {
-        test: /\.(png|jpe?g|gif|ttf|ico)$/i,
+        test: /\.(png|jpe?g|gif|ttf|ico|woff2)$/i,
         use: [
           {
             loader: 'file-loader',
