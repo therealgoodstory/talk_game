@@ -17,9 +17,6 @@ const config = {
         use: [
           {
             loader: 'file-loader',
-            options: {
-              outputPath: 'images',
-            },
           }
         ]
       },
@@ -27,7 +24,7 @@ const config = {
         test: /\.(ttf|ico|woff2)$/i,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'file-loader?name=[name].[ext]&outputPath=images',
           },
         ],
       },

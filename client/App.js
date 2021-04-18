@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom'
-import logo from './public/logo.jpg'
 
 const App = () => {
   const [style, setStyle] = useState("main__animation")
@@ -13,7 +12,7 @@ const App = () => {
     <section className="main">
       <div className="main__header">
         <div className={style} />
-        <img src={logo} alt="logo" className="main__logo" />
+        <img src="https://cq-esports.com/storage/uploads/images/1079876/1613738343502.png" alt="logo" className="main__logo" />
       </div>
       <div className="main__field">
         <h1 className="main__title">ЭТО ЧЕСТНАЯ РАБОТА</h1>
