@@ -18,14 +18,9 @@
   ```shell
   $ npm install
   ```
-3. Create first build
-
-  ```shell
-  $ yarn run dev:build
-  ```
   
-4. Run project in Dev mode
+3. Run project in Dev mode
 
   ```shell
-  $ yarn run dev:watch
+  $ yarn run start
   ```
