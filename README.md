@@ -1,10 +1,10 @@
-# leopon
+# Bulshit game
 
 ## Quick start
 
 1. Clone this repo using:
   ```shell
-  $ git clone git@github.com:therealgoodstory/leopon.git
+  $ git@github.com:therealgoodstory/talk_game.git
   ```
 
 2. To install dependencies and clean the git repo run:
