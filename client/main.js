@@ -7,7 +7,6 @@ import { ConnectedRouter } from "connected-react-router";
 import "./main.scss";
 import store, { history } from "./redux";
 import App from "./App";
-import HowManyYears from "./programs/howManyYears";
 
 const Main = () => (
   <Provider store={store}>
@@ -15,7 +14,6 @@ const Main = () => (
       <HashRouter>
         <Switch>
           <Route exact path="/" render={() => <App />} />
-          <Route exact path="/howMany" render={() => <HowManyYears />} />
         </Switch>
       </HashRouter>
     </ConnectedRouter>
