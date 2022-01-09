@@ -28,12 +28,12 @@ const config = {
           },
         ],
       },
-      {
-        enforce: 'pre',
-        test: /\.(js|jsx)$/,
-        use: ["eslint-loader"],
-        exclude: /node_modules/,
-      },
+      // {
+      //   enforce: 'pre',
+      //   test: /\.(js|jsx)$/,
+      //   // use: ["eslint-loader"],
+      //   exclude: /node_modules/,
+      // },
       {
         test: /\.(js|jsx)$/,
         use: ["babel-loader"],

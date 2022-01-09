@@ -1,12 +1,17 @@
 import React from 'react'
+// import { useSelector } from 'react-redux'
 import Header from '../components/Header'
 
 const Game = () => {
-  const q = 1
+  // const data = useSelector((s) => s.presets.presets)
+  const test = "asdasdasdasd"
   return (
     <div className="main">
       <Header link="/" />
-      {q}
+      <section className="game">
+        {test}
+      </section>
+      {/* {data} */}
     </div>
   )
 }

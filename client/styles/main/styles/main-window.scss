@@ -14,29 +14,31 @@ body {
   background-size: cover;
 }
 
-.main_container {
-  width: auto;
-  height: auto;
+.main_butttons-container {
+  width: 100%;
+  bottom: 32px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.main_text-container {
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: 50px;
-  right: 50px;
- 
 }
 
 .main_title {
-  width: 90%;
-  height: 50%;
+  width: 100%;
+  height: auto;
   font-family: 'Open Sans';
   font-weight: 700;
   color: rgb(61, 61, 61);
   font-size: 12vw;
-  position: absolute;
-  left: 5%;
-  top: 10%;
+  text-align: center;
   opacity: 0.5;
   margin: 0;
 }
@@ -46,7 +48,7 @@ body {
   height: 40px;
   margin: 10px;
   border: none;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgb(54, 54, 54);
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.8);

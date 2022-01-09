@@ -1,10 +1,16 @@
 const UPDATE_STATE = "UPDATE_STATE";
 
-const initialState = {
-  id: -1,
+const data = {
+  players: [
+    'Артём',
+    'Андрей',
+    'Дима',
+    'Виталий',
+    'Я забыл',
+  ],
 };
 
-const Test = (state = initialState, action) => {
+const Test = (state = data, action) => {
   switch (action.type) {
     case UPDATE_STATE: {
       return {

@@ -1,16 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import { Route, Switch } from "react-router";
-import { HashRouter } from "react-router-dom";
-import { ConnectedRouter } from "connected-react-router";
-import "./main.scss";
-import store, { history } from "./redux";
-import App from "./App";
-import Game from "./pages/Game";
-import Settings from "./pages/Settings";
-import Presets from "./pages/Presets";
-import Players from "./pages/Players";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { Route, Switch } from 'react-router';
+import { HashRouter } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import './main.scss';
+import store, { history } from './redux';
+import App from './App';
+import Game from './pages/Game';
+import Settings from './pages/Settings';
+import Presets from './pages/Presets';
+import Players from './pages/Players';
 
 const Main = () => (
   <Provider store={store}>

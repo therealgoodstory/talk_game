@@ -1,14 +1,11 @@
 import React from 'react'
-import Header from '../components/Header'
 
-const Ceil = () => {
-  const q = 1
-  return (
-    <div className="main">
-      <Header link="/settings" />
-      {q}
-    </div>
-  )
-}
+const Ceil = ({ title }) => (
+  <div className="ceil">
+    <span className="ceil-title">
+      {title}
+    </span>
+  </div>
+)
 
 export default Ceil
