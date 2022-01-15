@@ -1,7 +1,7 @@
 const ADD_PLAYERS = "ADD_PLAYERS";
 
 const data = {
-  players: ['asdasd'],
+  players: ['asdasd','asdasd','asdasdas','asdasdasd'],
 };
 
 const PlayersData = (state = data, action) => {
@@ -19,11 +19,17 @@ const PlayersData = (state = data, action) => {
 
 export function addPlayers(name) {
   return (dispatch, getState) => {
-    const { players } = getState().players
-    const oldPlayers = players.unshift(name)
-    // const reasdasdasdasdasdsult =  oldPlayers.push(name)
-    console.log(typeof(oldPlayers))
-    dispatch({ type: ADD_PLAYERS, newData: [] })
+    let { players } = getState().players
+    dispatch({ type: ADD_PLAYERS, newData: [...players, name] })
+  };
+}
+
+export function deletePlayers(idx) {
+  return (dispatch, getState) => {
+    let { players } = getState().players
+    const result = players.filter((_, id) => id !== idx)
+    console.log(idx)
+    dispatch({ type: ADD_PLAYERS, newData: result })
   };
 }
 

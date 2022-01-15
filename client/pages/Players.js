@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import Header from '../components/Header'
-import { addPlayers } from '../redux/reducers/players'
+import { addPlayers, deletePlayers } from '../redux/reducers/players'
 
 const Players = () => {
   const [userName, setUserName] = useState('')
@@ -10,7 +10,8 @@ const Players = () => {
   const players = useSelector((s) => s.players.players)
 
   const addNewPlayers = (name) => dispatch(addPlayers(name))
-// console.log(typeof(userName))
+  const deleteOldPlayers = (idx) => dispatch(deletePlayers(idx))
+
   return (
     <div className="main">
       <Header link="/" />
@@ -31,10 +32,10 @@ const Players = () => {
             Players
           </h3>
           <ul className="players_list">
-            {players.map(player => (
+            {players.map((player, index) => (
               <div className="players_block" id={player}>
                 <h4 className="players_name">{player}</h4>
-                <button className="players_delete">
+                <button className="players_delete" onClick={() => deleteOldPlayers(index)}>
                   -
                 </button>
               </div>
