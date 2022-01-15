@@ -1,6 +1,6 @@
 {
   "name": "honest-work",
-  "homepage": "https://github.com/therealgoodstory/honest-work",
+  "homepage": "https://github.com/therealgoodstory/talk_game",
   "version": "1.0.0",
   "main": "index.js",
   "author": "epimetheus",
@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "connected-react-router": "^6.9.1",
-    "gh-pages": "^3.1.0",
+    "gh-pages": "^3.2.3",
     "history": "^4.10.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
