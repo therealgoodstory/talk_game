@@ -1,21 +1,15 @@
-const UPDATE_STATE = "UPDATE_STATE";
+const ADD_PLAYERS = "ADD_PLAYERS";
 
 const data = {
-  players: [
-    'Артём',
-    'Андрей',
-    'Дима',
-    'Виталий',
-    'Я забыл',
-  ],
+  players: ['asdasd'],
 };
 
-const Test = (state = data, action) => {
+const PlayersData = (state = data, action) => {
   switch (action.type) {
-    case UPDATE_STATE: {
+    case ADD_PLAYERS: {
       return {
         ...state,
-        id: action.new,
+        players: action.newData,
       };
     }
     default:
@@ -23,12 +17,14 @@ const Test = (state = data, action) => {
   }
 };
 
-export function updateState() {
+export function addPlayers(name) {
   return (dispatch, getState) => {
-    const { id } = getState().sidebar;
-    const result = id * -1;
-    dispatch({ type: UPDATE_STATE, new: result });
+    const { players } = getState().players
+    const oldPlayers = players.unshift(name)
+    // const reasdasdasdasdasdsult =  oldPlayers.push(name)
+    console.log(typeof(oldPlayers))
+    dispatch({ type: ADD_PLAYERS, newData: [] })
   };
 }
 
-export default Test;
+export default PlayersData;

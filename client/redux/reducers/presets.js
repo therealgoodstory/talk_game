@@ -73,11 +73,11 @@ const Test = (state = data, action) => {
 };
 
 export function updateState() {
-  return (dispatch, getState) => {
-    const { id } = getState().sidebar;
-    const result = id * -1;
-    dispatch({ type: UPDATE_STATE, new: result });
-  };
+  // return (dispatch, getState) => {
+  //   const { id } = getState().sidebar;
+  //   const result = id * -1;
+  //   dispatch({ type: UPDATE_STATE, new: result });
+  // };
 }
 
 export default Test;

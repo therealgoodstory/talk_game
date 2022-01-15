@@ -13,6 +13,8 @@ const Header = ({ link }) => {
     </Link>
   )
 
+  const home = location.pathname === "/"
+
   const menuButton = (
     <button
       type="button"
@@ -28,11 +30,15 @@ const Header = ({ link }) => {
   return (
     <div className="header">
       <nav className="header_nav-container">
-        {location.pathname === "/" ? menuButton : legend}
+        {home ? menuButton : legend}
       </nav>
-      <section className="header_slider">
-         <Slider state={openSlider} closeClick={() => setOpenSlider(!openSlider)} />
-      </section>
+      <h1 className="header_title">
+        {((location.pathname).split('').filter(symbol => symbol !== "/").join('')).toUpperCase()}
+      </h1>
+      {home
+        ? <section className="header_slider"> <Slider state={openSlider} closeClick={() => setOpenSlider(!openSlider)} /></section>
+        : null
+      }
     </div>
   )
 }
