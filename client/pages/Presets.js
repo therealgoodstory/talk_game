@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNewPreset } from '../redux/reducers/presets'
+import { savePreset } from '../redux/reducers/gameState'
 import Ceil from '../components/Ceil'
 import Header from '../components/Header'
 
@@ -13,9 +14,13 @@ const Presets = () => {
   const dispatch = useDispatch()
 
   const data = useSelector((s) => s.presets)
+  const selectPreset = useSelector((s) => s.gameState.selectPresets)
   const listPreset = Object.keys(data)
 
-  const columnList = [0,1,2,3,4]
+  const columnList = [0,1,2,3,4] // hack __ amoun columns [fix it]
+
+  useEffect(() => dispatch(savePreset(select)), [select]) // save select preset
+  useEffect(() => setSelect(selectPreset), [])
 
   const changePreset = (action) => {
     const forwardPreset = action === 'next'
