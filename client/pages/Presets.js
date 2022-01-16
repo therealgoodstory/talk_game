@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { addNewPreset } from '../redux/reducers/presets'
 import Ceil from '../components/Ceil'
 import Header from '../components/Header'
 
 const Presets = () => {
   const [select, setSelect] = useState(0)
+  const [newPreset, setNewPreset] = useState('')
 
-  const data = useSelector((s) => s.presets.presets)
+  const [errorNewPreset, setErrorNewPreset] = useState(true)
+
+  const dispatch = useDispatch()
+
+  const data = useSelector((s) => s.presets)
   const listPreset = Object.keys(data)
 
   const columnList = [0,1,2,3,4]
@@ -21,6 +27,17 @@ const Presets = () => {
     } else {
       setSelect(forwardPreset ? select + 1 : select - 1) // default function
     }
+  }
+
+  const checkNewPreset = () => {
+    const finalPreset = newPreset.split(',').filter(categoryName => categoryName.length > 0)
+    const arrayTextPreset = finalPreset.length
+
+    const validation = arrayTextPreset === 25
+    setErrorNewPreset(validation)
+
+    console.log(arrayTextPreset)
+    validation ? (dispatch(addNewPreset(finalPreset))) : null
   }
 
 
@@ -58,10 +75,10 @@ const Presets = () => {
             <span className="presets_desc">
               Enter 25 words separated by commas 
             </span>
-            <textarea className="presets_textarea">
+            <textarea className={"presets_textarea" + (errorNewPreset ? '' : "--error")} onChange={(e) => setNewPreset(e.target.value)}>
 
             </textarea>
-            <button className="presets_main-button">
+            <button type="reset" className="presets_main-button" onClick={() => checkNewPreset()}>
               Add presets
             </button>
           </div>

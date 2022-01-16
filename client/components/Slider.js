@@ -3,7 +3,7 @@ import MainButton from './MainButton'
 
 const Slider = ({ closeClick, state }) => {
 
-  const sliderListButton = ['Settings', 'Presets', 'Players']
+  const sliderListButton = ['Presets', 'Players']
 
   return (
     <div className={"slider" + (state ? "--open" : '')}>

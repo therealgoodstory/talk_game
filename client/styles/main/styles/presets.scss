@@ -41,6 +41,13 @@
   width: 100%;
   margin-top: 16px;
   margin-bottom: 16px;
+
+  &--error {
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    border: 3px solid red;
+  }
 }
 
 .presets_main-button {

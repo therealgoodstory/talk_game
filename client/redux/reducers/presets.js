@@ -1,7 +1,6 @@
-const UPDATE_STATE = "UPDATE_STATE";
+const ADD_PRESET = "ADD_PRESET";
 
 const data = {
-  presets: {
     preset1: [
       'ОЧЕНЬ ПЛОХИЕ ШУТКИ',
       'ХАНЖЕСТВО',
@@ -55,16 +54,15 @@ const data = {
       'WARCRAFT или аналоги1111111111',
       'ОТВРАТНЫЕ ОБРАЗЫ1111111111',
       'СОФИЗМ1111111111',
-    ],
-  },
+    ]
 };
 
-const Test = (state = data, action) => {
+const PresetData = (state = data, action) => {
   switch (action.type) {
-    case UPDATE_STATE: {
+    case ADD_PRESET: {
       return {
         ...state,
-        id: action.new,
+        ['preset' + (Object.keys(state).length + 1)]: action.preset,
       };
     }
     default:
@@ -72,12 +70,8 @@ const Test = (state = data, action) => {
   }
 };
 
-export function updateState() {
-  // return (dispatch, getState) => {
-  //   const { id } = getState().sidebar;
-  //   const result = id * -1;
-  //   dispatch({ type: UPDATE_STATE, new: result });
-  // };
+export function addNewPreset(preset) {
+  return { type: ADD_PRESET, preset: preset };
 }
 
-export default Test;
+export default PresetData;
