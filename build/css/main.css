@@ -21,10 +21,14 @@ body {
 
 .main {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   background-image: url(../abcd3252ef71a3f3d4fe29db6d2e84b6.jpg);
   background-color: #777777;
-  background-size: cover; }
+  position: relative;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -moz-background-size: cover; }
 
 .main_butttons-container {
   width: 100%;
@@ -36,7 +40,7 @@ body {
   align-items: center; }
 
 .main_text-container {
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center; }
@@ -59,6 +63,10 @@ body {
   border: none;
   background-color: #0a1d18;
   border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
   -webkit-box-shadow: 0px 0px 34px 0px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 0px 0px 34px 0px rgba(34, 60, 80, 0.2);
   box-shadow: 0px 0px 34px 0px rgba(255, 255, 255, 0.2); }
@@ -68,13 +76,13 @@ body {
     height: 39px; }
 
 .main_button--title {
-  width: 200px;
-  height: 40px;
   font-family: 'Open Sans';
   font-weight: 700;
+  font-size: 0.9rem;
   color: white;
   opacity: 1;
-  text-decoration: none; }
+  text-decoration: none;
+  margin: 0%; }
 
 .header {
   height: 54px;
@@ -176,35 +184,99 @@ body {
   font-family: 'Open Sans';
   font-weight: 700; }
 
-.ceil {
+.game_players-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0%;
+  display: flex;
+  flex-wrap: wrap; }
+
+.game_players_button {
+  outline: none;
+  border: none;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  border-bottom: 2px solid white;
+  background-color: transparent;
+  color: white;
   width: 100px;
-  height: 100px;
-  background-color: rgba(243, 243, 243, 0.3);
-  border: 1px solid #2c2c2c;
-  border-radius: 10px;
+  height: 30px; }
+
+.ceil {
+  width: 45px;
+  height: 45px;
+  background-color: rgba(24, 51, 37, 0.3);
+  border: 1px solid white;
   margin: 5px;
   display: flex;
   justify-content: center;
   align-items: center; }
   .ceil:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    width: 98px;
-    height: 98px; }
+    background-color: rgba(255, 255, 255, 0.3); }
 
 .ceil-title {
   font-family: 'Open Sans';
   font-weight: 700;
-  font-size: 12px;
+  font-size: 6px;
   text-align: center;
   max-width: 90%;
   text-overflow: ellipsis;
-  overflow: hidden; }
+  overflow: hidden;
+  color: white; }
 
 .presets {
-  width: 560px;
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap; }
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 0%; }
+
+.presets_row {
+  display: flex;
+  flex-direction: row; }
+
+.presets_cahnge-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row; }
+
+.presets_button {
+  border: 1px solid white;
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  color: white; }
+
+.presets_desc {
+  margin-left: 16px;
+  margin-right: 16px;
+  color: white;
+  width: 150px;
+  text-align: center;
+  font-family: 'Open Sans';
+  font-weight: 700;
+  font-size: 12px; }
+
+.presets_textarea {
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 16px; }
+  .presets_textarea--error {
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    border: 3px solid red; }
+
+.presets_main-button {
+  border: 1px solid white;
+  background-color: transparent;
+  width: 100px;
+  height: 50px;
+  color: white; }
 
 .slider {
   position: absolute;
@@ -234,10 +306,7 @@ body {
 .slider_background {
   width: 50%;
   height: 100%;
-  position: absolute;
-  right: 0px;
-  z-index: 5;
-  background: transparent; }
+  margin-left: 50%; }
 
 .slider_button-list {
   width: 100%;
@@ -266,9 +335,10 @@ h3 {
   opacity: 0.5; }
 
 .container {
-  margin-top: 64px;
-  position: absolute;
-  padding: 24px;
+  padding-top: 34px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 34px;
   display: flex;
   flex-direction: column; }
 
@@ -310,7 +380,7 @@ h3 {
   border: 1px solid white;
   margin-left: 12px;
   position: absolute;
-  right: 0;
+  right: 24px;
   color: white;
   font-family: 'Open Sans';
   display: flex;
@@ -353,7 +423,7 @@ h3 {
   border: 1px solid white;
   margin-left: 12px;
   position: absolute;
-  right: 0;
+  right: 24px;
   display: flex;
   align-items: center;
   justify-content: center; }

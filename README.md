@@ -1,4 +1,4 @@
-# Bulshit game
+# Bulshit game [ONLY MOBILE]
 
 ## Quick start
 
@@ -23,4 +23,12 @@
 
   ```shell
   $ yarn run start
+  ```
+
+------------------------------------------
+
+START TO USE
+
+  ```shell
+  https://therealgoodstory.github.io/talk_game/
   ```
