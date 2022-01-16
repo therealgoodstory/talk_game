@@ -11,14 +11,14 @@ const Slider = ({ closeClick, state }) => {
         role="switch"
         className={"slider_container" + (state ? "--open" : '')}
       >
+        <ul className={"slider_button-list" + (state ? "--open" : '')}>
+          {state ? sliderListButton.map(nameButton => <MainButton link={"/" + nameButton.toLowerCase()} title={nameButton.toUpperCase()} />) : null}
+        </ul>
         <div
           className="slider_background"
           onClick={() => closeClick()}
         />
       </div>
-      <ul className={"slider_button-list" + (state ? "--open" : '')}>
-        {state ? sliderListButton.map(nameButton => <MainButton link={"/" + nameButton.toLowerCase()} title={nameButton.toUpperCase()} />) : null}
-      </ul>
     </div>
   )
 }

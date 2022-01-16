@@ -1,9 +1,8 @@
 .ceil {
-  width: 100px;
-  height: 100px;
-  background-color: rgba(243, 243, 243, 0.3);
-  border: 1px solid rgb(44, 44, 44);
-  border-radius: 10px;
+  width: 45px;
+  height: 45px;
+  background-color: rgba(24, 51, 37, 0.3);
+  border: 1px solid rgb(255, 255, 255);
   margin: 5px;
   display: flex;
   justify-content: center;
@@ -11,17 +10,16 @@
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.3);
-    width: 98px;
-    height: 98px;  
   }
 }
 
 .ceil-title {
   font-family: 'Open Sans';
   font-weight: 700;
-  font-size: 12px;
+  font-size: 6px;
   text-align: center;
   max-width: 90%;
   text-overflow: ellipsis;
   overflow: hidden;
+  color: white;
 }
