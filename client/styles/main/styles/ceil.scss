@@ -11,7 +11,24 @@
   &:hover {
     background-color: rgba(255, 255, 255, 0.3);
   }
+  // I'm sorry/ I fix this later
+
+  @media (min-width: 400px) {
+    width: 55px;
+    height: 55px;
+  }
+
+  @media (min-width: 660px) {
+    width: 90px;
+    height: 90px;
+  }
+
+  @media (min-width: 500px) {
+    width: 75px;
+    height: 75px;
+  }
 }
+
 
 .ceil-title {
   font-family: 'Open Sans';

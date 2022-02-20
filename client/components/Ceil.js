@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Ceil = ({ title, selectCeil }) => (
-  <div className="ceil" onClick={() => selectCeil()}>
+const Ceil = ({ title, selectCeilId }) => (
+  <div className="ceil" onClick={() => selectCeilId()}>
     <span className="ceil-title">
       {title}
     </span>
