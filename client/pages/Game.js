@@ -5,11 +5,11 @@ import Ceil from '../components/Ceil'
 
 const Game = () => {
 
-  const [selectRow, SetSelectRow] = useState(0)
-  const [selectCeilIndex, SetSelectCeilIndex] = useState(0)
-  const [selectCeil, SetSelectCeil] = useState(0) // 0-24
+  const [selectRow, SetSelectRow] = useState(-1)
+  const [selectCeilIndex, SetSelectCeilIndex] = useState(-1)
+  const [selectCeil, SetSelectCeil] = useState(-1) // 0-24
 
-  const [activePlayer, SetActivePlayer] = useState(0)
+  const [activePlayer, SetActivePlayer] = useState(-1)
 
   // GET SELECT SETINGS
   const players = useSelector((s) => s.players.players)
@@ -27,15 +27,17 @@ const Game = () => {
     SetSelectCeilIndex(idx)
   }
 
-  useEffect(() => {
-    SetSelectCeil(selectRow * 5 + selectCeilIndex)
-  }, [selectRow, selectCeilIndex])
-
   const selectPlayer = (idxPlayer) => {
     SetActivePlayer(idxPlayer)
   }
 
-  console.log(activePlayer)
+  useEffect(() => {
+    const send = selectRow * 5 + selectCeilIndex
+    console.log(send === selectRow)
+    SetSelectCeil(send)
+  }, [selectRow, selectCeilIndex])
+
+  console.log(selectCeil)
 
   return (
     <div className="main">
