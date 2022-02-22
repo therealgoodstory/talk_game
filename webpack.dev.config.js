@@ -1,5 +1,5 @@
 const { resolve } = require("path");
-const CopyWebpackPlugins = require("copy-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin")
 
 const config = {
@@ -42,14 +42,12 @@ const config = {
       {
         test: /\.scss$/,
         use: [
-          {
-            loader: MiniCSSExtractPlugin.loader,
-            options: {
-              publicPath: "../",
-            },
-          },
+          // Creates `style` nodes from JS strings
+          "style-loader",
+          // Translates CSS into CommonJS
           "css-loader",
-          "sass-loader"
+          // Compiles Sass to CSS
+          "sass-loader",
         ],
         exclude: /node_modules/,
       },
@@ -57,24 +55,31 @@ const config = {
   },
   devServer: {
     hot: true,
-    contentBase: resolve(__dirname, "dist"),
-    port: 8080,
-    host: "localhost",
-    index: "index.html",
+    static: resolve(__dirname, "dist"),
+    devMiddleware: {
+      index: true,
+    },
     historyApiFallback: true,
-    overlay: {
-      warning: false,
-      errors: true,
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false
+      },
+      webSocketURL: {
+        hostname: 'localhost',
+        port: 8080
+      },
     },
   },
   plugins: [
-    new MiniCSSExtractPlugin({
-      filename: 'css/main.css'
-    }),
-    new CopyWebpackPlugins({
-      patterns: [{ from: `${__dirname}/client/index.html`, to: "index.html" }],
-    }),
+    new MiniCSSExtractPlugin(
+     [{ filename: 'css/main.css' }]
+    ),
+    new CopyPlugin({
+        patterns : [{from: `${__dirname}/client/index.html`, to: "index.html"}]
+      }
+    ),
   ],
-};
+}
 
 module.exports = config;
